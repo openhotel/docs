@@ -20,5 +20,5 @@ deno task reset [--configs] [--cache]   wipe containers, s3 data, dbs
 ```
 Files: `compose.yml`, `configs/`, `s3/`, `seed.ts` + `seed.yml`, `setup.ts`, `reset.ts`, `utils.ts`.
 
-## Plan
-Reworked to clone 2 repos (openhotel + services monorepo), compose paths -> `apps/*`. Ports, SeaweedFS and Mailpit stay. See [restructuring](../plan/restructuring.md).
+## Proposed (pagoru, not committed)
+Reworked to clone 2 repos (openhotel + services monorepo), compose paths -> `apps/*`. Ports, SeaweedFS and Mailpit stay. See [restructuring](../ideas/pagoru/restructuring.md).

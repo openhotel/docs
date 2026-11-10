@@ -9,4 +9,4 @@ Web tool to build game assets: furniture, collections and sprite sheets, using t
 - onet also serves signed collections to hotels; the export path from the editor to onet is not wired in code yet (unverified). See [onet](onet.md).
 - Run: `deno task install && deno task start`. devkit port 2030.
 
-Plan: merged into the services monorepo, Tailwind rewrite. See [restructuring](../plan/restructuring.md).
+Proposed (pagoru): merged into the services monorepo, Tailwind rewrite. See [restructuring](../ideas/pagoru/restructuring.md).

@@ -1,6 +1,6 @@
 # What needs to be done (1/2)
 
-Synthesis of 195 open issues + 10 open PRs (snapshot 2026-11-10) against the [restructuring plan](../plan/restructuring.md). Lists per repo: see README index.
+Synthesis of 195 open issues + 10 open PRs (snapshot 2026-11-10) against the [restructuring idea](../ideas/pagoru/restructuring.md) (proposal; phase 0 = [triage](../ideas/pagoru/triage.md)). Per-repo lists: see README index.
 
 ## Numbers
 openhotel 103, auth 36, static 12, utils 9, pixi-components 8, web-components 7, asset-editor 7, onet 5, game-template 2, pathfinding 2, auth-example 2, web 1, devkit 1. ~80% are 2024-2025 backlog; many openhotel issues were last touched in one bulk relabel on 2025-04-10.

@@ -14,9 +14,9 @@ Server-side grab-bag used by almost every Deno repo (7 versions in use, see [dep
 - `yaml`, `lang`.
 - `src/utils`: points/sizes/directions, random strings, version compare, dates, base64, encryption/tokens (bcrypt), OS helpers, copyDirectory, getURL, getIpFromRequest.
 
-## Plan (split, then archive)
+## Proposed (pagoru, not committed): split, then archive
 - Pure/isomorphic -> [core](core.md).
 - HTTP/db/S3/tokens/config -> monorepo `packages/server`.
 - Game-only (workers, updater, OS, yaml) -> openhotel itself.
 - Template needs (workers, readYaml, getDb) -> game-utils.
-See [restructuring](../plan/restructuring.md).
+See [restructuring](../ideas/pagoru/restructuring.md).

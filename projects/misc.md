@@ -7,6 +7,6 @@
 - **docs**: this repo (2026-11). Entry point: [README](../README.md).
 
 ## Linked but not reachable (private or deleted)
-- **aseprite-scripts**: art tooling. Stays, needs love; needs access to plan.
+- **aseprite-scripts**: art tooling. Stays, needs love; not reachable yet.
 - **captcha**: archived on profile, killed. auth has its own captcha module.
 - **art**: art assets.

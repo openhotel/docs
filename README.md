@@ -1,6 +1,6 @@
 # OpenHotel docs
 
-Docs for the [OpenHotel](https://github.com/openhotel) org: what each repo is, how they work together, and the restructuring plan.
+Docs for the [OpenHotel](https://github.com/openhotel) org: what each repo is, how they work together, open tasks, and ideas.
 
 Load this file first, then only the files you need. Every file is ≤4 KB (CI-enforced). Snapshot: 2026-11-10.
 
@@ -32,9 +32,8 @@ Load this file first, then only the files you need. Every file is ≤4 KB (CI-en
 - [projects/devkit.md](projects/devkit.md): Docker stack to run everything locally.
 - [projects/misc.md](projects/misc.md): .github, openhotel.github.io, auth-example, at, captcha, aseprite-scripts, art.
 
-## Plan
-- [plan/restructuring.md](plan/restructuring.md): agreed target layout and decisions.
-- [plan/phases.md](plan/phases.md): phase order and open questions.
+## Ideas (proposals, not decisions)
+- [ideas/README.md](ideas/README.md): rules, template and index of all ideas (one folder per author). Main one now: org restructuring by pagoru (proposed).
 
 ## Tasks (open issues and PRs, every item links to GitHub)
 - [tasks/todo.md](tasks/todo.md): what needs to be done: critical issues and PR decisions. Start here.

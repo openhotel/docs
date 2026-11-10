@@ -5,7 +5,7 @@
 - **openhotel** (a hotel) starts, calls `GET {auth.api}/api/v3/hotel/license` with header `license-token` and learns its `hotelId`, `integrationId` and owner `accountId`. If auth is disabled in `config.yml`, the hotel runs open (dev mode).
 - **Player login**: the player signs in on auth, auth issues a **connection token** for that hotel. The client connects to the hotel proxy over WebSocket; the proxy calls `/user/@me/scopes` and `/user/@me` on auth with `connection-token` and builds the session (accountId, username, admin, languages).
 - **onet**: the hotel opens a WebSocket client to onet with protocols `[hotelId, licenseToken]` and uses HTTP `/api/v1` with an api token and `hotel-id`. onet validates the hotel against auth (auth also has an `onet` module with a shared token, checked via `/auth/check`). onet serves signed **collections** (furniture packs) and **teleports** between hotels.
-- **web, static, asset-editor**: each has an `api/auth` module that runs the same login flow against auth (copied code, see [plan](../plan/restructuring.md)).
+- **web, static, asset-editor**: each has an `api/auth` module that runs the same login flow against auth (copied code, see [restructuring idea](../ideas/pagoru/restructuring.md)).
 - **static** stores files in S3 (SeaweedFS locally).
 
 ## Inside openhotel server

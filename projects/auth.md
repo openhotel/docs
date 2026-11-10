@@ -28,5 +28,5 @@ Client: React 18 + `@openhotel/web-components` 0.3.9 (33 files import it).
 ## Run
 `deno task install && deno task start` or `docker compose up --build` (server 20240, client 2024). devkit: port 2024.
 
-## Plan
-Merged into the services monorepo, client rewritten to Tailwind. See [restructuring](../plan/restructuring.md).
+## Proposed (pagoru, not committed)
+Merged into the services monorepo, client rewritten to Tailwind. See [restructuring](../ideas/pagoru/restructuring.md).
