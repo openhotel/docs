@@ -17,5 +17,5 @@ Root `mod.ts` + `src/modules/{api/v1, system/{hotels,collections,teleports,auth,
 ## Run
 `deno task start` (port 9400 in devkit). `deno task build` makes binaries for 4 targets.
 
-## Plan
-Merged into the services monorepo (server only). Moves to the new binary socket. See [restructuring](../plan/restructuring.md).
+## Proposed (pagoru, not committed)
+Merged into the services monorepo (server only). Moves to the new binary socket. See [restructuring](../ideas/pagoru/restructuring.md).

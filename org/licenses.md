@@ -16,4 +16,4 @@
 ## What CC BY-NC-SA means here (from openhotel README)
 Free to use and remix, no commercial use, credit the repo, keep the license. Exceptions: donations to run a server with a cosmetic badge only; marketing exceptions need explicit permission.
 
-Open question: pick one policy for the whole org (see [phases](../plan/phases.md)).
+Open question: pick one policy for the whole org (see [restructuring questions](../ideas/pagoru/questions.md)).

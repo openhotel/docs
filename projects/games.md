@@ -13,10 +13,10 @@ Starter for mini-games: `app/server` (Deno, `modules/{development,system}`; dev 
 ## game-utils (`@oh/game-utils`)
 Repo: github.com/openhotel/game-utils · JSR · CC BY-NC-SA 4.0 · no README, no consumers.
 Exports `./core` and `./client` (application, core-loader, initial-loader, render, start components). Peer deps: pixi-components 0.0.29, react 19, zustand, yaml, ulidx.
-Plan: becomes the real shell; game-template depends on it instead of copying.
+Proposed (pagoru): becomes the real shell; game-template depends on it instead of copying.
 
 ## battleship
 Repo: github.com/openhotel/battleship · no license · 2026-05. Copy of game-template + game code (77 files differ); README still says game-template.
-Plan: stays as the first real game, rebuilt on game-utils + new socket + latest pixi-components.
+Proposed (pagoru): stays as the first real game, rebuilt on game-utils + new socket + latest pixi-components.
 
-See [restructuring](../plan/restructuring.md).
+See [restructuring](../ideas/pagoru/restructuring.md).
