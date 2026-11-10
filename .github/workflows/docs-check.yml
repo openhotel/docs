@@ -1,0 +1,12 @@
+name: docs-check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  size:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sh scripts/check-docs-size.sh
