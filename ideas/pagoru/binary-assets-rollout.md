@@ -12,6 +12,10 @@ Part of: [binary assets](binary-assets.md) · Author: pagoru · Status: proposed
 | Server loader | openhotel `system/game/furniture`, `rooms/public` | loads `*.oha` at boot, logs and skips bad files |
 | Client | openhotel client | asks the hotel for decoded data; images to Pixi via `createImageBitmap` |
 
+## Reader limits
+- Max file 16 MB, max 64 sections, reject overlapping or out-of-range offsets (fuzz the reader).
+- Check every length against the section end before reading; never trust lengths from the file.
+
 ## asset-editor flow
 - Open `.oha` (verify + decode), edit, save: bump `assetRevision`, re-sign on the editor server.
 - Import old folder format (png + sheet json + yml + locales) for the migration.

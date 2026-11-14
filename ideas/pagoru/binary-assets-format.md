@@ -10,19 +10,38 @@ All integers little-endian. Payloads use a fixed schema per kind and version (no
 ```
 
 ## Header (32 bytes)
+First 8 bytes: what the file is and which schema it uses.
+
 | Off | Type | Field | Notes |
 |---|---|---|---|
-| 0 | u8[4] | magic | `OHA1` (0x4F 0x48 0x41 0x31) |
-| 4 | u16 | formatVersion | starts at 1; reader refuses unknown majors |
-| 6 | u8 | kind | 1 furniture, 2 public room (room for more) |
-| 7 | u8 | flags | bit0 deflate, bit1 obfuscated, bit2 signed |
-| 8 | u16 | sectionCount | |
-| 10 | u16 | keyId | which public key signed it (0 = unsigned) |
-| 12 | u32 | fileLength | whole file, sanity check |
-| 16 | u8[8] | assetIdHash | first 8 B of SHA-256(asset id), quick lookup |
-| 24 | u16 | schemaVersion | payload schema for this kind |
-| 26 | u16 | assetRevision | bumped by the editor on every save |
+| 0 | u8[4] | magic | `OHA\0` (0x4F 0x48 0x41 0x00): it is an OpenHotel asset |
+| 4 | u16 | kind | what it is, see table below |
+| 6 | u16 | schemaVersion | schema of that kind used by the payload |
+| 8 | u16 | containerVersion | layout of header/table/trailer, starts at 1 |
+| 10 | u8 | flags | bit0 deflate, bit1 obfuscated, bit2 signed |
+| 11 | u8 | reserved | 0 |
+| 12 | u16 | sectionCount | |
+| 14 | u16 | keyId | which public key signed it (0 = unsigned) |
+| 16 | u32 | fileLength | whole file, sanity check |
+| 20 | u32 | assetRevision | bumped by the editor on every save |
+| 24 | u8[4] | assetIdHash | first 4 B of SHA-256(asset id), quick lookup |
 | 28 | u32 | headerCrc | CRC32 of bytes 0..27 |
+
+## Kinds
+| kind | Asset | Required sections |
+|---|---|---|
+| 1 | furniture | META, DATA, SHET, IMGS, LANG |
+| 2 | public room | META, DATA, IMGS, LANG (SHET optional) |
+| 3+ | reserved | defined when added |
+
+Each `(kind, schemaVersion)` pair maps to one decoder in `@oh/core`. A new field in furniture means furniture `schemaVersion` 2; other kinds are not affected.
+
+## Header check (reader, in order)
+1. Magic is `OHA\0`.
+2. `kind` is known and is the one the caller asked for (loading a room as furniture fails).
+3. `schemaVersion` has a decoder for that kind: older ones are decoded and upgraded in memory, newer ones are refused ("update the hotel").
+4. `containerVersion` supported, `headerCrc` and `fileLength` match.
+5. Signature, then sections.
 
 ## Primitives
 `u8 u16 u32 i16 i32 f32` · `str` = u16 length + UTF-8 · `bytes` = u32 length + raw · `list<T>` = u16 count + items.
@@ -52,12 +71,10 @@ Unknown tags are skipped, so new sections do not break old readers. Adding a fie
 
 ## Integrity and tamper resistance
 1. **CRC32** per section and on the header: catches corruption, not tampering.
-2. **Signature trailer** (72 B): `u16 keyId · u16 alg (1 = Ed25519) · u32 reserved · u8[64] sig`. Signed bytes = everything before the trailer. Verify with WebCrypto `Ed25519` (Deno, current Chrome, Firefox, Safari).
+2. **Signature trailer** (72 B): `u16 keyId · u16 alg (1 = Ed25519) · u32 reserved · u8[64] sig`. Signed bytes = everything before the trailer. WebCrypto `Ed25519`.
 3. **Compression**: deflate via `CompressionStream` on schema sections; PNG is already compressed, stored as is.
-4. **Obfuscation (optional)**: XOR payloads with a keystream from SHA-256(assetIdHash + salt). Stops `strings`/binwalk-style poking only; the salt ships in the client, so it is not encryption.
+4. **Obfuscation (optional)**: XOR with a keystream from SHA-256(assetIdHash + salt). The salt ships in the client: not encryption.
 
 Order on write: schema encode, deflate, obfuscate, CRC (on raw), table, sign. Read in reverse; verify the signature **before** decoding anything.
 
-## Limits
-- Max file 16 MB, max 64 sections, reject overlapping or out-of-range offsets (fuzz the reader).
-- Check every length against the section end before reading; never trust lengths from the file.
+Reader limits: see [rollout](binary-assets-rollout.md#reader-limits).
