@@ -2,7 +2,7 @@
 
 - Author: pagoru
 - Status: proposed
-- Created: 2026-11-14 · Updated: 2026-11-14
+- Created: 2026-11-14 · Updated: 2026-11-14 (schema bytes, no CBOR)
 - Affects: openhotel, asset-editor, core (onet later)
 - Discussion: none
 
@@ -20,7 +20,7 @@ Pack every furniture and every public room into one binary file that holds its i
 | Piece | Where | What |
 |---|---|---|
 | Container `.oha` | spec in [format](binary-assets-format.md) | magic + version + kind + section table + signature |
-| Sections | same | `META`, `DATA`, `SHET`, `IMGS`, `LANG` (CBOR + raw images) |
+| Sections | same | `META`, `DATA`, `SHET`, `IMGS`, `LANG` (schema-encoded bytes + raw images) |
 | Reader | `@oh/core` | pure isomorphic decode + verify (DataView, CompressionStream, WebCrypto) |
 | Writer | asset-editor only | encode + sign; never published in core |
 | Signing key | asset-editor server | Ed25519 private key; hotels ship the public key |
@@ -49,4 +49,4 @@ Pack every furniture and every public room into one binary file that holds its i
 8. Should the client verify the signature too, or trust its hotel?
 
 ## Links
-[asset-editor](../../projects/asset-editor.md) · [openhotel](../../projects/openhotel.md) · [core](../../projects/core.md) · [onet](../../projects/onet.md) · [socket idea](socket.md) (same CBOR choice)
+[asset-editor](../../projects/asset-editor.md) · [openhotel](../../projects/openhotel.md) · [core](../../projects/core.md) · [onet](../../projects/onet.md)
