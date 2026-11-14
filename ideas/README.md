@@ -57,3 +57,4 @@ Issues, PRs, related ideas.
 |---|---|---|
 | [Org restructuring](pagoru/restructuring.md): client, services and shared libs in one monorepo. Parts: [triage](pagoru/triage.md), [monorepo](pagoru/monorepo.md), [app/shared](pagoru/shared.md), [issues](pagoru/issues.md), [socket](pagoru/socket.md), [games](pagoru/games.md), [archive + devkit](pagoru/archive-devkit.md), [questions](pagoru/questions.md) | pagoru | proposed |
 | [Binary furniture and public rooms](pagoru/binary-assets.md): one signed `.oha` file per asset, editable only in asset-editor. Parts: [format](pagoru/binary-assets-format.md), [rollout](pagoru/binary-assets-rollout.md) | pagoru | proposed |
+| [OpenHotel on Steam](pagoru/steam.md): free Steam release, deno desktop shell, official hotel only, Steam login and account linking. Parts: [accounts](pagoru/steam-accounts.md) | pagoru | proposed |
