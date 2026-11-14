@@ -33,7 +33,7 @@ Load this file first, then only the files you need. Every file is ≤4 KB (CI-en
 - [projects/misc.md](projects/misc.md): .github, openhotel.github.io, auth-example, at, captcha, aseprite-scripts, art.
 
 ## Ideas (proposals, not decisions)
-- [ideas/README.md](ideas/README.md): rules, template and index of all ideas (one folder per author). Main one now: org restructuring by pagoru (proposed).
+- [ideas/README.md](ideas/README.md): rules, template and index of all ideas (one folder per author). Now: org restructuring, binary furniture and public room assets (both pagoru, proposed).
 
 ## Tasks (open issues and PRs, every item links to GitHub)
 - [tasks/todo.md](tasks/todo.md): what needs to be done: critical issues and PR decisions. Start here.
