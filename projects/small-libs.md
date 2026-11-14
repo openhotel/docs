@@ -3,7 +3,7 @@
 ## pathfinding (`@oh/pathfinding`)
 Repo: github.com/openhotel/pathfinding · MIT · last commit 2024-07.
 Jump Point Search with diagonal movement on a height `Grid` (`Grid.from(number[][])`). ~445 lines, preview page in `preview/`.
-Used only by openhotel rooms (`Grid`, v2.0.3). Proposed (pagoru): inline into the monorepo `apps/client`, archive.
+Used only by openhotel rooms (`Grid`, v2.0.3). Proposed (pagoru): inline into `app/server` of openhotel/openhotel, archive.
 
 ## queue (`@oh/queue`, `@tu/queue` in deno.json)
 Repo: github.com/openhotel/queue · MIT · last commit 2024-09. Not listed on the org profile.

@@ -8,4 +8,4 @@ File host for OpenHotel content, backed by S3 (SeaweedFS in devkit). Scaffolded 
 - Client: home, application. React 18, still on legacy `@oh/components`, ~11 scss files.
 - Run: `deno task install && deno task start`. devkit port 1995, S3 9000.
 
-Proposed (pagoru): merged into the monorepo (`apps/static`), moves to the shared UI package. See [restructuring](../ideas/pagoru/restructuring.md).
+Proposed (pagoru): merged into the monorepo (`app/static` in openhotel/openhotel), moves to the shared UI package. See [restructuring](../ideas/pagoru/restructuring.md).

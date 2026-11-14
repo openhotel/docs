@@ -15,8 +15,8 @@ Server-side grab-bag used by almost every Deno repo (7 versions in use, see [dep
 - `src/utils`: points/sizes/directions, random strings, version compare, dates, base64, encryption/tokens (bcrypt), OS helpers, copyDirectory, getURL, getIpFromRequest.
 
 ## Proposed (pagoru, not committed): keep, move into the monorepo
-- Becomes `packages/utils` in the monorepo; apps use the workspace version (no more drift).
+- Merges with core into `app/shared` in openhotel/openhotel; apps use the workspace version (no more drift).
 - Pure/isomorphic parts move to [core](core.md); utils keeps the server runtime.
 - Keeps publishing to JSR for games outside the monorepo.
-See [shared packages](../ideas/pagoru/shared-packages.md).
+See [shared packages](../ideas/pagoru/shared.md).
 See [restructuring](../ideas/pagoru/restructuring.md).

@@ -18,4 +18,4 @@ Root `mod.ts` + `src/modules/{api/v1, system/{hotels,collections,teleports,auth,
 `deno task start` (port 9400 in devkit). `deno task build` makes binaries for 4 targets.
 
 ## Proposed (pagoru, not committed)
-Merged into the monorepo (`apps/onet`, server only). Moves to the new binary socket. See [restructuring](../ideas/pagoru/restructuring.md).
+Merged into the monorepo (`app/onet` in openhotel/openhotel, server only). Moves to the new binary socket. See [restructuring](../ideas/pagoru/restructuring.md).

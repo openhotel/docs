@@ -7,7 +7,7 @@
 - Discussion: none
 
 ## Summary
-Move the game client and every service into **one monorepo** that also holds the shared libraries (`@oh/core`, `@oh/utils`, UI kit). Games, Pixi kit and tooling stay outside.
+Turn `openhotel/openhotel` into **the monorepo**: game, every service and the shared code under `app/`, and all issues in one tracker. Games, Pixi kit and tooling stay outside.
 
 ## Motivation
 ~20 repos, 7 versions of `@oh/utils`, copied code (login flow x5, socket client x4, game shell x3), no shared CI, mixed licenses. See [overview](../../org/overview.md), [dependencies](../../org/dependencies.md), [todo](../../tasks/todo.md).
@@ -15,12 +15,11 @@ Move the game client and every service into **one monorepo** that also holds the
 ## Proposal: target layout
 | Repo | Proposed fate |
 |---|---|
-| openhotel (client) | into the monorepo as `apps/client`; pathfinding inlined |
-| auth, onet, web, asset-editor, static | into the monorepo as `apps/*` |
-| core (`@oh/core`) | into the monorepo as `packages/core` |
-| utils (`@oh/utils`) | into the monorepo as `packages/utils` (no longer killed) |
-| web-components | into the monorepo as `packages/ui`, rewritten to Tailwind |
-| pathfinding | inlined in `apps/client`, repo archived |
+| openhotel | **is** the monorepo; game stays in `app/client` + `app/server`, pathfinding inlined |
+| auth, onet, web, asset-editor, static | into the monorepo as `app/<name>` |
+| core + utils | merged into one project, `app/shared` |
+| web-components | into the monorepo as `app/ui`, rewritten to Tailwind |
+| pathfinding | inlined in `app/server`, repo archived |
 | game-utils, game-template, battleship | stay outside, love: one shared game shell |
 | pixi-components | stays outside, love |
 | aseprite-scripts | stays, love (not reachable yet) |
@@ -30,12 +29,12 @@ Move the game client and every service into **one monorepo** that also holds the
 | auth-example, captcha, at | archived |
 | queue, openhotel.github.io | undecided |
 
-Details: [monorepo](monorepo.md), [shared packages](shared-packages.md).
+Details: [monorepo](monorepo.md), [app/shared](shared.md), [issues](issues.md).
 
 ## Proposed phases
 0. [Triage](triage.md) (any time)
-1. [Monorepo](monorepo.md): import the 9 repos with history, workspaces, one CI
-2. [Shared packages](shared-packages.md): everyone on workspace core/utils, dedupe, inline pathfinding
+1. [Monorepo](monorepo.md): import 8 repos into `openhotel/openhotel` with history, workspaces, one CI; [move issues](issues.md)
+2. [app/shared](shared.md): merge core + utils, everyone on the workspace, dedupe, inline pathfinding
 3. [Archive + devkit](archive-devkit.md)
 4. Tailwind ([monorepo](monorepo.md))
 5. [Socket rewrite](socket.md)

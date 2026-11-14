@@ -9,4 +9,4 @@ Web tool to build game assets: furniture, collections and sprite sheets, using t
 - onet also serves signed collections to hotels; the export path from the editor to onet is not wired in code yet (unverified). See [onet](onet.md).
 - Run: `deno task install && deno task start`. devkit port 2030.
 
-Proposed (pagoru): merged into the monorepo (`apps/asset-editor`), Tailwind rewrite. See [restructuring](../ideas/pagoru/restructuring.md).
+Proposed (pagoru): merged into the monorepo (`app/asset-editor` in openhotel/openhotel), Tailwind rewrite. See [restructuring](../ideas/pagoru/restructuring.md).

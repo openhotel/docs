@@ -11,10 +11,10 @@ Part of [restructuring](restructuring.md). Facts: [misc](../../projects/misc.md)
 
 ## Archive
 - at, captcha, auth-example (close its 2 issues).
-- pathfinding, after inlining it in `apps/client`.
-- openhotel, auth, onet, web, asset-editor, static, core, utils, web-components after the monorepo import, as read-only pointers (README links to the monorepo path).
+- pathfinding, after inlining it in `app/server`.
+- auth, onet, web, asset-editor, static, core, utils, web-components after the import into `openhotel/openhotel` and the [issue move](issues.md), as read-only pointers (README links to the monorepo path).
 - Update the `.github` profile and these docs at the same time.
 
 ## devkit
-- Clones 1 repo (the monorepo) instead of 6; compose points to `apps/*`; ports, SeaweedFS and Mailpit unchanged.
+- Clones 1 repo (the monorepo) instead of 6; compose points to `app/*`; ports, SeaweedFS and Mailpit unchanged.
 - Could move into the monorepo itself ([questions](questions.md)).

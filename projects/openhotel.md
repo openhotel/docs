@@ -36,4 +36,4 @@ auth (license + player tokens), onet (network), spawned games. See [architecture
 `@oh/utils`, `@oh/core`, `@oh/queue`, `@oh/pathfinding`, `@da/socket`, `@da/worker`. See [dependencies](../org/dependencies.md).
 
 ## Proposed (pagoru, not committed)
-Moves into the monorepo as `apps/client`, uses workspace `@oh/core`/`@oh/utils`, inlines pathfinding, moves to new binary socket. See [restructuring](../ideas/pagoru/restructuring.md).
+Becomes the monorepo: services join under `app/`, uses workspace `app/shared`, inlines pathfinding, moves to new binary socket. See [restructuring](../ideas/pagoru/restructuring.md).
