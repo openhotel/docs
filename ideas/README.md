@@ -55,5 +55,5 @@ Issues, PRs, related ideas.
 ## Index
 | Idea | Author | Status |
 |---|---|---|
-| [Org restructuring](pagoru/restructuring.md): ~20 repos to ~8. Parts: [triage](pagoru/triage.md), [utils split](pagoru/utils-split.md), [services monorepo](pagoru/services-monorepo.md), [socket](pagoru/socket.md), [games](pagoru/games.md), [archive + devkit](pagoru/archive-devkit.md), [questions](pagoru/questions.md) | pagoru | proposed |
+| [Org restructuring](pagoru/restructuring.md): client, services and shared libs in one monorepo. Parts: [triage](pagoru/triage.md), [monorepo](pagoru/monorepo.md), [shared packages](pagoru/shared-packages.md), [socket](pagoru/socket.md), [games](pagoru/games.md), [archive + devkit](pagoru/archive-devkit.md), [questions](pagoru/questions.md) | pagoru | proposed |
 | [Binary furniture and public rooms](pagoru/binary-assets.md): one signed `.oha` file per asset, editable only in asset-editor. Parts: [format](pagoru/binary-assets-format.md), [rollout](pagoru/binary-assets-rollout.md) | pagoru | proposed |

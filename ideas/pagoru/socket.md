@@ -1,8 +1,8 @@
-# Binary socket library (phase 6)
+# Binary socket library (phase 5)
 
 - Author: pagoru
 - Status: proposed
-- Created: 2026-10-22 · Updated: 2026-11-10
+- Created: 2026-10-22 · Updated: 2026-11-14
 - Part of: [restructuring](restructuring.md). Facts: [small-libs](../../projects/small-libs.md), [architecture](../../org/architecture.md)
 
 ## Problem

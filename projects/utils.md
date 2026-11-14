@@ -1,6 +1,6 @@
 # utils (`@oh/utils`)
 
-Repo: github.com/openhotel/utils · JSR `@oh/utils` · MIT · active, **to be killed**.
+Repo: github.com/openhotel/utils · JSR `@oh/utils` · MIT · active (proposed: moves into the monorepo).
 
 Server-side grab-bag used by almost every Deno repo (7 versions in use, see [dependencies](../org/dependencies.md)).
 
@@ -14,9 +14,9 @@ Server-side grab-bag used by almost every Deno repo (7 versions in use, see [dep
 - `yaml`, `lang`.
 - `src/utils`: points/sizes/directions, random strings, version compare, dates, base64, encryption/tokens (bcrypt), OS helpers, copyDirectory, getURL, getIpFromRequest.
 
-## Proposed (pagoru, not committed): split, then archive
-- Pure/isomorphic -> [core](core.md).
-- HTTP/db/S3/tokens/config -> monorepo `packages/server`.
-- Game-only (workers, updater, OS, yaml) -> openhotel itself.
-- Template needs (workers, readYaml, getDb) -> game-utils.
+## Proposed (pagoru, not committed): keep, move into the monorepo
+- Becomes `packages/utils` in the monorepo; apps use the workspace version (no more drift).
+- Pure/isomorphic parts move to [core](core.md); utils keeps the server runtime.
+- Keeps publishing to JSR for games outside the monorepo.
+See [shared packages](../ideas/pagoru/shared-packages.md).
 See [restructuring](../ideas/pagoru/restructuring.md).
