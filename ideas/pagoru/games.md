@@ -1,8 +1,8 @@
-# One game shell (phase 7)
+# One game shell (phase 6)
 
 - Author: pagoru
 - Status: proposed
-- Created: 2026-10-22 · Updated: 2026-11-10
+- Created: 2026-10-22 · Updated: 2026-11-14
 - Part of: [restructuring](restructuring.md). Facts: [games](../../projects/games.md), [ui-libs](../../projects/ui-libs.md)
 
 ## Problem

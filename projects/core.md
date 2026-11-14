@@ -17,4 +17,4 @@ Both Jest + Babel (`yarn test`) and `deno test` exist; `typecheck` via tsc, `bun
 openhotel, onet, asset-editor.
 
 ## Proposed (pagoru, not committed)
-Stays and becomes the single shared library: receives pure parts of `@oh/utils` (Point/Size/Direction, random, version compare, dates, base64, HttpStatusCode, RequestMethod). Rule: never touch Deno APIs. Needs README API list, CI tests, one toolchain. See [restructuring](../ideas/pagoru/restructuring.md).
+Merges with utils into `app/shared` in openhotel/openhotel; receives pure parts of `@oh/utils` (Point/Size/Direction, random, version compare, dates, base64, HttpStatusCode, RequestMethod). Rule: never touch Deno APIs. Needs README API list, CI tests, one toolchain. See [restructuring](../ideas/pagoru/restructuring.md).

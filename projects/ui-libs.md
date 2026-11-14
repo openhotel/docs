@@ -12,4 +12,4 @@ Repo: github.com/openhotel/web-components · npm · CC BY-NC-SA 4.0 (package.jso
 
 React 18 + Sass CSS-module components for web apps: account-item, card, form, hotel-card, icons, layout, license, palette, social, tooltip; hooks (modal, theme, layout, click-outside); `styles.scss` (colors, mixins). Storybook. ~35 scss files, ~1,970 lines.
 Consumers: auth 0.3.9, web 0.3.3, asset-editor 0.3.3. static still on legacy `@oh/components`.
-Proposed (pagoru): becomes `packages/ui` in the monorepo, rewritten to Tailwind. See [restructuring](../ideas/pagoru/restructuring.md).
+Proposed (pagoru): becomes `app/ui` in the monorepo (openhotel/openhotel), rewritten to Tailwind. See [restructuring](../ideas/pagoru/restructuring.md).

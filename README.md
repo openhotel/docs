@@ -21,7 +21,7 @@ Load this file first, then only the files you need. Every file is ≤4 KB (CI-en
 
 ## Libraries
 - [projects/core.md](projects/core.md): `@oh/core`, shared isomorphic types and pure helpers.
-- [projects/utils.md](projects/utils.md): `@oh/utils`, server grab-bag (to be killed).
+- [projects/utils.md](projects/utils.md): `@oh/utils`, server grab-bag.
 - [projects/ui-libs.md](projects/ui-libs.md): `@openhotel/pixi-components` and `@openhotel/web-components`.
 - [projects/small-libs.md](projects/small-libs.md): pathfinding, queue, `@da/socket`.
 

@@ -8,4 +8,4 @@ Public website for OpenHotel: home/landing and account pages, logged in through 
 - Client `app/client/src/modules/`: home, account, application. React 18 + `@openhotel/web-components` 0.3.3, ~7 scss files.
 - Run: `deno task install && deno task start` (Deno >= 2). devkit port 2025.
 
-Proposed (pagoru): merged into the services monorepo, first app to move to Tailwind (smallest). See [restructuring](../ideas/pagoru/restructuring.md).
+Proposed (pagoru): merged into the monorepo (`app/web` in openhotel/openhotel), first app to move to Tailwind (smallest). See [restructuring](../ideas/pagoru/restructuring.md).
