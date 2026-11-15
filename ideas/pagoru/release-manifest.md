@@ -32,7 +32,7 @@ entries[count]
   u16  patch
 ```
 - All projects listed every release (4 + 7 per project, 46 bytes for 6).
-- Changed app: the tag's version. Unchanged app: its version from the previous `release.oh`. No previous file (or other schema): everyone gets the tag's version.
+- Changed app: the tag's version. Unchanged app: its version from the previous `release.oh`. No previous file (or other schema): unchanged apps get the previous tag's version, changed apps the new one. No previous tag: everyone gets the tag's version.
 - The release version is not stored: it is the tag the file lives in.
 - Pre-release suffix is not stored (`1.1.0-beta.1` is written as `1.1.0`).
 - Project ids: only append to `RELEASE_PROJECTS`, never reorder or remove.
