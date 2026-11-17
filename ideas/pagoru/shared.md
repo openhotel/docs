@@ -2,12 +2,12 @@
 
 - Author: pagoru
 - Status: proposed
-- Created: 2026-10-22 · Updated: 2026-11-14
+- Created: 2026-10-22 · Updated: 2026-11-17
 - Affects: core, utils, pathfinding, openhotel and every service
 - Discussion: none
 
 ## Summary
-Part of [restructuring](restructuring.md). `@oh/core` and `@oh/utils` merge into one project, `app/shared`, inside [the monorepo](monorepo.md). Facts: [utils](../../projects/utils.md), [core](../../projects/core.md).
+Part of [restructuring](restructuring.md). `@oh/core` and `@oh/utils` merge into one project, `app/shared`, inside [the monorepo](monorepo.md). Facts: [utils](../../projects/utils.md), [core](../../projects/core.md). Execution plan: [shared migration](shared-migration.md).
 
 ## Proposal
 One project, two entry points so browser code never pulls Deno APIs:
