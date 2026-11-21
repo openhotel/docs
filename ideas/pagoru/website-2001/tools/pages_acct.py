@@ -19,6 +19,16 @@ account = f'''      <div class="blk box">
         <ul class="pills"><li>English <button type="button" aria-label="Remove English">x</button></li><li>Español <button type="button" aria-label="Remove Español">x</button></li></ul>
         <div class="row" style="display:flex;gap:8px;max-width:340px"><select class="in"><option>Add a language</option><option>Deutsch</option><option>Français</option></select><button class="btn" type="button">Add</button></div>
       </div>
+      <div class="blk box">
+        <h2>Email news</h2>
+        <form class="form" onsubmit="event.preventDefault()">
+          <label class="chk"><input type="checkbox"> Send me the OpenHotel network news by email</label>
+          <label class="chk"><input type="checkbox"> OpenHotel news (hotel you joined)</label>
+          <label class="chk"><input type="checkbox"> Pixel Plaza news (hotel you joined)</label>
+          <span class="hint">Off until you turn it on. Hotels never see your email: the network sends it for them. Every email has an unsubscribe link. Account emails (verify, password, security) are always sent.</span>
+          <div class="row"><button class="btn main" type="submit">Save</button></div>
+        </form>
+      </div>
       <div class="blk box tfa" data-state="off">
         <h2>Two-step login (2FA)</h2>
         <p class="demo hint">Preview: <button type="button" class="btn" data-set="off">2FA is off</button> <button type="button" class="btn" data-set="on">2FA is on</button></p>
