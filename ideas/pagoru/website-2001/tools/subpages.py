@@ -104,6 +104,7 @@ forgot = '''      <div class="blk box">
 exec(open(T + "pages_acct.py").read())
 exec(open(T + "pages_social.py").read())
 exec(open(T + "pages_assets.py").read())
+exec(open(T + "pages_admin.py").read())
 
 PAGES = {  # key: (title, tab, logged, body)
   "retro-news": ("News", "news", False, news_list), "retro-news-in": ("News", "news", True, news_list),
@@ -113,6 +114,9 @@ PAGES = {  # key: (title, tab, logged, body)
   "retro-connections": ("Connected hotels", "connections", True, connections),
   "retro-friends": ("Friends", "friends", True, friends_body), "retro-exchange": ("Credit exchange", "exchange", True, exchange_body),
   "retro-assets": ("Hotel assets", "hotels", True, library), "retro-market": ("Marketplace", "market", True, market), "retro-create": ("Create an asset", "market", True, create),
+  "retro-item": ("Telephone booth", "market", True, item), "retro-collection": ("Beach set", "market", True, collection), "retro-mine": ("Your creations", "market", True, mine),
+  "retro-link": ("OpenHotel Link", "market", True, link), "retro-coin": ("Pixel Plaza · PXP", "exchange", True, coin_body),
+  "retro-admin": ("Hotel admin", "account", True, admin), "retro-network": ("Network", "account", True, network),
 }
 for key, (title, tab, logged, body) in PAGES.items():
     h = page(title, tab, logged, body)
@@ -124,7 +128,7 @@ def wire(path, theme, logged, community):
     s = open(path).read()
     sfx = "-in" if logged else ""
     m = {"#home": f"retro-lobby{sfx}", "#news": f"retro-news{sfx}", "#post": f"retro-post{sfx}", "#register": "retro-register",
-         "#account": "retro-account", "#hotels": "retro-my-hotels", "#connections": "retro-connections", "#friends": "retro-friends", "#exchange": "retro-exchange", "#market": "retro-market", "#create": "retro-create", "#library": "retro-assets"}
+         "#account": "retro-account", "#hotels": "retro-my-hotels", "#connections": "retro-connections", "#friends": "retro-friends", "#exchange": "retro-exchange", "#market": "retro-market", "#create": "retro-create", "#library": "retro-assets", "#item": "retro-item", "#collection": "retro-collection", "#mine": "retro-mine", "#link": "retro-link", "#coin": "retro-coin", "#admin": "retro-admin", "#network": "retro-network"}
     for k, v in m.items(): s = s.replace(f'href="{k}"', f'href="{v}-{theme}.html"')
     txt = {"Register for free": "retro-register", "Register on OpenHotel": "retro-register", "Forgot password?": "retro-forgot",
            "Account settings": "retro-account", "OpenHotel account": "retro-account", "My hotels (2)": "retro-my-hotels", "Connected hotels": "retro-connections", "Friends online (4)": "retro-friends",
@@ -138,6 +142,6 @@ def wire(path, theme, logged, community):
 for f in glob.glob(f"{site}/retro-*-light.html") + glob.glob(f"{site}/retro-*-dark.html"):
     n = os.path.basename(f); theme = "light" if n.endswith("-light.html") else "dark"; key = n.rsplit("-", 1)[0]
     if key in ("retro-orange", "retro-portal"): continue
-    logged = key.endswith("-in") or key in ("retro-account", "retro-my-hotels", "retro-connections", "retro-friends", "retro-exchange", "retro-assets", "retro-market", "retro-create")
+    logged = key.endswith("-in") or (key in PAGES and PAGES[key][2])
     wire(f, theme, logged, key.startswith("retro-hotel"))
 print("ok")

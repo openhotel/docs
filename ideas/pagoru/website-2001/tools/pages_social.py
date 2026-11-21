@@ -44,58 +44,24 @@ friends_body = '''      <div class="split3">
       </div>
 '''
 
-MARKET = [  # icon, w, h, hotel, code, price, change, supply, volume
-  ("navigator", 23, 23, "OpenHotel", "OHC", "1.000", "0.0", "2.1M", "18,400"),
-  ("console-off", 15, 23, "Pixel Plaza", "PXP", "0.420", "+3.2", "5.6M", "41,250"),
-  ("club", 23, 21, "Neon Docks", "NDK", "1.850", "-1.4", "310K", "6,900"),
-  ("purse", 18, 20, "Hotel Aurora", "AUR", "0.075", "+12.0", "48M", "122,000"),
-  ("inventory", 20, 19, "Moonbase Inn", "MBI", "0.910", "-0.3", "760K", "2,140"),
+import math
+MARKET = [  # icon, w, h, hotel, code, price, change
+  ("navigator", 23, 23, "OpenHotel", "OHC", "1.000", "0.0"),
+  ("console-off", 15, 23, "Pixel Plaza", "PXP", "0.420", "+3.2"),
+  ("club", 23, 21, "Neon Docks", "NDK", "1.850", "-1.4"),
+  ("purse", 18, 20, "Hotel Aurora", "AUR", "0.075", "+12.0"),
+  ("inventory", 20, 19, "Moonbase Inn", "MBI", "0.910", "-0.3"),
 ]
-def mrow(ic, w, h, n, c, p, ch, s, v):
+def mrow(ic, w, h, n, c, p, ch):
     cls = "up" if ch.startswith("+") else ("down" if ch.startswith("-") else "")
     arrow = "▲" if cls == "up" else ("▼" if cls == "down" else "")
-    return f'          <tr><td><img class="fav" src="assets/oh/icon-{ic}.png" width="{w}" height="{h}" alt=""> {n}</td><td><b>{c}</b></td><td class="num">{p}</td><td class="num {cls}">{arrow} {ch}%</td><td class="num">{s}</td><td class="num">{v}</td></tr>\n'
-exchange_body = '''      <div class="split3">
-        <div class="col">
-          <div class="blk box">
-            <h2>Credit exchange</h2>
-            <p>Every hotel has its own credits, earned by playing there. Here you can swap them between hotels. Prices are in OpenHotel credits (OHC) and move with what guests buy and sell.</p>
-            <div class="tbl"><table>
-              <tr><th>Hotel</th><th>Credit</th><th class="num">Price (OHC)</th><th class="num">24h</th><th class="num">In circulation</th><th class="num">Traded 24h</th></tr>
-''' + "".join(mrow(*m) for m in MARKET) + '''            </table></div>
-            <p class="hint">Sample prices. A hotel that gives away lots of credits sees its price fall.</p>
-          </div>
-          <div class="blk box">
-            <h2>PXP / OHC order book</h2>
-            <div class="two book">
-              <div class="tbl"><table><tr><th>Buying PXP</th><th class="num">Price</th></tr>
-                <tr><td>12,000</td><td class="num up">0.419</td></tr><tr><td>4,500</td><td class="num up">0.418</td></tr><tr><td>30,000</td><td class="num up">0.415</td></tr></table></div>
-              <div class="tbl"><table><tr><th>Selling PXP</th><th class="num">Price</th></tr>
-                <tr><td>2,000</td><td class="num down">0.421</td></tr><tr><td>9,800</td><td class="num down">0.423</td></tr><tr><td>15,000</td><td class="num down">0.430</td></tr></table></div>
-            </div>
-          </div>
-          <div class="blk box">
-            <h2>How it works</h2>
-            <ul class="perms">
-              <li>Credits are never sold for real money. You get them by playing, and trade them here.</li>
-              <li>Each trade pays a 1% fee in credits; the fee is removed from circulation.</li>
-              <li>Furniture never moves between hotels. Credits do, at the market price.</li>
-              <li>Hotel owners see how many credits their hotel creates, so the price stays honest.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col">
-          <div class="blk box">
-            <h2>Your wallets</h2>
-            <dl class="kv">
-              <div><dt>OpenHotel</dt><dd>1,250 OHC</dd></div>
-              <div><dt>Pixel Plaza</dt><dd>4,800 PXP</dd></div>
-              <div><dt>Neon Docks</dt><dd>320 NDK</dd></div>
-            </dl>
-          </div>
-          <div class="blk box">
-            <h2>Exchange</h2>
-            <form class="form xform" onsubmit="event.preventDefault()">
+    return f'          <tr><td><img class="fav" src="assets/oh/icon-{ic}.png" width="{w}" height="{h}" alt=""> <a href="#coin">{n}</a></td><td><b>{c}</b></td><td class="num">{p}</td><td class="num {cls}">{arrow} {ch}%</td></tr>\n'
+HIST = [("21 Nov 15:02", "PXP to OHC", "Sold", "1,000 PXP", "0.419", "415 OHC", "10 PXP"),
+        ("20 Nov 21:40", "OHC to NDK", "Bought", "200 OHC", "1.862", "107 NDK", "2 OHC"),
+        ("19 Nov 18:12", "AUR to OHC", "Sold", "20,000 AUR", "0.071", "1,406 OHC", "200 AUR"),
+        ("17 Nov 10:05", "PXP to OHC", "Open order", "5,000 PXP", "0.430", "-", "-")]
+def hrow(*c): return "          <tr>" + "".join(f'<td class="{"num" if i >= 3 else ""}">{x}</td>' for i, x in enumerate(c)) + "</tr>\n"
+XFORM = """            <form class="form xform" onsubmit="event.preventDefault()">
               <label>You give<span class="pair"><input class="in" type="number" value="1000" min="1"><select class="in"><option>PXP</option><option>OHC</option><option>NDK</option></select></span></label>
               <label>You get<span class="pair"><input class="in" type="text" value="415" readonly><select class="in"><option>OHC</option><option>PXP</option><option>NDK</option></select></span></label>
               <fieldset class="vis"><legend>Price</legend>
@@ -105,7 +71,78 @@ exchange_body = '''      <div class="split3">
               <p class="hint">Fee 1%: 10 PXP. Daily limit left: 46,000 OHC.</p>
               <div class="row"><button class="btn main" type="submit">Exchange</button></div>
             </form>
+"""
+WALLETS = """            <dl class="kv">
+              <div><dt>OpenHotel</dt><dd>1,250 OHC</dd></div>
+              <div><dt>Pixel Plaza</dt><dd>4,800 PXP</dd></div>
+              <div><dt>Neon Docks</dt><dd>320 NDK</dd></div>
+            </dl>
+"""
+exchange_body = """      <div class="split3">
+        <div class="col">
+          <div class="blk box dense">
+            <h2>Credit exchange</h2>
+            <p class="hint">Swap the credits of one hotel for another's. Prices are in OHC. Click a hotel for the chart and details.</p>
+            <div class="tbl"><table>
+              <tr><th>Hotel</th><th>Credit</th><th class="num">Price (OHC)</th><th class="num">24h</th></tr>
+""" + "".join(mrow(*m) for m in MARKET) + """            </table></div>
+          </div>
+          <div class="blk box dense">
+            <h2>Your exchanges</h2>
+            <div class="tbl"><table>
+              <tr><th>Date</th><th>Pair</th><th>Type</th><th class="num">You gave</th><th class="num">Price</th><th class="num">You got</th><th class="num">Fee</th></tr>
+""" + "".join(hrow(*h) for h in HIST) + """            </table></div>
+            <div class="pager"><span class="hint">Last 4 of 37</span><span><a href="#exchange">All</a> &gt;&gt;</span></div>
           </div>
         </div>
+        <div class="col">
+          <div class="blk box"><h2>Your wallets</h2>
+""" + WALLETS + """          </div>
+          <div class="blk box"><h2>Exchange</h2>
+""" + XFORM + """          </div>
+        </div>
       </div>
-'''
+"""
+
+pts = [0.40 + 0.012 * math.sin(i / 3.1) + 0.008 * math.sin(i / 1.3) + i * 0.0004 for i in range(60)]
+lo, hi = min(pts) - 0.004, max(pts) + 0.004
+xy = [(i * 520 / 59, 150 - (v - lo) / (hi - lo) * 140) for i, v in enumerate(pts)]
+line = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in xy)
+area = line + " L520,160 L0,160 Z"
+chart = (f'<div class="chart"><svg viewBox="0 0 520 160" preserveAspectRatio="none" role="img" aria-label="PXP price, up 3.2%"><path class="ar" d="{area}"/><path class="ln" d="{line}"/></svg>'
+         f'<div class="axis"><span>{hi:.3f}</span><span>{lo:.3f}</span></div></div>'
+         '<div class="ktabs"><a class="btn" href="#coin">1D</a><a class="btn main" href="#coin">1W</a><a class="btn" href="#coin">1M</a><a class="btn" href="#coin">All</a></div>')
+coin_body = """      <div class="split3">
+        <div class="col">
+          <div class="blk box dense">
+            <p class="crumb"><a href="#exchange">Exchange</a> &gt; Pixel Plaza</p>
+            <h2><img class="fav" src="assets/oh/icon-console-off.png" width="15" height="23" alt=""> Pixel Plaza · PXP</h2>
+            <p><b style="font-size:20px">0.420 OHC</b> <span class="up">▲ +3.2%</span> <span class="hint">24h</span></p>
+            """ + chart + """
+          </div>
+          <div class="blk box dense">
+            <h2>Order book</h2>
+            <div class="two book">
+              <div class="tbl"><table><tr><th>Buying PXP</th><th class="num">Price</th></tr>
+                <tr><td>12,000</td><td class="num up">0.419</td></tr><tr><td>4,500</td><td class="num up">0.418</td></tr><tr><td>30,000</td><td class="num up">0.415</td></tr></table></div>
+              <div class="tbl"><table><tr><th>Selling PXP</th><th class="num">Price</th></tr>
+                <tr><td>2,000</td><td class="num down">0.421</td></tr><tr><td>9,800</td><td class="num down">0.423</td></tr><tr><td>15,000</td><td class="num down">0.430</td></tr></table></div>
+            </div>
+          </div>
+          <div class="blk box dense">
+            <h2>Latest trades</h2>
+            <div class="tbl"><table><tr><th>Time</th><th class="num">Price</th><th class="num">Amount (PXP)</th></tr>
+              <tr><td>15:02</td><td class="num up">0.420</td><td class="num">1,000</td></tr><tr><td>14:51</td><td class="num down">0.419</td><td class="num">250</td></tr><tr><td>14:20</td><td class="num up">0.420</td><td class="num">3,400</td></tr></table></div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="blk box dense"><h2>Numbers</h2>
+            <dl class="kv"><div><dt>24h high / low</dt><dd>0.425 / 0.401</dd></div><div><dt>In circulation</dt><dd>5.6M</dd></div><div><dt>Created 24h</dt><dd>82,000</dd></div><div><dt>Destroyed 24h</dt><dd>61,000</dd></div><div><dt>Traded 24h</dt><dd>41,250</dd></div><div><dt>Fee</dt><dd>1%, burned</dd></div><div><dt>Hotel</dt><dd><a href="#">Pixel Plaza</a></dd></div></dl>
+            <p class="hint">The hotel reports its credits every day. If reports stop, trading pauses.</p>
+          </div>
+          <div class="blk box"><h2>You hold</h2><dl class="kv"><div><dt>Pixel Plaza</dt><dd>4,800 PXP</dd></div></dl></div>
+          <div class="blk box"><h2>Exchange</h2>
+""" + XFORM + """          </div>
+        </div>
+      </div>
+"""

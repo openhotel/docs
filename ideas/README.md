@@ -63,3 +63,4 @@ Issues, PRs, related ideas.
 | [Website rework, 2001 style](pagoru/website-2001.md): static HTML mockups (home, news, auth pages, community hotel) with assets and generators in `pagoru/website-2001/` | pagoru | draft |
 | [Credit exchange between hotels](pagoru/credit-exchange.md): each hotel's credits trade against OHC on an onet order book; friends network-wide, furniture stays | pagoru | draft |
 | [Asset library and marketplace](pagoru/asset-library.md): owners pick rooms, furniture and clothes per hotel from a network marketplace; draw on web, Aseprite or Resprite | pagoru | draft |
+| [Hotel admin in My account](pagoru/hotel-admin.md): admin box per hotel (accounts, rooms, moderation, credits, registration lock) and a network box for the main hotel | pagoru | draft |

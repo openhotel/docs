@@ -281,6 +281,34 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .code{font:700 22px/1 ui-monospace,monospace;letter-spacing:.1em;text-align:center;padding:8px;border:1px dashed var(--line)}
 @media (max-width:480px){.ed{grid-template-columns:minmax(0,1fr)}.ed .tools{flex-direction:row;flex-wrap:wrap}.pal{grid-template-columns:repeat(10,18px)}}
 .pair.tiles .in{max-width:70px}
+.dense .tbl{margin:6px 0}
+.dense .tbl th,.dense .tbl td{padding:2px 6px;font-size:12px}
+.dense p{margin:4px 0}
+.ct{width:44px;height:36px;overflow:hidden;display:flex;justify-content:center;align-items:flex-start}
+.ct img{object-fit:none;object-position:top;max-width:none}
+.ra{text-align:right;white-space:nowrap}
+.ra .btn,.dense .btn{padding:1px 6px;font-size:11px}
+.dl{font-size:11px;margin-left:4px}
+.sel-s{max-width:160px;padding:1px 4px;font-size:12px}
+.ktabs{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+.ktabs .btn{padding:1px 8px;font-size:12px}
+.mfind{align-items:center;margin:6px 0}
+.mfind .chk{display:flex;gap:4px;align-items:center;font-size:12px}
+.ihead{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.ihead>div:last-child{flex:1 1 220px;min-width:0}
+.ipv{display:flex;align-items:flex-end;justify-content:center;min-width:72px;padding:6px;border:1px solid var(--line);background:var(--box)}
+.ipv img{image-rendering:pixelated}
+.stars{color:var(--accent)}
+.kb .st{display:none}
+.kb[data-state="furn"] .st-furn,.kb[data-state="room"] .st-room,.kb[data-state="cloth"] .st-cloth{display:block}
+.pre{overflow-x:auto;font:11px/1.4 ui-monospace,monospace;padding:8px;border:1px solid var(--line);background:var(--box);margin:6px 0;white-space:pre}
+.steps{margin:6px 0;padding-left:20px}.steps li{margin:3px 0}
+.chart{position:relative;margin:8px 0 4px}
+.chart svg{display:block;width:100%;height:160px;border:1px solid var(--line)}
+.chart .ln{fill:none;stroke:var(--ink);stroke-width:2;vector-effect:non-scaling-stroke}
+.chart .ar{fill:var(--line);opacity:.5}
+.chart .axis{position:absolute;inset:0 4px;display:flex;flex-direction:column;justify-content:space-between;font-size:10px;color:var(--soft);pointer-events:none}
+.kb>.row{margin:8px 0}
 </style>
 </head>
 <body>
@@ -346,6 +374,20 @@ document.querySelectorAll(".tfa").forEach((box) => {
   });
 });
 </script>
+      <div class="blk box dense">
+        <h2>Manage this hotel</h2>
+        <p class="hint">You are an admin of <select class="in sel-s" aria-label="Hotel"><option>Sunset Plaza</option><option>Pixel Inn</option></select></p>
+        <dl class="kv"><div><dt>Accounts</dt><dd>1,842</dd></div><div><dt>Online now</dt><dd>312</dd></div><div><dt>Rooms</dt><dd>640</dd></div><div><dt>Credits in circulation</dt><dd>5.6M PXP</dd></div><div><dt>Open reports</dt><dd><b>3</b></dd></div><div><dt>Asset updates</dt><dd><b>2</b></dd></div></dl>
+        <form class="form" onsubmit="event.preventDefault()"><label class="chk"><input type="checkbox"> Closed to new registrations</label>
+          <span class="hint">Guests who already have an account can still enter. New accounts can't connect to this hotel.</span><div class="row"><button class="btn" type="submit">Save</button></div></form>
+        <p><a class="btn main" href="retro-admin-dark.html">Open hotel admin</a> <a class="btn" href="retro-assets-dark.html">Asset library</a></p>
+      </div>
+      <div class="blk box dense">
+        <h2>OpenHotel network</h2>
+        <p class="hint">Only the main hotel sees this.</p>
+        <dl class="kv"><div><dt>Hotels</dt><dd>128 (96 public)</dd></div><div><dt>Online now</dt><dd>4,210</dd></div><div><dt>Hotels waiting for review</dt><dd><b>2</b></dd></div><div><dt>Exchange paused</dt><dd>none</dd></div></dl>
+        <p><a class="btn main" href="retro-network-dark.html">Manage the network</a></p>
+      </div>
     </main>
     <aside class="side">
       <div class="blk">

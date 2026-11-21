@@ -281,6 +281,34 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .code{font:700 22px/1 ui-monospace,monospace;letter-spacing:.1em;text-align:center;padding:8px;border:1px dashed var(--line)}
 @media (max-width:480px){.ed{grid-template-columns:minmax(0,1fr)}.ed .tools{flex-direction:row;flex-wrap:wrap}.pal{grid-template-columns:repeat(10,18px)}}
 .pair.tiles .in{max-width:70px}
+.dense .tbl{margin:6px 0}
+.dense .tbl th,.dense .tbl td{padding:2px 6px;font-size:12px}
+.dense p{margin:4px 0}
+.ct{width:44px;height:36px;overflow:hidden;display:flex;justify-content:center;align-items:flex-start}
+.ct img{object-fit:none;object-position:top;max-width:none}
+.ra{text-align:right;white-space:nowrap}
+.ra .btn,.dense .btn{padding:1px 6px;font-size:11px}
+.dl{font-size:11px;margin-left:4px}
+.sel-s{max-width:160px;padding:1px 4px;font-size:12px}
+.ktabs{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+.ktabs .btn{padding:1px 8px;font-size:12px}
+.mfind{align-items:center;margin:6px 0}
+.mfind .chk{display:flex;gap:4px;align-items:center;font-size:12px}
+.ihead{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.ihead>div:last-child{flex:1 1 220px;min-width:0}
+.ipv{display:flex;align-items:flex-end;justify-content:center;min-width:72px;padding:6px;border:1px solid var(--line);background:var(--box)}
+.ipv img{image-rendering:pixelated}
+.stars{color:var(--accent)}
+.kb .st{display:none}
+.kb[data-state="furn"] .st-furn,.kb[data-state="room"] .st-room,.kb[data-state="cloth"] .st-cloth{display:block}
+.pre{overflow-x:auto;font:11px/1.4 ui-monospace,monospace;padding:8px;border:1px solid var(--line);background:var(--box);margin:6px 0;white-space:pre}
+.steps{margin:6px 0;padding-left:20px}.steps li{margin:3px 0}
+.chart{position:relative;margin:8px 0 4px}
+.chart svg{display:block;width:100%;height:160px;border:1px solid var(--line)}
+.chart .ln{fill:none;stroke:var(--ink);stroke-width:2;vector-effect:non-scaling-stroke}
+.chart .ar{fill:var(--line);opacity:.5}
+.chart .axis{position:absolute;inset:0 4px;display:flex;flex-direction:column;justify-content:space-between;font-size:10px;color:var(--soft);pointer-events:none}
+.kb>.row{margin:8px 0}
 </style>
 </head>
 <body>
@@ -288,54 +316,23 @@ img{display:block;image-rendering:pixelated;max-width:none}
   <div class="grid2">
     <main class="mainc">
       <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-in-dark.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"><p>Create an asset</p><a class="btn" href="retro-lobby-in-dark.html">Home</a><a class="btn" href="retro-news-in-dark.html">News</a><a class="btn" href="retro-friends-dark.html">Friends</a><a class="btn" href="retro-exchange-dark.html">Exchange</a><a class="btn main" href="retro-market-dark.html">Marketplace</a><a class="btn" href="retro-account-dark.html">My account</a><a class="btn" href="retro-connections-dark.html">Connections</a><a class="btn" href="retro-my-hotels-dark.html">My hotels</a></nav></header>
-      <div class="split3">
-        <div class="col">
-          <div class="blk box">
-            <h2>Create an asset</h2>
-            <form class="form" onsubmit="event.preventDefault()">
-              <fieldset class="vis"><legend>What are you making?</legend>
-                <label class="chk"><input type="radio" name="k" checked> Furniture</label>
-                <label class="chk"><input type="radio" name="k"> Public room</label>
-                <label class="chk"><input type="radio" name="k"> Clothes</label>
-              </fieldset>
-              <label>Name<input class="in" value="Telephone booth"></label>
-              <label>Size in tiles<span class="pair tiles"><input class="in" type="number" value="1" min="1" aria-label="Width"><input class="in" type="number" value="1" min="1" aria-label="Depth"></span></label>
-            </form>
-          </div>
-          <div class="blk box">
-            <h2>Draw</h2>
-            <div class="ed">
-              <div class="tools" role="toolbar" aria-label="Tools"><button class="btn main" type="button">Pencil</button><button class="btn" type="button">Eraser</button><button class="btn" type="button">Fill</button><button class="btn" type="button">Pick</button></div>
-              <div class="canvas"><img src="assets/oh/furni-telephone.png" width="48" height="98" alt="Telephone booth, north"></div>
-              <div class="pal"><button type="button" class="sw" style="background:#000000" aria-label="Colour #000000"></button><button type="button" class="sw" style="background:#ffffff" aria-label="Colour #ffffff"></button><button type="button" class="sw" style="background:#7f7f7f" aria-label="Colour #7f7f7f"></button><button type="button" class="sw" style="background:#c0392b" aria-label="Colour #c0392b"></button><button type="button" class="sw" style="background:#e67e22" aria-label="Colour #e67e22"></button><button type="button" class="sw" style="background:#f1c40f" aria-label="Colour #f1c40f"></button><button type="button" class="sw" style="background:#27ae60" aria-label="Colour #27ae60"></button><button type="button" class="sw" style="background:#2980b9" aria-label="Colour #2980b9"></button><button type="button" class="sw" style="background:#8e44ad" aria-label="Colour #8e44ad"></button><button type="button" class="sw" style="background:#efcfb1" aria-label="Colour #efcfb1"></button></div>
-            </div>
-            <div class="dirs"><button class="btn main" type="button">North ✓</button><button class="btn" type="button">East ✓</button><button class="btn" type="button">South</button><button class="btn" type="button">West</button></div>
-            <p class="hint">2 of 4 directions drawn. Furniture needs all four, or two if it is the same mirrored.</p>
-          </div>
-          <div class="blk box">
-            <h2>Send</h2>
-            <p>We check it, then sign it as a .oha file. Once it is live, any hotel owner can add it.</p>
-            <div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn main" type="button">Send for review</button><button class="btn" type="button">Save draft</button></div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="blk box apps">
-            <h2>Draw in your own app</h2>
-            <h3>Aseprite</h3>
-            <p>Install the OpenHotel extension, then <b>File &gt; Send to OpenHotel</b>. Layers and tags become directions and frames.</p>
-            <p><a class="btn" href="#">Get the extension</a></p>
-            <h3>Resprite (iPad)</h3>
-            <p>Export as .aseprite, then share it to this page or upload it below.</p>
-            <form class="form" onsubmit="event.preventDefault()"><label>Upload<input class="in" type="file" accept=".aseprite,.ase,.png"></label></form>
-          </div>
-          <div class="blk box">
-            <h2>Link an app</h2>
-            <p>Type this code in the extension. It works for 10 minutes.</p>
-            <p class="code">482 913</p>
-            <dl class="kv"><div><dt>Aseprite on PC</dt><dd><a class="danger" href="#">Unlink</a></dd></div></dl>
-          </div>
-        </div>
+      <div class="blk box kb" data-state="furn">
+        <h2>Create an asset</h2>
+        <p>You can't draw on the website. Draw in Aseprite (or Resprite on iPad) and send it here: this page checks it and shows a preview of everything that will be saved.</p>
+        <div class="row" role="group" aria-label="Kind"><button class="btn main" type="button" data-go="furn">Furniture</button> <button class="btn" type="button" data-go="room">Public room</button> <button class="btn" type="button" data-go="cloth">Clothes</button></div>
+        <form class="form" onsubmit="event.preventDefault()"><label>Send a file<input class="in" type="file" accept=".aseprite,.ase,.png,.json,.oha"></label><span class="hint">.aseprite, or a .png sprite sheet with its .json, or a .oha</span></form>
+        <h3>Preview</h3>
+        <div class="st st-furn"><div class="ipv"><img src="assets/oh/furni-telephone.png" width="48" height="98" alt="Preview, north"></div><dl class="kv"><div><dt>id</dt><dd>teleports@telephone</dd></div><div><dt>revision</dt><dd>1.2</dd></div><div><dt>type</dt><dd>furniture (or frame)</dd></div><div><dt>size w × d × h</dt><dd>1 × 1 × 2</dd></div><div><dt>icon.texture</dt><dd>telephone-icon</dd></div><div><dt>minHotelVersion · schema</dt><dd>0.140 · 3</dd></div></dl><h3>Actions</h3><div class="tbl"><table><tr><th>id</th><th>label</th><th>states</th><th>default</th></tr><tr><td>door</td><td>Door</td><td>closed, open</td><td>closed</td></tr></table></div><h3>Lang</h3><div class="tbl"><table><tr><th>lang</th><th>name</th><th>description</th></tr><tr><td>English</td><td>Telephone booth</td><td>Dial a friend</td></tr><tr><td>Español</td><td>Cabina</td><td>Llama a un amigo</td></tr></table></div><h3>Directions</h3><div class="tbl"><table><tr><th>direction</th><th>texture</th><th>zIndex</th><th>pivot</th><th>position</th><th>actions</th></tr><tr><td>north</td><td>telephone-n</td><td>0</td><td>24, 98</td><td>0, 0</td><td>door: closed</td></tr><tr><td>north</td><td>telephone-n-top</td><td>1</td><td>24, 98</td><td>0, 0</td><td>door: open</td></tr><tr><td>east</td><td>telephone-e</td><td>0</td><td>24, 98</td><td>0, 0</td><td>door: closed</td></tr></table></div><h3>Sprite sheet</h3><dl class="kv"><div><dt>format · scale</dt><dd>png · 1</dd></div><div><dt>size</dt><dd>96 × 196</dd></div><div><dt>frames</dt><dd>9</dd></div><div><dt>animations</dt><dd>2</dd></div></dl></div><div class="st st-room"><dl class="kv"><div><dt>id</dt><dd>rooftop-pool</dd></div><div><dt>revision</dt><dd>2.1</dd></div><div><dt>name</dt><dd>Rooftop Pool (en), Piscina (es)</dd></div><div><dt>size w × d</dt><dd>12 × 9 tiles</dd></div><div><dt>wall height</dt><dd>3</dd></div><div><dt>door / spawn</dt><dd>tile 0,4 · facing east</dd></div><div><dt>max users</dt><dd>40</dd></div><div><dt>minHotelVersion · schema</dt><dd>0.150 · 2</dd></div></dl><h3>Floor</h3><p class="hint">Tile map with heights, 108 tiles, 2 levels.</p><h3>Furniture placed</h3><div class="tbl"><table><tr><th>furniture</th><th>tile</th><th>direction</th></tr><tr><td>Sunbed</td><td>3,2</td><td>south</td></tr><tr><td>Telephone booth</td><td>0,0</td><td>east</td></tr><tr><td>Palm tree</td><td>11,8</td><td>north</td></tr></table></div><p class="hint">Public room fields are a proposal; the format is not final.</p></div><div class="st st-cloth"><div class="ipv"><img src="assets/oh/av-idle-c.png" width="21" height="66" alt="Preview"></div><dl class="kv"><div><dt>id</dt><dd>striped-shirt</dd></div><div><dt>revision</dt><dd>1.0</dd></div><div><dt>slot</dt><dd>top</dd></div><div><dt>colours</dt><dd>3 (body, stripes, sleeves)</dd></div><div><dt>minHotelVersion · schema</dt><dd>0.120 · 1</dd></div></dl><h3>Lang</h3><div class="tbl"><table><tr><th>lang</th><th>name</th></tr><tr><td>English</td><td>Striped shirt</td></tr><tr><td>Español</td><td>Camiseta de rayas</td></tr></table></div><h3>Frames</h3><div class="tbl"><table><tr><th>direction</th><th>action</th><th>frames</th></tr><tr><td>north</td><td>idle</td><td>1</td></tr><tr><td>north</td><td>walk</td><td>4</td></tr><tr><td>east</td><td>idle</td><td>1</td></tr><tr><td>east</td><td>walk</td><td>4</td></tr></table></div><p class="hint">Clothes fields are a proposal; the format is not final.</p></div>
+        <h3>Checks</h3><ul class="perms"><li>Schema 3 is valid</li><li>All 4 directions have textures</li><li>Icon texture exists in the sprite sheet</li><li>Name and description in English</li><li>No frame is outside the image</li></ul>
+        <div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn main" type="button">Send for review</button><button class="btn" type="button">Save draft</button></div>
       </div>
+      <div class="blk box"><h2>No app yet?</h2><p>The <a href="retro-link-dark.html">OpenHotel Link</a> app sends from Aseprite to this page in one click. <a class="btn" href="retro-link-dark.html">Download Link app</a></p></div>
+<script>
+document.querySelectorAll(".kb").forEach((box) => box.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-go]");
+  if (b) { box.dataset.state = b.dataset.go; box.querySelectorAll(".row .btn").forEach((x) => x.classList.toggle("main", x === b)); }
+}));
+</script>
     </main>
     <aside class="side">
       <div class="blk">
