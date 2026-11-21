@@ -144,6 +144,7 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .subnews{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line)}
 .subnews p{margin:0}
 .subnews[hidden]{display:none}
+.in:disabled{opacity:.55;cursor:not-allowed}
 .top{margin:0}
 .hero.mini{height:110px}
 .hero.mini .room{top:-150px}
@@ -437,12 +438,13 @@ td.dr input.in[type=date]{width:7.8em;font-size:10px}
       <div class="blk">
       <section class="login">
         <h3>Guest login</h3>
-        <form onsubmit="event.preventDefault()">
+        <form id="lg" onsubmit="event.preventDefault();var o=this.querySelector('.otp');if(o.disabled){o.disabled=false;o.focus();document.getElementById('lg-msg').hidden=false}">
           <label>Email<input class="in" type="email" autocomplete="email"></label>
           <div class="pwrow">
             <label>Password<input class="in" type="password" autocomplete="current-password"></label>
-            <label title="Only if you turned on 2FA">2FA<input class="in otp" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="000000" aria-label="2FA code, if turned on"></label>
+            <label title="Asked after your password, only if your account has 2FA">2FA<input class="in otp" type="text" disabled inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="000000" aria-label="2FA code, if turned on"></label>
           </div>
+          <p class="hint" id="lg-msg" role="status" hidden>This account has 2FA. Type the 6-digit code from your app.</p>
           <div class="row"><button class="btn main" type="submit">Log in</button><a href="retro-forgot-dark.html">Forgot password?</a></div>
         </form>
         <p class="new">New to OpenHotel?<br><a href="retro-register-dark.html">Register for free</a> &gt;&gt;</p>

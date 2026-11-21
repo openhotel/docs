@@ -137,3 +137,4 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .subnews{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line)}
 .subnews p{margin:0}
 .subnews[hidden]{display:none}
+.in:disabled{opacity:.55;cursor:not-allowed}

@@ -91,7 +91,8 @@ def post(logged):
     assert MN in article
     return ('      <div class="split3">\n        <div class="col">\n' + article.replace(MN, inter + MN, 1) + '        </div>\n        <div class="col">\n'
             + comments(logged) + '        </div>\n      </div>\n')
-register = '''      <div class="blk box">
+register = '''<div class="two wide"><div>
+      <div class="blk box">
         <h2>Register</h2>
         <p>One account for OpenHotel and every hotel on the network. It takes a minute.</p>
         <form class="form" onsubmit="event.preventDefault()">
@@ -106,7 +107,8 @@ register = '''      <div class="blk box">
           <div class="row"><button class="btn main" type="submit">Register</button><span>Already registered? <a href="#home">Log in</a></span></div>
         </form>
       </div>
-<!--SIDE-->      <div class="blk box">
+      </div><div>
+      <div class="blk box">
         <h2>What happens next</h2>
         <ol class="steps">
           <li><b>Register.</b> Fill the form. One account works in every hotel.</li>
@@ -115,7 +117,8 @@ register = '''      <div class="blk box">
           <li><b>Pick your hotels.</b> Join the main hotel or any community hotel with the same login.</li>
         </ol>
         <p class="hint">Free. No credit card. Credits come from playing. You can turn on 2FA and delete your account at any time in My account.</p>
-      </div><!--/SIDE-->
+      </div>
+      </div></div>
 '''
 forgot = '''      <div class="blk box">
         <h2>Forgot your password?</h2>
