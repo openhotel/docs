@@ -96,6 +96,7 @@ CATS = [("Alpha", 5, "Visible", "-", "-", "10"), ("Flags", 14, "Visible", "-", "
         ("Summer", 12, "Scheduled", "01 Jun 2027", "31 Aug 2027", "15 to 40"), ("Winter", 10, "Scheduled", "01 Dec 2026", "06 Jan 2027", "10 to 35"), ("Pirate week", 8, "Hidden", "14 Nov 2026", "21 Nov 2026", "5 to 15")]
 VB = {"Visible": '<span class="badge on">Visible</span>', "Scheduled": '<span class="badge">Scheduled</span>', "Hidden": '<span class="badge">Hidden</span>'}
 exec(open(T + "pages_net.py").read())
+exec(open(T + "pages_mine.py").read())
 def catrow(i, n, c, st, a, b, pr):
     sel = ' class="go sel"' if n == "Teleports" else ' class="go"'
     return (f'<tr{sel}><td class="ord"><button class="btn" type="button" aria-label="Move up">↑</button><button class="btn" type="button" aria-label="Move down">↓</button></td>'
