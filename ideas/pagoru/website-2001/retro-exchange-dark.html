@@ -141,6 +141,9 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .fl .btn{padding:1px 6px;font-size:11px}
 .fl .all{margin:8px 0 0}
 .fl .all .off{color:var(--muted)}
+.subnews{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line)}
+.subnews p{margin:0}
+.subnews[hidden]{display:none}
 .top{margin:0}
 .hero.mini{height:110px}
 .hero.mini .room{top:-150px}
@@ -377,6 +380,9 @@ td.dr input.in[type=date]{width:7.8em;font-size:10px}
 .two>div>.blk{margin-bottom:10px}
 .two.wide{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
 @media (max-width:720px){.two.wide{grid-template-columns:minmax(0,1fr)}}
+.subnews{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px}
+.subnews p{margin:0}
+.subnews[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -504,7 +510,8 @@ td.dr input.in[type=date]{width:7.8em;font-size:10px}
     <p>Sample page: names and numbers are made up.</p>
   </footer>
 </div>
-<script>document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>
+<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-sub-btn]");if(b)b.closest(".subnews").hidden=true})</script>
+<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-sub-btn]");if(b)b.closest(".subnews").hidden=true});document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>
 <script>document.addEventListener("input",function(e){var i=e.target;if(!i.hasAttribute||!i.hasAttribute("data-filter"))return;var t=i.closest(".friends");if(!t){t=i.closest("form").nextElementSibling;while(t&&!t.classList.contains("tbl")&&t.tagName!="UL")t=t.nextElementSibling}if(!t)return;var q=i.value.toLowerCase();t.querySelectorAll("tr,li").forEach(function(r){if(r.querySelector("th"))return;r.hidden=!!q&&r.textContent.toLowerCase().indexOf(q)<0})})</script>
 </body>
 </html>

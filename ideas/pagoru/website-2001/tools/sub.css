@@ -234,3 +234,6 @@ td.dr input.in[type=date]{width:7.8em;font-size:10px}
 .two>div>.blk{margin-bottom:10px}
 .two.wide{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
 @media (max-width:720px){.two.wide{grid-template-columns:minmax(0,1fr)}}
+.subnews{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px}
+.subnews p{margin:0}
+.subnews[hidden]{display:none}

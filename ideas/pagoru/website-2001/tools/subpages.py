@@ -13,7 +13,7 @@ NEWS = [("booths","21 Nov 2026","Telephone booths are here","Step into a booth a
         ("atrium","02 Nov 2026","The Atrium is open","A new public room with a fountain and two staircases. Come and see it before it gets busy."),
         ("pool","30 Oct 2026","Rooftop pool party","Saturday at 20:00. Bring a towel and keep the splashing in the pool.")]
 
-GO = '<script>document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>\n'
+GO = '<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-sub-btn]");if(b)b.closest(".subnews").hidden=true});document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>\n'
 import re as _re
 FSKIP = ("Overview", "Needs attention", "Numbers", "Updates", "Who sends", "Email templates", "Latest trades", "Order book")
 def addfind(b):
@@ -39,6 +39,7 @@ def page(title, tab, logged, body):
       + '      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="#home"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div>'
       + f'<nav class="actions" aria-label="Site"><p>{title}</p>{nav}</nav></header>\n' + body + '    </main>\n    <aside class="side">\n' + side + '    </aside>\n  </div>\n' + foot.replace('</body>', GO + FIND + '</body>'))
 
+SUBBOX = open(T + "sub-news.html").read()
 news_list = '      <div class="blk box">\n        <h2>Hotel news</h2>\n        <ul class="newslist">\n' + "".join(
     f'          <li><img src="assets/oh/news-{i}.png" width="64" height="64" alt=""><div><time>{d}</time><b>{t}</b><p>{x}</p><a href="#post">Read more</a> &gt;&gt;</div></li>\n' for i, d, t, x in NEWS
   ) + '        </ul>\n        <div class="pager"><span class="hint">Page 1 of 4</span><a href="#news">Older news</a> &gt;&gt;</div>\n      </div>\n'
@@ -125,8 +126,8 @@ exec(open(T + "pages_assets.py").read())
 exec(open(T + "pages_admin.py").read())
 
 PAGES = {  # key: (title, tab, logged, body)
-  "retro-news": ("News", "news", False, news_list), "retro-news-in": ("News", "news", True, news_list),
-  "retro-post": ("Telephone booths are here", "news", False, post(False)), "retro-post-in": ("Telephone booths are here", "news", True, post(True)),
+  "retro-news": ("News", "news", False, news_list), "retro-news-in": ("News", "news", True, SUBBOX + news_list),
+  "retro-post": ("Telephone booths are here", "news", False, post(False)), "retro-post-in": ("Telephone booths are here", "news", True, SUBBOX + post(True)),
   "retro-register": ("Register", "register", False, register), "retro-forgot": ("Forgot password", "", False, forgot),
   "retro-account": ("My account", "account", True, account), "retro-my-hotels": ("My hotels", "hotels", True, hotels),
   "retro-connections": ("Connected hotels", "connections", True, connections),

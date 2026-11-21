@@ -141,6 +141,9 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .fl .btn{padding:1px 6px;font-size:11px}
 .fl .all{margin:8px 0 0}
 .fl .all .off{color:var(--muted)}
+.subnews{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line)}
+.subnews p{margin:0}
+.subnews[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -214,6 +217,7 @@ img{display:block;image-rendering:pixelated;max-width:none}
     <div class="news">
       <div class="blk newsbox">
         <h3>Hotel news</h3>
+
         <ul>
           <li><img src="assets/oh/news-booths.png" width="64" height="64" alt=""><div><time>21 Nov 2026</time><b>Telephone booths are here</b><p>Step into a booth and come out in another room, or in another hotel on the network.</p><a href="retro-post-light.html">Read more</a> &gt;&gt;</div></li>
           <li><img src="assets/oh/news-flag.png" width="64" height="64" alt=""><div><time>14 Nov 2026</time><b>Pirate week</b><p>Hoist the flag in your room. The best decorated rooms win a spot on the front page.</p><a href="retro-post-light.html">Read more</a> &gt;&gt;</div></li>
@@ -305,5 +309,6 @@ img{display:block;image-rendering:pixelated;max-width:none}
     <p>Sample page: names and numbers are made up.</p>
   </footer>
 </div>
+<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-sub-btn]");if(b)b.closest(".subnews").hidden=true})</script>
 </body>
 </html>
