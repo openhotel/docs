@@ -8,10 +8,10 @@ BTN = lambda t, main=False: f'<button class="btn{" main" if main else ""}" type=
 KV = lambda rows: '<dl class="kv">' + "".join(f"<div><dt>{a}</dt><dd>{b}</dd></div>" for a, b in rows) + "</dl>"
 PAGER = lambda t, k: f'<div class="pager"><span class="hint">{t}</span><span><a href="#{k}">Next</a> &gt;&gt;</span></div>'
 def subnav(items, cur, title):
-    return (f'      <nav class="blk subnav" aria-label="{title}"><b>{title}</b>' + "".join(f'<a class="btn{" main" if k == cur else ""}" href="#{k}">{n}</a>' for k, n in items) + '</nav>\n')
-ADMIN_NAV = [("admin", "Overview"), ("admin-registration", "Registration"), ("admin-accounts", "Accounts"), ("admin-blocked", "Blocked"), ("admin-rooms", "Rooms"),
+    return (f'      <nav class="blk subnav" aria-label="{title}">' + "".join(f'<a class="btn{" main" if k == cur else ""}" href="#{k}">{n}</a>' for k, n in items) + '</nav>\n')
+ADMIN_NAV = [("admin", "Manage hotel"), ("admin-registration", "Registration"), ("admin-accounts", "Accounts"), ("admin-blocked", "Blocked"), ("admin-rooms", "Rooms"),
              ("admin-moderation", "Moderation"), ("admin-news", "News"), ("admin-credits", "Credits"), ("library", "Catalog"), ("admin-publicrooms", "Public rooms"), ("admin-clothes", "Clothes")]
-NET_NAV = [("network", "Overview"), ("network-hotels", "Hotels"), ("network-accounts", "Accounts"), ("network-blocked", "Blocked"), ("network-emails", "Emails"), ("network-news", "News"), ("network-credits", "Credit reports"), ("network-settings", "Settings")]
+NET_NAV = [("network", "Network admin"), ("network-hotels", "Hotels"), ("network-accounts", "Accounts"), ("network-blocked", "Blocked"), ("network-emails", "Emails"), ("network-news", "News"), ("network-credits", "Credit reports"), ("network-settings", "Settings")]
 AN = lambda cur: subnav(ADMIN_NAV, cur, "Manage OpenHotel")
 NN = lambda cur: subnav(NET_NAV, cur, "Network admin")
 
