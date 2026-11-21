@@ -20,7 +20,7 @@ Everything is in [website-2001/](website-2001/): open `index.html` (page picker 
 | Register, forgot password | `retro-register`, `retro-forgot` |
 | Friends, credit exchange | `retro-friends`, `retro-exchange` |
 | My account, connected hotels, my hotels | `retro-account`, `retro-connections`, `retro-my-hotels` |
-| Hotel assets, marketplace, item, collection, creations, create, link app | `retro-assets`, `retro-market`, `retro-item`, `retro-collection`, `retro-mine`, `retro-create`, `retro-link` |
+| Assets, marketplace, item, collection, creations, create, link | `retro-assets`, `retro-market`, `retro-item`, `retro-collection`, `retro-mine`, `retro-create`, `retro-link` |
 | Exchange credit page, hotel admin, network | `retro-coin`, `retro-admin`, `retro-network` |
 
 ## Proposal
@@ -36,6 +36,7 @@ Everything is in [website-2001/](website-2001/): open `index.html` (page picker 
 - **Assets**: owner picks rooms, furniture, clothes; marketplace + web/Aseprite/Resprite: see [asset-library](asset-library.md). **Admin**: boxes at the bottom of My account, see [hotel-admin](hotel-admin.md).
 - **Credits box**: credits come from playing; no paid credits.
 - **Friends** are network-wide; furniture and credits stay per hotel. Credits swap between hotels on an exchange: see [credit-exchange](credit-exchange.md).
+- **Explore box**: one box on every page linking to news, marketplace, exchange, friends and admin (logged out: public links only).
 - **Footer**: socials, CC BY-NC-SA 4.0, hotel version.
 
 ## Impact

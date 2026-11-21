@@ -179,3 +179,4 @@
 .chart .ar{fill:var(--line);opacity:.5}
 .chart .axis{position:absolute;inset:0 4px;display:flex;flex-direction:column;justify-content:space-between;font-size:10px;color:var(--soft);pointer-events:none}
 .kb>.row{margin:8px 0}
+.explore .hint{display:block;font-size:11px}

@@ -309,6 +309,7 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .chart .ar{fill:var(--line);opacity:.5}
 .chart .axis{position:absolute;inset:0 4px;display:flex;flex-direction:column;justify-content:space-between;font-size:10px;color:var(--soft);pointer-events:none}
 .kb>.row{margin:8px 0}
+.explore .hint{display:block;font-size:11px}
 </style>
 </head>
 <body>
@@ -364,6 +365,20 @@ ws:sendText(json.encode({ kind = "furniture", sheet = tmp .. ".json" }))</pre>
           <li><a href="retro-my-hotels-dark.html">My hotels (2)</a></li>
           <li><a href="retro-friends-dark.html">Friends online (4)</a></li>
           <li><a href="retro-lobby-dark.html">Log out</a></li>
+        </ul>
+      </section>
+      </div>
+      <div class="blk">
+      <section class="explore">
+        <h3>Explore</h3>
+        <ul class="links">
+          <li><a href="retro-news-in-dark.html">News</a></li>
+          <li><a href="retro-friends-dark.html">Friends</a> <span class="hint">4 online</span></li>
+          <li><a href="retro-market-dark.html">Marketplace</a> <span class="hint">2 updates for your hotel</span></li>
+          <li><a href="retro-exchange-dark.html">Credit exchange</a> <span class="hint">PXP +3.2%</span></li>
+          <li><a href="retro-mine-dark.html">Your creations</a> · <a href="retro-create-dark.html">Create an asset</a></li>
+          <li><a href="retro-admin-dark.html">Manage Sunset Plaza</a> <span class="hint">3 open reports</span></li>
+          <li><a href="retro-network-dark.html">OpenHotel network</a></li>
         </ul>
       </section>
       </div>
