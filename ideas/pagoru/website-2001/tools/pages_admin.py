@@ -11,7 +11,7 @@ def subnav(items, cur, title):
     return (f'      <nav class="blk subnav" aria-label="{title}"><b>{title}</b>' + "".join(f'<a class="btn{" main" if k == cur else ""}" href="#{k}">{n}</a>' for k, n in items) + '</nav>\n')
 ADMIN_NAV = [("admin", "Overview"), ("admin-registration", "Registration"), ("admin-accounts", "Accounts"), ("admin-blocked", "Blocked"), ("admin-rooms", "Rooms"),
              ("admin-moderation", "Moderation"), ("admin-credits", "Credits"), ("library", "Catalog"), ("admin-publicrooms", "Public rooms"), ("admin-clothes", "Clothes")]
-NET_NAV = [("network", "Overview"), ("network-hotels", "Hotels"), ("network-credits", "Credit reports"), ("network-settings", "Settings")]
+NET_NAV = [("network", "Overview"), ("network-hotels", "Hotels"), ("network-accounts", "Accounts"), ("network-blocked", "Blocked"), ("network-emails", "Emails"), ("network-credits", "Credit reports"), ("network-settings", "Settings")]
 AN = lambda cur: subnav(ADMIN_NAV, cur, "Manage OpenHotel")
 NN = lambda cur: subnav(NET_NAV, cur, "Network admin")
 
@@ -30,14 +30,17 @@ admin_accounts = AN("admin-accounts") + box("Accounts (1,204,311)", '''        <
     ["Captain_K", "Moderator", "Aug 2026", "Online", "950", BTN("Role") + " " + BTN("Block")],
     ["Pebbles", "Guest", "Oct 2026", "2 h ago", "120", BTN("Mute") + " " + BTN("Block")],
     ["Sparrow", "Guest", "Nov 2026", "Yesterday", "40", BTN("Mute") + " " + BTN("Block")]], (4,)) + PAGER("1-4 of 1,204,311", "admin-accounts"))
-admin_blocked = AN("admin-blocked") + box("Blocked (6)", TBL(
-    ["Name", "Reason", "By", "Date", ""], [["Trollface", "Spam in 3 rooms", "Captain_K", "20 Nov", BTN("Unblock")], ["xX_cheat", "Credit exploit", "Nightowl", "14 Nov", BTN("Unblock")], ["Rude99", "Harassment", "Captain_K", "09 Nov", BTN("Unblock")]]) + PAGER("3 of 6", "admin-blocked"))
+admin_blocked = AN("admin-blocked") + box("Blocked here (6)", TBL(
+    ["Name", "Reason", "By", "Date", ""], [["Trollface", "Spam in 3 rooms", "Captain_K", "20 Nov", BTN("Unblock")], ["xX_cheat", "Credit exploit", "Nightowl", "14 Nov", BTN("Unblock")], ["Rude99", "Harassment", "Captain_K", "09 Nov", BTN("Unblock")]]) + PAGER("3 of 6", "admin-blocked")) + box("Blocked on other hotels (2)", TBL(
+    ["Name", "Hotel", "Reason", "Date", ""], [["Sparrow", "Pixel Plaza", "Harassment", "18 Nov", BTN("Block here too", True) + " " + BTN("Ignore")], ["Wanda", "Neon Docks", "Credit exploit", "12 Nov", BTN("Block here too", True) + " " + BTN("Ignore")]])
+    + '<p class="hint">Guests of this hotel who were blocked in another hotel. Only the hotel, the reason and the date are shared. A network block (<a href="#network-blocked">Network admin</a>) applies here automatically.</p>')
 admin_rooms = AN("admin-rooms") + box("Rooms (184,020)", TBL(
     ["Room", "Owner", "Now", "Messages 24h", ""], [["Mint garden", "Mintleaf", "12", "1.1k", BTN("Close") + " " + BTN("Delete")], ["Pebbles' pad", "Pebbles", "0", "0", BTN("Delete")], ["Disco night", "Lumen", "7", "620", BTN("Close") + " " + BTN("Delete")]], (2, 3))
     + PAGER("3 of 184,020", "admin-rooms") + '<p class="hint">Public rooms are managed in <a href="#admin-publicrooms">Public rooms</a>.</p>')
 admin_moderation = AN("admin-moderation") + box("Reported messages (3)", TBL(
-    ["Message", "Room", "From", "Reports", ""], [["“...buy credits at my site...”", "The Atrium", "Trollface", "5", BTN("Delete", True) + " " + BTN("Ignore")], ["“you suck”", "Mint garden", "Rude99", "2", BTN("Mute") + " " + BTN("Ignore")]], (3,))) + box("Blocked words (42)", '''        <p><span class="badge">casino</span> <span class="badge">free credits</span> <span class="badge">discord.gg</span> <span class="badge">+ 39</span></p>
-        <form class="mfind" onsubmit="event.preventDefault()"><input class="in" placeholder="Add a word" aria-label="Word"><button class="btn" type="submit">Add</button></form>
+    ["Message", "Room", "From", "Reports", ""], [["“...buy credits at my site...”", "The Atrium", "Trollface", "5", BTN("Delete", True) + " " + BTN("Ignore")], ["“you suck”", "Mint garden", "Rude99", "2", BTN("Mute") + " " + BTN("Ignore")]], (3,))) + box("Blocked words (42)", '''        <form class="mfind" onsubmit="event.preventDefault()"><input class="in" placeholder="Word" aria-label="Word"><input class="in" placeholder="Replace with (default ***)" aria-label="Replace with"><button class="btn" type="submit">Add</button></form>''' + TBL(
+    ["Word", "Replace with", ""], [["casino", '<input class="in" value="***" aria-label="Replace with">', BTN("Remove")], ["free credits", '<input class="in" value="***" aria-label="Replace with">', BTN("Remove")], ["discord.gg", '<input class="in" value="[link removed]" aria-label="Replace with">', BTN("Remove")]]) + PAGER("3 of 42", "admin-moderation")
+    + '''<p class="hint">The word is replaced in the chat message. Every word starts with ***; you can set a different text for each one.</p>
         <form class="form" onsubmit="event.preventDefault()"><label class="chk"><input type="checkbox" checked> Mute a guest for 10 minutes after 3 blocked messages</label><div class="row"><button class="btn main" type="submit">Save</button></div></form>''')
 admin_credits = AN("admin-credits") + box("Credits", KV([("Credit", "OHC (quote currency of the exchange)"), ("In circulation", "2.1M"), ("Created 24h", "310,000"), ("Destroyed 24h", "262,000"), ("Exchange price", "1.000 OHC")])) + box("Purchases", TBL(
     ["When", "Who", "Bought", "Price"], [["15:20", "Mintleaf", "Telephone booth", "25 OHC"], ["15:02", "Pebbles", "Pirate flag", "10 OHC"], ["14:48", "Wanda", "Striped shirt", "free"]], (3,)) + PAGER("3 of 48,210 today", "admin-credits"))
@@ -86,6 +89,7 @@ network_settings = NN("network-settings") + box("Settings", '''        <form cla
 CATS = [("Alpha", 5, "Visible", "-", "-", "10"), ("Flags", 14, "Visible", "-", "-", "5"), ("Teleports", 3, "Visible", "-", "-", "5 to 25"),
         ("Summer", 12, "Scheduled", "01 Jun 2027", "31 Aug 2027", "15 to 40"), ("Winter", 10, "Scheduled", "01 Dec 2026", "06 Jan 2027", "10 to 35"), ("Pirate week", 8, "Hidden", "14 Nov 2026", "21 Nov 2026", "5 to 15")]
 VB = {"Visible": '<span class="badge on">Visible</span>', "Scheduled": '<span class="badge">Scheduled</span>', "Hidden": '<span class="badge">Hidden</span>'}
+exec(open(T + "pages_net.py").read())
 def catrow(i, n, c, st, a, b, pr):
     sel = ' class="go sel"' if n == "Teleports" else ' class="go"'
     return (f'<tr{sel}><td class="ord"><button class="btn" type="button" aria-label="Move up">↑</button><button class="btn" type="button" aria-label="Move down">↓</button></td>'

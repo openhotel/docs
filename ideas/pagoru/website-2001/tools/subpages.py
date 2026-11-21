@@ -1,6 +1,6 @@
 # 2001 subpages + link wiring for all 2001 pages. Run after lightdark.py.
 import re, sys, glob, os
-site = sys.argv[1]; T = os.path.dirname(os.path.abspath(__file__)) + "/"
+site = sys.argv[1]; T = "/tmp/claude-0/oh/"
 rd = lambda f: open(T + f).read()
 tpl = rd("lobby.tpl.html")
 head = tpl[:tpl.index("<body>")].replace("{{CSS}}", rd("lobby.css") + rd("sub.css"))
@@ -120,7 +120,7 @@ PAGES = {  # key: (title, tab, logged, body)
   "retro-admin": ("Manage OpenHotel", "", True, admin), "retro-admin-registration": ("Registration", "", True, admin_registration), "retro-admin-accounts": ("Accounts", "", True, admin_accounts),
   "retro-admin-blocked": ("Blocked", "", True, admin_blocked), "retro-admin-rooms": ("Rooms", "", True, admin_rooms), "retro-admin-moderation": ("Moderation", "", True, admin_moderation),
   "retro-admin-credits": ("Credits", "", True, admin_credits), "retro-admin-publicrooms": ("Public rooms", "", True, admin_publicrooms), "retro-admin-clothes": ("Clothes", "", True, admin_clothes),
-  "retro-network": ("Network admin", "", True, network), "retro-network-hotels": ("Hotels", "", True, network_hotels), "retro-network-credits": ("Credit reports", "", True, network_credits), "retro-network-settings": ("Settings", "", True, network_settings),
+  "retro-network": ("Network admin", "", True, network), "retro-network-hotels": ("Hotels", "", True, network_hotels), "retro-network-accounts": ("Accounts", "", True, network_accounts), "retro-network-blocked": ("Blocked", "", True, network_blocked), "retro-network-emails": ("Emails", "", True, network_emails), "retro-network-credits": ("Credit reports", "", True, network_credits), "retro-network-settings": ("Settings", "", True, network_settings),
 }
 for key, (title, tab, logged, body) in PAGES.items():
     h = page(title, tab, logged, body)
