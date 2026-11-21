@@ -1,0 +1,12 @@
+      <section class="login">
+        <h3>Guest login</h3>
+        <form onsubmit="event.preventDefault()">
+          <label>Email<input class="in" type="email" autocomplete="email"></label>
+          <div class="pwrow">
+            <label>Password<input class="in" type="password" autocomplete="current-password"></label>
+            <label title="Only if you turned on 2FA">2FA<input class="in otp" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="000000" aria-label="2FA code, if turned on"></label>
+          </div>
+          <div class="row"><button class="btn main" type="submit">Log in</button><a href="#">Forgot password?</a></div>
+        </form>
+        <p class="new">New to OpenHotel?<br><a href="#">Register for free</a> &gt;&gt;</p>
+      </section>
