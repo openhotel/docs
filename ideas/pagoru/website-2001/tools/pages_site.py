@@ -61,7 +61,7 @@ admin_connection = AN("admin-connection") + '<div class="two wide"><div>' + box(
         <form class="form" onsubmit="event.preventDefault()"><label>Set a new licence<input class="in" type="password" placeholder="Paste the licence" autocomplete="off"></label>
           <span class="hint">The licence goes in the hotel server's config (proposal: <code>licence</code> in its config file or the OH_LICENCE variable). This page saves it there. A licence is shown once, when it is made in <a href="#hotels">My hotels</a>; lost it? Remake it there and paste the new one.</span>
           <div class="row"><button class="btn main" type="submit">Save licence</button> <button class="btn" type="button">Check it</button></div></form>''') + '</div><div>' + box("Addresses", '''        <form class="form" onsubmit="event.preventDefault()">
-          <label>Network<input class="in" value="https://openhotel.club" disabled></label><span class="hint">The network address is fixed.</span>
+          <label>Network<select class="in"><option selected>https://openhotel.club (official)</option><option>Other network (enter URL)</option></select></label><label>Other network URL<input class="in" type="url" placeholder="https://" disabled></label><span class="hint">Pick the official network or another one.</span>
           <label>Website (this site)<input class="in" type="url" value="https://openhotel.club"></label>
           <label>Client (where guests play)<input class="in" type="url" value="https://play.openhotel.club"></label>
           <div class="row"><button class="btn main" type="submit">Save</button> <button class="btn" type="button">Test addresses</button></div>
