@@ -15,20 +15,20 @@ PP_BRAND = '          <div class="brand"><img src="assets/oh/icon-console-off.pn
 acts = lambda w, a, b=None: f'          <p>{w}</p>\n          <a class="btn main" href="#">{a}</a>\n' + (f'          <a class="btn" href="#">{b}</a>\n' if b else '')
 V = {
   "retro-lobby": dict(ROOM="assets/oh/room-lobby-door.png", BRAND=OH_BRAND, ABOUT=OH_ABOUT, NEWS_TITLE="Hotel news", FOOT_NOTE="",
-                      ACTIONS=acts("Welcome to OpenHotel", "Check in"), AUTH=rd("login.html"), EXPLORE=rd("explore-out.html")),
+                      ACTIONS=acts("Welcome to OpenHotel", "Check in"), AUTH=rd("login.html"), EXPLORE=rd("sidebar-out.html"), BOXES=rd("home-boxes.html")),
   "retro-lobby-in": dict(ROOM="assets/oh/room-lobby-door.png", BRAND=OH_BRAND, ABOUT=OH_ABOUT, NEWS_TITLE="Hotel news", FOOT_NOTE="",
-                      ACTIONS=acts("Welcome back, Nightowl", "Enter hotel"), AUTH=rd("account.html"), EXPLORE=rd("explore-in.html")),
+                      ACTIONS=acts("Welcome back, Nightowl", "Enter hotel"), AUTH=rd("account.html"), EXPLORE=rd("sidebar-in.html"), BOXES=rd("home-boxes.html")),
 }
 PP = dict(ROOM="assets/oh/room-plaza-door.png", BRAND=PP_BRAND, ABOUT=PP_ABOUT, NEWS_TITLE="Pixel Plaza news",
           FOOT_NOTE="    <p>Pixel Plaza is run by its own staff, not by the OpenHotel team. Accounts are handled by OpenHotel.</p>\n")
-V["retro-hotel"] = dict(PP, ACTIONS=acts("Welcome to Pixel Plaza", "Check in"), AUTH=rd("login-hotel.html"), EXPLORE=rd("explore-out.html"))
-V["retro-hotel-in"] = dict(PP, ACTIONS=acts("Welcome back, Nightowl", "Enter Pixel Plaza"), AUTH=rd("account-hotel.html"), EXPLORE=rd("explore-in.html"))
+V["retro-hotel"] = dict(PP, ACTIONS=acts("Welcome to Pixel Plaza", "Check in"), AUTH=rd("login-hotel.html"), EXPLORE=rd("sidebar-out.html"), BOXES=rd("home-boxes.html"))
+V["retro-hotel-in"] = dict(PP, ACTIONS=acts("Welcome back, Nightowl", "Enter Pixel Plaza"), AUTH=rd("account-hotel.html"), EXPLORE=rd("sidebar-hotel-in.html"), BOXES=rd("home-boxes.html"))
 for key, vals in V.items():
     for theme in ("light", "dark"):
         h = tpl.replace("{{THEME}}", theme)
         for k, v in vals.items():
             assert h.count("{{%s}}" % k) == 1, k
-            h = h.replace("{{%s}}" % k, v if k in ("FOOT_NOTE", "ACTIONS", "AUTH", "EXPLORE") else v)
+            h = h.replace("{{%s}}" % k, v if k in ("FOOT_NOTE", "ACTIONS", "AUTH", "EXPLORE", "BOXES") else v)
         h = h.replace("{{BRAND}}\n", "")
         assert "{{" not in h, key
         open(f"{site}/{key}-{theme}.html", "w").write(h)

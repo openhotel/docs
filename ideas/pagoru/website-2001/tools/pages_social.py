@@ -46,6 +46,7 @@ friends_body = '''      <div class="split3">
 
 import math
 MARKET = [  # icon, w, h, hotel, code, price, change
+  ("catalog", 16, 23, "Sunset Plaza (your hotel)", "SNP", "0.310", "+1.1"),
   ("navigator", 23, 23, "OpenHotel", "OHC", "1.000", "0.0"),
   ("console-off", 15, 23, "Pixel Plaza", "PXP", "0.420", "+3.2"),
   ("club", 23, 21, "Neon Docks", "NDK", "1.850", "-1.4"),
@@ -74,6 +75,7 @@ XFORM = """            <form class="form xform" onsubmit="event.preventDefault()
 """
 WALLETS = """            <dl class="kv">
               <div><dt>OpenHotel</dt><dd>1,250 OHC</dd></div>
+              <div><dt>Sunset Plaza</dt><dd>12,400 SNP</dd></div>
               <div><dt>Pixel Plaza</dt><dd>4,800 PXP</dd></div>
               <div><dt>Neon Docks</dt><dd>320 NDK</dd></div>
             </dl>

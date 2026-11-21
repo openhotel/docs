@@ -128,6 +128,9 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .credits h3{margin:0 0 2px;font-size:12px;color:var(--accent-ink)}
 .credits p{margin:0}
 .credits img{margin-top:2px}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.visit .all{margin:8px 0 0}
+@media (max-width:560px){.duo{grid-template-columns:minmax(0,1fr)}}
 .top{margin:0}
 .hero.mini{height:110px}
 .hero.mini .room{top:-150px}
@@ -310,6 +313,32 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .chart .axis{position:absolute;inset:0 4px;display:flex;flex-direction:column;justify-content:space-between;font-size:10px;color:var(--soft);pointer-events:none}
 .kb>.row{margin:8px 0}
 .explore .hint{display:block;font-size:11px}
+.f{display:flex;flex-direction:column;gap:2px;font-size:11px;color:var(--soft);min-width:0}
+.f .in{font-size:12px;padding:2px 4px;min-width:0;width:100%}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px 8px;align-items:end;margin:6px 0}
+.fgrid.tx{grid-template-columns:repeat(auto-fit,minmax(72px,1fr)) auto;padding:6px 0;border-top:1px dotted var(--line)}
+.fgrid.lg{grid-template-columns:100px minmax(0,1fr) minmax(0,1.5fr) auto}
+.ed2 h3{margin:14px 0 4px}
+.dir{margin:4px 0}
+.dir>summary{display:inline-block}
+.stepbar{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:4px 0 8px}
+.stepbar li{padding:1px 8px;border:1px solid var(--line);color:var(--soft);font-size:12px}
+.stepbar li.on{border-color:#000;color:var(--ink);font-weight:700}
+.cats{list-style:none;margin:0;padding:0}
+.cats li{display:flex;gap:6px;align-items:center;padding:3px 4px;border-bottom:1px dotted var(--line);border-left:3px solid transparent}
+.cats li.sel{border-left-color:var(--accent);font-weight:700}
+.cats .hint{margin-left:auto}
+.vp .st{display:none}
+.vp[data-state="v12"] .st-v12,.vp[data-state="v11"] .st-v11,.vp[data-state="v10"] .st-v10,.vp[data-state="v20"] .st-v20{display:block}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+.visit .all,.net .all{margin:8px 0 0}
+.stars .dim{color:var(--line)}
+.dense .badge{font-size:9px;padding:0 3px;white-space:nowrap}
+.split3.narrow{grid-template-columns:minmax(0,1fr) 200px}.split3.narrow .btn{font-size:11px}@media (max-width:900px){.split3.narrow{grid-template-columns:minmax(0,1fr)}}
+.fgrid.tx{grid-template-columns:minmax(0,1.7fr) repeat(6,minmax(0,1fr)) auto}
+.fgrid .btn{align-self:end;padding:2px 8px}
+@media (max-width:620px){.fgrid.tx,.fgrid.lg{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}}
+.tbl .sel-s{min-width:96px}
 </style>
 </head>
 <body>
@@ -375,20 +404,6 @@ document.querySelectorAll(".tfa").forEach((box) => {
   });
 });
 </script>
-      <div class="blk box dense">
-        <h2>Manage this hotel</h2>
-        <p class="hint">You are an admin of <select class="in sel-s" aria-label="Hotel"><option>Sunset Plaza</option><option>Pixel Inn</option></select></p>
-        <dl class="kv"><div><dt>Accounts</dt><dd>1,842</dd></div><div><dt>Online now</dt><dd>312</dd></div><div><dt>Rooms</dt><dd>640</dd></div><div><dt>Credits in circulation</dt><dd>5.6M PXP</dd></div><div><dt>Open reports</dt><dd><b>3</b></dd></div><div><dt>Asset updates</dt><dd><b>2</b></dd></div></dl>
-        <form class="form" onsubmit="event.preventDefault()"><label class="chk"><input type="checkbox"> Closed to new registrations</label>
-          <span class="hint">Guests who already have an account can still enter. New accounts can't connect to this hotel.</span><div class="row"><button class="btn" type="submit">Save</button></div></form>
-        <p><a class="btn main" href="retro-admin-dark.html">Open hotel admin</a> <a class="btn" href="retro-assets-dark.html">Asset library</a></p>
-      </div>
-      <div class="blk box dense">
-        <h2>OpenHotel network</h2>
-        <p class="hint">Only the main hotel sees this.</p>
-        <dl class="kv"><div><dt>Hotels</dt><dd>128 (96 public)</dd></div><div><dt>Online now</dt><dd>4,210</dd></div><div><dt>Hotels waiting for review</dt><dd><b>2</b></dd></div><div><dt>Exchange paused</dt><dd>none</dd></div></dl>
-        <p><a class="btn main" href="retro-network-dark.html">Manage the network</a></p>
-      </div>
     </main>
     <aside class="side">
       <div class="blk">
@@ -409,17 +424,38 @@ document.querySelectorAll(".tfa").forEach((box) => {
       </section>
       </div>
       <div class="blk">
-      <section class="explore">
-        <h3>Explore</h3>
-        <ul class="links">
-          <li><a href="retro-news-in-dark.html">News</a></li>
-          <li><a href="retro-friends-dark.html">Friends</a> <span class="hint">4 online</span></li>
-          <li><a href="retro-market-dark.html">Marketplace</a> <span class="hint">2 updates for your hotel</span></li>
-          <li><a href="retro-exchange-dark.html">Credit exchange</a> <span class="hint">PXP +3.2%</span></li>
-          <li><a href="retro-mine-dark.html">Your creations</a> · <a href="retro-create-dark.html">Create an asset</a></li>
-          <li><a href="retro-admin-dark.html">Manage Sunset Plaza</a> <span class="hint">3 open reports</span></li>
-          <li><a href="retro-network-dark.html">OpenHotel network</a></li>
+      <section class="visit">
+        <h3>Friends online (4)</h3>
+        <ul>
+          <li><a href="retro-friends-dark.html">Mintleaf</a><span>Pixel Plaza</span></li>
+          <li><a href="retro-friends-dark.html">Captain_K</a><span>OpenHotel</span></li>
+          <li><a href="retro-friends-dark.html">Pebbles</a><span>Neon Docks</span></li>
+          <li><a href="retro-friends-dark.html">nightbus</a><span>OpenHotel</span></li>
+          <li><span>Offline</span><span>2</span></li>
         </ul>
+        <p class="all"><a href="retro-friends-dark.html">All friends</a> &gt;&gt;</p>
+      </section>
+      </div>
+      <div class="blk">
+      <section class="net">
+        <h3>Manage Sunset Plaza</h3>
+        <dl>
+          <div><dt>Accounts</dt><dd>1,842</dd></div>
+          <div><dt>Online now</dt><dd>312</dd></div>
+          <div><dt>Open reports</dt><dd>3</dd></div>
+          <div><dt>New registrations</dt><dd>Open</dd></div>
+        </dl>
+        <p class="all"><a href="retro-admin-dark.html">Hotel admin</a> &gt;&gt; &nbsp; <a href="retro-assets-dark.html">Catalog</a> &gt;&gt;</p>
+      </section>
+      </div>
+      <div class="blk">
+      <section class="net">
+        <h3>Network admin</h3>
+        <dl>
+          <div><dt>Hotels</dt><dd>128</dd></div>
+          <div><dt>Waiting for review</dt><dd>2</dd></div>
+        </dl>
+        <p class="all"><a href="retro-network-dark.html">Manage the network</a> &gt;&gt;</p>
       </section>
       </div>
       <div class="blk">

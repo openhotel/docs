@@ -7,36 +7,36 @@
 - Discussion: none
 
 ## Summary
-Every hotel owner picks which public rooms, furniture and clothes are in their hotel. Assets come from a network marketplace where anyone can publish. Anyone can create; only the owner adds an asset to a hotel. Pixel art is drawn in Aseprite or Resprite (iPad), never on the web. Mockup: [website-2001](website-2001/) `retro-assets`, `retro-market`, `retro-item`, `retro-create`, `retro-link`.
+Every hotel owner picks which public rooms, furniture and clothes are in their hotel. Assets come from a network marketplace where anyone can publish. Anyone can create; only the owner adds an asset to a hotel. Pixel art is drawn in Aseprite or Resprite (iPad), never on the web. Mockup: [website-2001](website-2001/) `retro-assets` (catalog), `retro-market`, `retro-item`, `retro-create`, `retro-link`.
 
 ## Motivation
 Today each hotel ships the assets in its server folder, so sharing a room or a piece of furniture between hotels means copying files by hand. Builds on [binary-assets](binary-assets.md): every asset is one signed `.oha` file.
 
 ## Proposal
-- **Versions and schemas**: every asset (room, furniture, clothes) and collection has a version, a schema number and a `minHotelVersion`. A hotel only sees versions it can run; newer ones are hidden with a count. Owners see "Update to x" when a newer compatible version exists.
-- **Hotel assets** (owner): list with version, latest, hotel-from, on/off, price (furniture) and first room. Upload a signed `.oha` or add from the marketplace. A hotel keeps its version until the owner updates.
-- **Marketplace** (onet): dense table (thumb, name, kind, version, hotels using it, downloads, rating, Add or Update). Filters: kind, search, sort, "works with my hotel". Download gives the signed `.oha` for hotels that upload by hand; Add is one click for the hotel you pick.
-- **Collections**: a set of furniture (asset-editor `CollectionData`: `id`, `category.label`, `category.description`, `minHotelVersion`, furniture list). Add all in one click.
-- **Item and collection pages**: versions table with compat, data in the version (revision, type, size w/d/h, icon, actions, lang, directions with texture, zIndex, pivot, position, sprite sheet), who uses it, downloads, dates, stars, comments like news, report.
-- **Your creations**: state (draft, review, live), versions, hotels using each, downloads, rating, new version, edit collections.
-- **Create**: no drawing on the web. Send a file (.aseprite, .png + .json, .oha); the page validates it and previews every field. Furniture fields come from asset-editor; room and clothes fields are a proposal.
-- **Link app**: small desktop app on `127.0.0.1` that joins the website and Aseprite. Aseprite Lua extension sends the export via the scripting `WebSocket` (to verify), else drops files in an outbox folder. Layers = directions, tags = action states, slices = icon and pivot.
-- **Resprite (iPad)**: no plugin and no localhost, so files only (export, then pick the file on the website). A share-sheet route is unverified.
+- **Version vs schema**: version = the item's own iterations (1.0, 1.1...), shown with its history. Schema = the data shape; each hotel version runs a range of schemas, and that decides if a hotel can use an item. There is no "minimum hotel version" field. Versions with a schema the hotel doesn't run are hidden or marked unsupported.
+- **Catalog on the web**: a hotel's catalog today is `catalog.yml` (categories with id, label, description, enabled, optional from/to dates, furniture `id` + `price`). The owner edits it on the web: categories, availability dates, per-item version and price. Adding an item is done from its marketplace page (any compatible version, old ones too) or from the catalog; no one-click add on the marketplace list.
+- **Marketplace** (onet): list with version, schema, your catalog version, hotels using it, and stars. Filter by kind, search, sort, "schemas my hotel runs". No downloads: hotels get assets through the catalog.
+- **Item and collection pages**: version picker with each version's data (revision, schema, size w/d/h, icon, actions, lang, directions, sprite sheet), history with "use this one", stars and comments once, who uses it.
+- **Collections**: asset-editor `CollectionData` (`id`, `category.label`, `category.description`, furniture list).
+- **Your creations**: state, versions, hotels using each, rating. Download (own files only), new version, edit collections. **Delete only while no hotel uses the asset or version.**
+- **Uploads**: only OpenHotel files made like asset-editor does today (`.furniture` zip: sprite.png, sheet.json, data.yml, lang.yml; `.collection`; `.oha` later). Revision is a ULID. The Create page is an editable form of those fields (id, type, size, icon, actions, lang, directions). Rooms and clothes come when the editor supports them.
+- **Link app**: desktop app on `127.0.0.1`; Aseprite Lua extension (scripting `WebSocket`, to verify) fills the form from an export. Layers = directions, tags = action states, slices = icon and pivot.
+- **Resprite (iPad)**: no plugin or localhost; file export and upload only.
 - **Rules**: own art only, review, CC BY-NC-SA 4.0. Anyone creates; only the owner adds to a hotel.
 
 ## Alternatives
 | Option | For | Against |
 |---|---|---|
-| Files on each hotel server (today) | Nothing to build | No sharing, no signing, manual copies |
-| Marketplace + pinned versions (proposed) | Easy sharing, owner stays in control | Needs review and storage on onet |
-| Marketplace with auto-updates | Always fresh | An author can change a hotel without the owner |
+| Files on each server (today) | Nothing to build | No sharing, manual copies |
+| Marketplace + pinned versions (proposed) | Easy sharing, owner in control | Review and storage on onet |
+| Auto-updates | Always fresh | An author can change a hotel |
 
 ## Impact
 - onet: asset store, search, ratings, usage counts, review queue, hotel asset lists.
 - asset-editor: importer for `.aseprite` and PNG sheets, validation, signing.
 - openhotel (server): pulls the hotel's asset list and `.oha` files from onet at boot and on change.
 - aseprite-scripts: Lua extension; new Link app (desktop).
-- web: Hotel assets, Marketplace, item, creations, Create and Link pages.
+- web: Hotel catalog, Marketplace, item, creations, Create and Link pages.
 
 ## Open questions
 1. Who reviews assets: OpenHotel staff, trusted guests, or both?

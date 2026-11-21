@@ -126,7 +126,7 @@ def myhotel(thumb, icon, iw, ih, name, hid, public, accounts, client, web, lic, 
           </form>
         </div>
         <dl class="kv wide"><div><dt>Credit code</dt><dd><b>{code}</b> <span class="hint">can't be changed</span></dd></div><div><dt>Accounts connected</dt><dd>{accounts}</dd></div><div><dt>Online now</dt><dd>{'312' if public else '0'}</dd></div></dl>
-        <p><a href="#library">Rooms, furniture and clothes in this hotel</a> &gt;&gt;</p>
+        <p><a href="#library">Hotel catalog</a> &gt;&gt; &nbsp; <a href="#admin">Hotel admin</a> &gt;&gt;</p>
         <h3>Licence</h3>
         {licb}
         <p><a class="danger" href="#">Delete hotel</a></p>
@@ -150,7 +150,7 @@ hotels = '''      <div class="blk box">
           </form>
         </details>
       </div>
-''' + myhotel("plaza", "console-off", 15, 23, "Sunset Plaza", "01M7XSPG3W92FQ0EEJ2EPHCY3C", True, 2, "play.sunset.example", "sunset.example", "12 Nov 2026", "SNP") \
+''' + myhotel("tower", "catalog", 16, 23, "Sunset Plaza", "01M7XSPG3W92FQ0EEJ2EPHCY3C", True, 2, "play.sunset.example", "sunset.example", "12 Nov 2026", "SNP") \
     + myhotel("cafe", "club", 23, 21, "Pixel Inn", "01M7XSPG4KXBVQ8V0HYY57DZ69", False, 0, "play.pixelinn.example", "pixelinn.example", None, "PXI") + '''<script>
 document.querySelectorAll(".lic").forEach((box) => box.addEventListener("click", (e) => {
   const b = e.target.closest("[data-go]");

@@ -128,6 +128,9 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .credits h3{margin:0 0 2px;font-size:12px;color:var(--accent-ink)}
 .credits p{margin:0}
 .credits img{margin-top:2px}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.visit .all{margin:8px 0 0}
+@media (max-width:560px){.duo{grid-template-columns:minmax(0,1fr)}}
 .top{margin:0}
 .hero.mini{height:110px}
 .hero.mini .room{top:-150px}
@@ -310,6 +313,32 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .chart .axis{position:absolute;inset:0 4px;display:flex;flex-direction:column;justify-content:space-between;font-size:10px;color:var(--soft);pointer-events:none}
 .kb>.row{margin:8px 0}
 .explore .hint{display:block;font-size:11px}
+.f{display:flex;flex-direction:column;gap:2px;font-size:11px;color:var(--soft);min-width:0}
+.f .in{font-size:12px;padding:2px 4px;min-width:0;width:100%}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px 8px;align-items:end;margin:6px 0}
+.fgrid.tx{grid-template-columns:repeat(auto-fit,minmax(72px,1fr)) auto;padding:6px 0;border-top:1px dotted var(--line)}
+.fgrid.lg{grid-template-columns:100px minmax(0,1fr) minmax(0,1.5fr) auto}
+.ed2 h3{margin:14px 0 4px}
+.dir{margin:4px 0}
+.dir>summary{display:inline-block}
+.stepbar{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:4px 0 8px}
+.stepbar li{padding:1px 8px;border:1px solid var(--line);color:var(--soft);font-size:12px}
+.stepbar li.on{border-color:#000;color:var(--ink);font-weight:700}
+.cats{list-style:none;margin:0;padding:0}
+.cats li{display:flex;gap:6px;align-items:center;padding:3px 4px;border-bottom:1px dotted var(--line);border-left:3px solid transparent}
+.cats li.sel{border-left-color:var(--accent);font-weight:700}
+.cats .hint{margin-left:auto}
+.vp .st{display:none}
+.vp[data-state="v12"] .st-v12,.vp[data-state="v11"] .st-v11,.vp[data-state="v10"] .st-v10,.vp[data-state="v20"] .st-v20{display:block}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+.visit .all,.net .all{margin:8px 0 0}
+.stars .dim{color:var(--line)}
+.dense .badge{font-size:9px;padding:0 3px;white-space:nowrap}
+.split3.narrow{grid-template-columns:minmax(0,1fr) 200px}.split3.narrow .btn{font-size:11px}@media (max-width:900px){.split3.narrow{grid-template-columns:minmax(0,1fr)}}
+.fgrid.tx{grid-template-columns:minmax(0,1.7fr) repeat(6,minmax(0,1fr)) auto}
+.fgrid .btn{align-self:end;padding:2px 8px}
+@media (max-width:620px){.fgrid.tx,.fgrid.lg{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}}
+.tbl .sel-s{min-width:96px}
 </style>
 </head>
 <body>
@@ -373,17 +402,6 @@ img{display:block;image-rendering:pixelated;max-width:none}
           <div class="row"><button class="btn main" type="submit">Log in</button><a href="retro-forgot-light.html">Forgot password?</a></div>
         </form>
         <p class="new">New to OpenHotel?<br><a href="retro-register-light.html">Register for free</a> &gt;&gt;</p>
-      </section>
-      </div>
-      <div class="blk">
-      <section class="explore">
-        <h3>Explore</h3>
-        <ul class="links">
-          <li><a href="retro-news-light.html">News</a></li>
-          <li><a href="retro-market-light.html">Marketplace</a> <span class="hint">rooms, furniture, clothes</span></li>
-          <li><a href="retro-exchange-light.html">Credit exchange</a> <span class="hint">swap credits between hotels</span></li>
-          <li><a href="retro-register-light.html">Register for free</a></li>
-        </ul>
       </section>
       </div>
       <div class="blk">

@@ -7,12 +7,13 @@
 - Discussion: none
 
 ## Summary
-A box at the bottom of My account for hotel admins, and a second one for owners of the main hotel. Mockup: [website-2001](website-2001/) `retro-account`, `retro-admin`, `retro-network`.
+Boxes in the right bar for hotel admins, and one more for owners of the main hotel. Mockup: [website-2001](website-2001/) `retro-lobby-in`, `retro-admin`, `retro-network`.
 
 ## Proposal
-- **Manage this hotel** (box): pick the hotel, see accounts, online, rooms, credits in circulation, open reports and asset updates. Switch "Closed to new registrations": existing accounts still enter, new accounts can't connect.
-- **Hotel admin page**, per hotel: registration (lock, message, verified email), accounts (search, mute, block, role), blocked list with reason and unblock, rooms (close, delete), chat and moderation (reported messages, blocked words, auto-mutes), credits and purchases, asset library applied (links to [asset-library](asset-library.md)).
-- **OpenHotel network** (box, main hotel owners only): hotels, online, hotels waiting for review. Page: allow new hotels, pause the whole [credit exchange](credit-exchange.md), oldest allowed hotel version, hotel table (owner, version, accounts, online, credit code, state; approve, pause trading, suspend), daily credit reports with a check.
+- **Manage this hotel** (right bar box): accounts, online, open reports, registration state, links to admin and catalog. The registration lock lives on the admin page: existing accounts still enter, new accounts can't connect.
+- **Friends online** (right bar box) sits above them.
+- **Hotel admin page**, per hotel: registration (lock, message, verified email), accounts (search, mute, block, role), blocked list with reason and unblock, rooms (close, delete), chat and moderation (reported messages, blocked words, auto-mutes), credits and purchases, hotel catalog (see [asset-library](asset-library.md)).
+- **Network admin** (right bar box, main hotel owners only): hotels, online, hotels waiting for review. Page: allow new hotels, pause the whole [credit exchange](credit-exchange.md), oldest allowed hotel version, hotel table (owner, version, accounts, online, credit code, state; approve, pause trading, suspend), daily credit reports with a check.
 - **Data**: the hotel server exposes these lists and actions to its admins through onet; auth only says who is an admin. The website shows data it gets from the hotel, it doesn't store it.
 - **Roles**: owner, admin, moderator with different actions (not final).
 
