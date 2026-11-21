@@ -53,9 +53,10 @@ admin_publicrooms = AN("admin-publicrooms") + box("Public rooms (3)", '<div clas
     + "".join(prrow(*r) for r in PR)
     + '</table></div><p><a class="btn main" href="#market">Add rooms from the marketplace</a> <button class="btn" type="button">Save</button></p><p class="hint">Guests land in the first room when they enter the hotel.</p>')
 SKINS = ["#efcfb1", "#f6dcc8", "#d9a57a", "#c98e62", "#a8714a", "#7a4a2e"]
-def crow(t, n, by, sl, v, on, pr):
+def crow(t, n, by, sl, v, on, pr, d=("", "", False)):
     return (f'<tr class="go"><td>{tb(t)}</td><td><a href="#item"><b>{n}</b></a><br><span class="hint">{by}</span></td><td>{sl}</td><td class="num">{v}</td><td>{sch(1)}</td>'
-            f'<td><input type="checkbox"{" checked" if on else ""} aria-label="In wardrobe"></td><td class="num">{pr}</td></tr>')
+            f'<td><input type="checkbox"{" checked" if on else ""} aria-label="In wardrobe"></td>'
+            f'<td><input class="in" type="date" value="{d[0]}" aria-label="Available from"> <input class="in" type="date" value="{d[1]}" aria-label="Available until"><br><label class="chk"><input type="checkbox"{" checked" if d[2] else ""}> every year</label></td><td class="num">{pr}</td></tr>')
 PRICE = lambda v: f'<input class="in price" type="number" value="{v}" aria-label="Price">'
 admin_clothes = AN("admin-clothes") + box("Character personalisation", '''        <p class="hint">What guests can change on their avatar in this hotel.</p>
         <h3>Skin colours</h3>
@@ -66,8 +67,8 @@ admin_clothes = AN("admin-clothes") + box("Character personalisation", '''      
         <form class="mfind" onsubmit="event.preventDefault()"><input class="in" placeholder="#a1b2c3" aria-label="New colour" style="max-width:110px"><button class="btn" type="submit">Add colour</button><label class="chk">Default skin <select class="in sel-s"><option>#efcfb1</option><option>#c98e62</option></select></label></form>
         <h3>Guests can change</h3>
         <label class="chk"><input type="checkbox" checked> Skin colour</label> <label class="chk"><input type="checkbox" checked> Hair colour</label> <label class="chk"><input type="checkbox" checked> Clothes colours</label>
-        <p><button class="btn main" type="button">Save</button></p>''') + box("Wardrobe (64)", '<div class="tbl"><table><tr><th></th><th>Clothes</th><th>Slot</th><th class="num">Version</th><th>Schema</th><th>In wardrobe</th><th class="num">Price</th></tr>'
-    + crow("c", "Striped shirt", "Wanda", "top", "1.0", True, '<span class="hint">free</span>') + crow("b", "Red jacket", "Lumen", "top", "1.0", True, PRICE(20)) + crow("e", "Summer dress", "nightbus", "top", "1.2", False, PRICE(30))
+        <p><button class="btn main" type="button">Save</button></p>''') + box("Wardrobe (64)", '<div class="tbl"><table><tr><th></th><th>Clothes</th><th>Slot</th><th class="num">Version</th><th>Schema</th><th>In wardrobe</th><th>Available from / until</th><th class="num">Price</th></tr>'
+    + crow("c", "Striped shirt", "Wanda", "top", "1.0", True, '<span class="hint">free</span>') + crow("b", "Red jacket", "Lumen", "top", "1.0", True, PRICE(20), ("2026-12-01", "2027-01-06", True)) + crow("e", "Summer dress", "nightbus", "top", "1.2", False, PRICE(30), ("2026-06-01", "2026-09-15", True))
     + '</table></div>' + PAGER("3 of 64", "admin-clothes") + '<p><a class="btn main" href="#market">Add clothes from the marketplace</a></p>')
 
 network = NN("network") + box("Overview", KV([("Hotels", "128"), ("Public", "96"), ("Online now", "4,210"), ("Accounts", "1.2M"), ("Waiting for review", "<b>2</b>")])) + box("Needs attention", TBL(
