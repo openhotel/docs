@@ -250,3 +250,5 @@ input[type=file]{max-width:100%;min-width:0}.fgrid>label{min-width:0}
 .wzbox .wn{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}.gsteps li.m a{color:inherit;text-decoration:none}
 .wzbox .form{max-width:none}.wzbox .form .in{max-width:340px}
 .gsteps li.s{padding-left:24px}.gsteps li.g{cursor:default}
+.wzm{display:flex;flex-direction:column}.wzm>.wp,.wzm>.form,.wzm>form{flex:1}.wzm>.wp{display:flex;flex-direction:column}.wzm .wp>form,.wzm>form{display:flex;flex-direction:column;gap:8px}.wzm .wp>form{flex:1}.wzbox .wn{margin-top:auto;padding-top:12px}
+.wzm .wp[hidden]{display:none}
