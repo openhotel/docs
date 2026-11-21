@@ -390,6 +390,8 @@ td.dr input.in[type=date]{width:7.8em;font-size:10px}
 .two.wide2>div>.blk{margin-bottom:10px}
 input[type=file]{max-width:100%;min-width:0}.fgrid>label{min-width:0}
 .form .skins .skin{display:flex;flex-direction:row;align-items:center;gap:6px;margin:0}
+
+.gsteps{margin:0;padding:0;list-style:none}.gsteps li{padding:5px 8px;border-top:1px dotted var(--line)}.gsteps li:first-child{border-top:0}.gsteps li.cur{background:var(--accent);color:var(--accent-ink)}
 </style>
 </head>
 <body>
@@ -400,7 +402,7 @@ input[type=file]{max-width:100%;min-width:0}.fgrid>label{min-width:0}
       <nav class="blk subnav" aria-label="Manage OpenHotel"><a class="btn" href="retro-admin-dark.html">Manage hotel</a><a class="btn" href="retro-admin-registration-dark.html">Registration</a><a class="btn" href="retro-admin-accounts-dark.html">Accounts</a><a class="btn" href="retro-admin-blocked-dark.html">Blocked</a><a class="btn" href="retro-admin-rooms-dark.html">Rooms</a><a class="btn" href="retro-admin-moderation-dark.html">Moderation</a><a class="btn" href="retro-admin-news-dark.html">News</a><a class="btn" href="retro-admin-credits-dark.html">Credits</a><a class="btn" href="retro-assets-dark.html">Catalog</a><a class="btn" href="retro-admin-publicrooms-dark.html">Public rooms</a><a class="btn" href="retro-admin-clothes-dark.html">Clothes</a><a class="btn" href="retro-admin-website-dark.html">Website</a><a class="btn main" href="retro-admin-connection-dark.html">Connection</a></nav>
 <div class="two wide"><div>      <div class="blk box dense">
         <h2>Network connection</h2>
-        <p><span class="badge on">Connected</span> to the OpenHotel network · last seen 12 s ago</p>
+        <p>Mode <b>Managed</b> <span class="hint">(set at setup, not changeable here)</span></p><p><span class="badge on">Connected</span> to the OpenHotel network · last seen 12 s ago</p>
         <p class="hint">Public hotels show on the Hotels online list. Credits, friends and the exchange need this connection.</p>
         <form class="form" onsubmit="event.preventDefault()"><label class="chk"><input type="checkbox" checked> Connect on start and reconnect by itself</label>
           <label class="chk"><input type="checkbox" checked> Public: show this hotel on the network list</label>

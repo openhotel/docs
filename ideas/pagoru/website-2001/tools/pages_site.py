@@ -53,7 +53,7 @@ admin_website = AN("admin-website") + '<div class="two wide"><div>' + LOOK + box
           <label>Default language<select class="in"><option>English</option><option>Español</option></select></label>
           <div class="row"><button class="btn main" type="submit">Save</button></div>
         </form>''') + '</div></div>'
-admin_connection = AN("admin-connection") + '<div class="two wide"><div>' + box("Network connection", '''        <p><span class="badge on">Connected</span> to the OpenHotel network · last seen 12 s ago</p>
+admin_connection = AN("admin-connection") + '<div class="two wide"><div>' + box("Network connection", '''        <p>Mode <b>Managed</b> <span class="hint">(set at setup, not changeable here)</span></p><p><span class="badge on">Connected</span> to the OpenHotel network · last seen 12 s ago</p>
         <p class="hint">Public hotels show on the Hotels online list. Credits, friends and the exchange need this connection.</p>
         <form class="form" onsubmit="event.preventDefault()"><label class="chk"><input type="checkbox" checked> Connect on start and reconnect by itself</label>
           <label class="chk"><input type="checkbox" checked> Public: show this hotel on the network list</label>
