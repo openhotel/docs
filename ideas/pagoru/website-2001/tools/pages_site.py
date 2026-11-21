@@ -66,3 +66,4 @@ admin_connection = AN("admin-connection") + '<div class="two wide"><div>' + box(
           <label>Client (where guests play)<input class="in" type="url" value="https://play.openhotel.club"></label>
           <div class="row"><button class="btn main" type="submit">Save</button> <button class="btn" type="button">Test addresses</button></div>
         </form>''') + box("Test results", TBL(["Address", "Result"], [["Network", '<span class="badge on">Connected</span>'], ["Website", '<span class="badge on">200 OK</span>'], ["Client", '<span class="badge on">200 OK</span>']])) + box("Versions", KV([("Hotel", "v0.156.0"), ("Schemas it runs", "1 to 4"), ("Network asks for", "0.150.0 or newer")])) + '</div></div>'
+exec(open(T + "pages_setup.py").read())
