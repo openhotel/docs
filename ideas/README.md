@@ -66,4 +66,4 @@ Issues, PRs, related ideas.
 | [Hotel admin in My account](pagoru/hotel-admin.md): hotel and network admin pages | pagoru | draft |
 | [Emails and templates](pagoru/emails.md): editable templates with preview | pagoru | draft |
 | [First-run setup](pagoru/setup.md): setup page, new or joined network | pagoru | draft |
-| [Aseprite link for assets](pagoru/aseprite-link.md): Link app and Lua extension to send a spritesheet from Aseprite to the website | pagoru | draft |
+| [Aseprite link](pagoru/aseprite-link.md): web creates a sprite, sees Aseprite edits live. Parts: [test kit](pagoru/aseprite-link-test.md) | pagoru | draft |

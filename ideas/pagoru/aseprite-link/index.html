@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aseprite link test</title>
+<style>
+  body { font: 14px/1.4 system-ui, sans-serif; margin: 16px; max-width: 900px; background: #f4f4f4; color: #222; }
+  .box { background: #fff; border: 1px solid #ccc; padding: 12px; margin-bottom: 12px; }
+  button { margin: 4px 4px 4px 0; }
+  #log { font: 12px/1.4 monospace; height: 220px; overflow: auto; background: #111; color: #9f9; padding: 8px; white-space: pre-wrap; }
+  #view { image-rendering: pixelated; max-width: 100%; background: repeating-conic-gradient(#ddd 0 25%, #fff 0 50%) 0 0 / 16px 16px; }
+  #mismatch { background: #fee; border-color: #c00; }
+  .ok { color: #080; font-weight: bold; } .bad { color: #c00; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Aseprite link test</h1>
+<div class="box">
+  Relay: <input id="url" size="40" value="ws://127.0.0.1:48621/ws?role=web">
+  <button id="connect">Connect</button>
+  <a href="/oh-link.aseprite-extension" download>Download Aseprite plugin</a>
+  <div>
+    Socket: <span id="sock" class="bad">closed</span> ·
+    Aseprite: <span id="ase" class="bad">not connected</span> ·
+    Web version: <span id="webVersion"></span> ·
+    Plugin version: <span id="pluginVersion">-</span>
+  </div>
+</div>
+<div class="box" id="mismatch" hidden>
+  The Aseprite plugin is version <b id="mismatchPlugin"></b> but this page needs version <b id="mismatchWeb"></b>.
+  <a href="/oh-link.aseprite-extension" download>Download the plugin</a>, double-click it to install, then reopen File &gt; Scripts &gt; OpenHotel Link.
+</div>
+<div class="box">
+  <b>New image</b>
+  <label>Width <input type="number" id="w" value="64" min="1" max="4096" style="width:70px"></label>
+  <label>Height <input type="number" id="h" value="64" min="1" max="4096" style="width:70px"></label>
+  <button id="create">Create in Aseprite</button>
+  <button id="frame">Get current frame</button>
+  <button id="sheet">Get sprite sheet</button>
+  <label><input type="checkbox" id="live" checked> Live</label>
+</div>
+<div class="box"><b>From Aseprite</b> <span id="info"></span>
+  <div><canvas id="view" width="0" height="0"></canvas></div>
+  <pre id="sheetJson" style="max-height:200px;overflow:auto"></pre>
+</div>
+<div id="log"></div>
+<script>
+// Bump when the protocol in oh-link.lua changes.
+const VERSION = "1";
+const $ = (id) => document.getElementById(id);
+let ws;
+let pluginOk = false;
+
+const log = (text) => {
+  $("log").textContent += `${new Date().toLocaleTimeString()} ${text}\n`;
+  $("log").scrollTop = $("log").scrollHeight;
+};
+
+const send = (text) => {
+  if (!ws || ws.readyState !== WebSocket.OPEN) return log("not connected");
+  if (!pluginOk && text !== "hello" && !text.startsWith("deny")) return log("plugin not ready");
+  ws.send(text);
+  log(`sent "${text}"`);
+};
+
+const setAse = (text, ok) => {
+  $("ase").textContent = text;
+  $("ase").className = ok ? "ok" : "bad";
+};
+
+const onHello = (pluginVersion) => {
+  $("pluginVersion").textContent = pluginVersion;
+  pluginOk = pluginVersion === VERSION;
+  $("mismatch").hidden = pluginOk;
+  if (pluginOk) {
+    setAse("connected", true);
+    return send(`live ${$("live").checked ? "on" : "off"}`);
+  }
+  $("mismatchPlugin").textContent = pluginVersion;
+  $("mismatchWeb").textContent = VERSION;
+  setAse("wrong version", false);
+  send(`deny ${VERSION}`);
+};
+
+const onText = (text) => {
+  if (text.startsWith("{")) {
+    const msg = JSON.parse(text);
+    if (msg.type !== "status") return;
+    if (!msg.aseprite) {
+      pluginOk = false;
+      if ($("mismatch").hidden) setAse("not connected", false);
+    } else if (!pluginOk) send("hello");
+    return;
+  }
+  const [name, ...rest] = text.split(" ");
+  const args = rest.join(" ");
+  if (name === "hello") return onHello(args);
+  if (name === "sheet") return ($("sheetJson").textContent = args);
+  log(`text "${text.slice(0, 200)}"`);
+};
+
+// Binary: "<kind> <width> <height>\n" + png. Drawn at the largest whole-number scale that fits 512px.
+const onBinary = async (buffer) => {
+  if (!pluginOk) return;
+  const bytes = new Uint8Array(buffer);
+  const newline = bytes.indexOf(10);
+  const [kind, width, height] = new TextDecoder().decode(bytes.subarray(0, newline)).split(" ");
+  const bitmap = await createImageBitmap(new Blob([bytes.subarray(newline + 1)], { type: "image/png" }));
+  const scale = Math.max(1, Math.floor(512 / Math.max(bitmap.width, bitmap.height)));
+  const view = $("view");
+  view.width = bitmap.width * scale;
+  view.height = bitmap.height * scale;
+  const ctx = view.getContext("2d");
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(bitmap, 0, 0, view.width, view.height);
+  $("info").textContent = `${kind} ${width}x${height} at ${scale}x, ${new Date().toLocaleTimeString()}`;
+};
+
+const connect = () => {
+  ws?.close();
+  pluginOk = false;
+  ws = new WebSocket($("url").value);
+  ws.binaryType = "arraybuffer";
+  ws.onopen = () => { $("sock").textContent = "open"; $("sock").className = "ok"; log("open"); };
+  ws.onclose = (e) => { $("sock").textContent = "closed"; $("sock").className = "bad"; setAse("not connected", false); log(`close code=${e.code}`); };
+  ws.onerror = () => log("error (relay not running, or blocked by the browser)");
+  ws.onmessage = (e) => (typeof e.data === "string" ? onText(e.data) : onBinary(e.data));
+};
+
+$("webVersion").textContent = VERSION;
+$("connect").onclick = connect;
+$("create").onclick = () => {
+  const width = Math.max(1, $("w").value | 0);
+  const height = Math.max(1, $("h").value | 0);
+  send(`command NewFile ui=false width=${width} height=${height}`);
+};
+$("frame").onclick = () => send("frame");
+$("sheet").onclick = () => send("sheet");
+$("live").onchange = () => send(`live ${$("live").checked ? "on" : "off"}`);
+connect();
+</script>
+</body>
+</html>
