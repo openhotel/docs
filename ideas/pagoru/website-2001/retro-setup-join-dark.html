@@ -399,7 +399,11 @@ input[type=file]{max-width:100%;min-width:0}.fgrid>label{min-width:0}
   <div class="grid2" style="grid-template-columns:1fr">
     <main class="mainc">
       <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-dark.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"></nav></header>
-<div class="two wide"><div>      <div class="blk box dense">
+<div class="two"><div>      <div class="blk box dense">
+        <h2>Steps</h2>
+<ol class="gsteps"><li><b>1. Network</b></li><li class=cur><b>2. Licence</b></li><li><b>3. Admin</b></li><li><b>4. Hotel</b></li><li><b>5. Registration</b></li><li><b>6. Finish</b></li></ol><p class="hint">Everything here can be changed later in Manage hotel.</p>
+      </div>
+      <div class="blk box dense">
         <h2>1. Network</h2>
         <form class="form" onsubmit="event.preventDefault()"><label>Network<select class="in"><option selected>https://openhotel.club (official)</option><option>Other network (enter URL)</option></select></label><label>Other network URL<input class="in" type="url" placeholder="https://" disabled></label><div class="row"><button class="btn" type="button">Check network</button> <span class="badge on">Reachable · v1.4</span></div></form>
       </div>
@@ -407,7 +411,7 @@ input[type=file]{max-width:100%;min-width:0}.fgrid>label{min-width:0}
         <h2>2. Licence and sign in</h2>
 <p>Your hotel needs a licence from the network. Sign in on the network, create the licence there and approve this hotel. It comes back here by itself.</p><dl class="kv"><div><dt>This hotel</dt><dd>Code <b>K7QF-29XM</b></dd></div><div><dt>Status</dt><dd><span class="badge">Waiting for approval…</span></dd></div></dl><p><a class="btn main" href="retro-setup-join-dark.html">Open openhotel.club to sign in</a> <button class="btn" type="button">Show a new code</button></p><p class="hint">No browser on this machine? Create the licence on the network and paste it here.</p><label>Licence (optional, paste)<input class="in" type="text" value="" placeholder="ohl_…"></label>
       </div>
-      <div class="blk box dense">
+</div><div>      <div class="blk box dense">
         <h2>3. Admin</h2>
         <form class="form" onsubmit="event.preventDefault()"><p>You become the first admin of this hotel with the network account you signed in with.</p><dl class="kv"><div><dt>Signed in as</dt><dd>dana (dana@example.com)</dd></div><div><dt>Role</dt><dd>Hotel admin</dd></div></dl></form>
       </div>
@@ -418,10 +422,6 @@ input[type=file]{max-width:100%;min-width:0}.fgrid>label{min-width:0}
       <div class="blk box dense">
         <h2>5. Registration</h2>
         <form class="form" onsubmit="event.preventDefault()"><label class="chk"><input type="checkbox" checked> Guests can register on this hotel</label><label class="chk"><input type="checkbox" checked> Guests must verify their email</label><div class="row"><a class="btn" href="retro-setup-dark.html">Back</a> <button class="btn main" type="submit">Finish setup</button></div></form>
-      </div>
-</div><div>      <div class="blk box dense">
-        <h2>Steps</h2>
-<ol class="gsteps"><li><b>1. Network</b></li><li class=cur><b>2. Licence</b></li><li><b>3. Admin</b></li><li><b>4. Hotel</b></li><li><b>5. Registration</b></li><li><b>6. Finish</b></li></ol><p class="hint">Everything here can be changed later in Manage hotel.</p>
       </div>
 </div></div>    </main>
   </div>

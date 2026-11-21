@@ -399,7 +399,11 @@ input[type=file]{max-width:100%;min-width:0}.fgrid>label{min-width:0}
   <div class="grid2" style="grid-template-columns:1fr">
     <main class="mainc">
       <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-dark.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"></nav></header>
-<div class="two wide"><div>      <div class="blk box dense">
+<div class="two"><div>      <div class="blk box dense">
+        <h2>Steps</h2>
+<ol class="gsteps"><li class=cur><b>1. Hotel admin</b></li><li><b>2. Email sending</b></li><li><b>3. Hotel</b></li><li><b>4. Registration</b></li><li><b>5. Finish</b></li></ol><p class="hint">Everything here can be changed later in Manage hotel.</p>
+      </div>
+      <div class="blk box dense">
         <h2>1. Hotel admin</h2>
         <form class="form" onsubmit="event.preventDefault()"><label>Username<input class="in" type="text" value="admin" placeholder=""></label><label>Email<input class="in" type="email" value="" placeholder="you@example.com"></label><label>Password<input class="in" type="password" value="" placeholder=""></label><label>Repeat password<input class="in" type="password" value="" placeholder=""></label><label class="chk"><input type="checkbox"> Set up 2FA now</label></form>
       </div>
@@ -407,17 +411,13 @@ input[type=file]{max-width:100%;min-width:0}.fgrid>label{min-width:0}
         <h2>2. Email sending</h2>
         <form class="form" onsubmit="event.preventDefault()"><label>SMTP server<input class="in" type="text" value="smtp.example.com" placeholder=""></label><div class="fgrid"><label class="f">Port<input class="in" value="587"></label><label class="f">Security<select class="in"><option>STARTTLS</option><option>SSL/TLS</option><option>None</option></select></label></div><label>User<input class="in" type="text" value="" placeholder=""></label><label>Password<input class="in" type="password" value="" placeholder=""></label><label>Send from<input class="in" type="text" value="no-reply@myhotel.example" placeholder=""></label><div class="row"><button class="btn" type="button">Send a test email</button> <span class="hint">Needed for verify and password emails. You can skip and add it later.</span></div></form>
       </div>
-      <div class="blk box dense">
+</div><div>      <div class="blk box dense">
         <h2>3. Hotel</h2>
         <form class="form" onsubmit="event.preventDefault()"><label>Hotel name<input class="in" type="text" value="My hotel" placeholder=""></label><label>Short description<input class="in" type="text" value="" placeholder="A friendly hotel for…"></label><label>Language<select class="in"><option>English</option><option>Español</option></select></label><label>Website (this site)<input class="in" type="url" value="https://myhotel.example" placeholder=""></label><label>Client (where guests play)<input class="in" type="url" value="https://play.myhotel.example" placeholder=""></label></form>
       </div>
       <div class="blk box dense">
         <h2>4. Registration</h2>
         <form class="form" onsubmit="event.preventDefault()"><label class="chk"><input type="checkbox" checked> Guests can register</label><label class="chk"><input type="checkbox" checked> Guests must verify their email</label><div class="row"><a class="btn" href="retro-setup-dark.html">Back</a> <button class="btn main" type="submit">Finish setup</button></div></form>
-      </div>
-</div><div>      <div class="blk box dense">
-        <h2>Steps</h2>
-<ol class="gsteps"><li class=cur><b>1. Hotel admin</b></li><li><b>2. Email sending</b></li><li><b>3. Hotel</b></li><li><b>4. Registration</b></li><li><b>5. Finish</b></li></ol><p class="hint">Everything here can be changed later in Manage hotel.</p>
       </div>
 </div></div>    </main>
   </div>
