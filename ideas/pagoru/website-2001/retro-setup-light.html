@@ -399,11 +399,19 @@ input[type=file]{max-width:100%;min-width:0}.fgrid>label{min-width:0}
   <div class="grid2" style="grid-template-columns:1fr">
     <main class="mainc">
       <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-light.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"></nav></header>
-<div class="blk box"><h2>Set up OpenHotel</h2><p>This server has an empty database and no accounts, so nothing is configured yet. Answer a few questions here instead of setting environment variables. It takes about five minutes.</p></div>      <div class="blk box dense">
+<div class="two"><div>      <div class="blk box dense">
+        <h2>Set up OpenHotel</h2>
+<p>This server has an empty database and no accounts, so nothing is configured yet. Answer a few questions here instead of setting environment variables. It takes about five minutes.</p>
+      </div>
+      <div class="blk box dense">
         <h2>Setup code</h2>
         <form class="form" onsubmit="event.preventDefault()"><label>Code from the server log<input class="in" type="text" value="" placeholder="xxxx-xxxx"></label><span class="hint">The server prints a one-time code when it starts empty. This keeps strangers from setting up your server first.</span></form>
       </div>
-<div class="two">      <div class="blk box dense">
+      <div class="blk box dense">
+        <h2>Changing mode later</h2>
+<p>The mode is fixed once setup ends. Switching between standalone, network and managed wipes accounts and links, so it is not in the interface. It takes a server command that asks you to type the hotel name to confirm.</p>
+      </div>
+</div><div>      <div class="blk box dense">
         <h2>Standalone</h2>
 <p>One hotel on its own. Its own accounts, no network, no licence. Pick this to run a hotel just for your community.</p><p><a class="btn main" href="retro-setup-standalone-light.html">Standalone hotel</a></p>
       </div>
@@ -411,15 +419,11 @@ input[type=file]{max-width:100%;min-width:0}.fgrid>label{min-width:0}
         <h2>Network</h2>
 <p>You run a network: its accounts, hotels, licences and news. Your first hotel is part of it and other hotels can join later.</p><p><a class="btn main" href="retro-setup-new-light.html">Create a network</a></p>
       </div>
-</div><div class="two">      <div class="blk box dense">
+      <div class="blk box dense">
         <h2>Managed</h2>
 <p>Your hotel joins an existing network such as openhotel.club. You get a licence from the network and guests use their network account.</p><p><a class="btn main" href="retro-setup-join-light.html">Join a network</a></p>
       </div>
-      <div class="blk box dense">
-        <h2>Changing mode later</h2>
-<p>The mode is fixed once setup ends. Switching between standalone, network and managed wipes accounts and links, so it is not in the interface. It takes a server command that asks you to type the hotel name to confirm.</p>
-      </div>
-</div>    </main>
+</div></div>    </main>
   </div>
   <footer class="foot">
     <p class="social"><a href="https://github.com/openhotel" target="_blank" rel="noopener">GitHub</a><span>·</span><a href="https://discord.gg/qBZfPdNWUj" target="_blank" rel="noopener">Discord</a><span>·</span><a href="https://bsky.app/profile/openhotel.club" target="_blank" rel="noopener">Bluesky</a></p>
