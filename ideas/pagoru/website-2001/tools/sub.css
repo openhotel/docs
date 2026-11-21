@@ -225,3 +225,7 @@ tr.sel td{font-weight:700}
 .chart .w{stroke-width:1;vector-effect:non-scaling-stroke}
 .chart .w.g{stroke:#2e9b4a}.chart .b.g{fill:#2e9b4a}
 .chart .w.r{stroke:#d03a3a}.chart .b.r{fill:#d03a3a}
+td.dr{min-width:150px}
+td.dr label{display:grid;grid-template-columns:3.2em minmax(0,1fr);align-items:center;gap:4px;font-size:11px;color:var(--soft);margin:0 0 3px}
+td.dr label.chk{display:flex;gap:5px;margin:2px 0 0;color:var(--ink)}
+td.dr input.in{font:11px/1.2 Verdana,Tahoma,sans-serif;padding:3px 4px;min-width:0;width:100%}
