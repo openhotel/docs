@@ -30,14 +30,18 @@ def addfind(b):
     return out + b[pos:]
 FIND = '<script>document.addEventListener("input",function(e){var i=e.target;if(!i.hasAttribute||!i.hasAttribute("data-filter"))return;var t=i.closest(".friends");if(!t){t=i.closest("form").nextElementSibling;while(t&&!t.classList.contains("tbl")&&t.tagName!="UL")t=t.nextElementSibling}if(!t)return;var q=i.value.toLowerCase();t.querySelectorAll("tr,li").forEach(function(r){if(r.querySelector("th"))return;r.hidden=!!q&&r.textContent.toLowerCase().indexOf(q)<0})})</script>\n'
 def page(title, tab, logged, body):
+    extra = ''
+    if '<!--SIDE-->' in body:
+        i, j = body.index('<!--SIDE-->'), body.index('<!--/SIDE-->')
+        extra, body = body[i + 11:j], body[:i] + body[j + 12:]
     if 'class="blk subnav"' in body or title in ("Your creations", "Friends"): body = addfind(body)
     tabs = [("Home","home"),("News","news")] + ([("Friends","friends"),("Exchange","exchange"),("Marketplace","market"),("My account","account"),("Connections","connections"),("My hotels","hotels")] if logged else [("Register","register")])
     nav = "".join(f'<a class="btn{" main" if k == tab else ""}" href="#{k}">{n}</a>' for n, k in tabs)
-    side = '      <div class="blk">\n' + (rd("account.html") if logged else rd("login.html")) + '      </div>\n' + (rd("sidebar-in.html") if logged else "") + '      <div class="blk">\n' + soc + '      </div>\n'
+    side = '      <div class="blk">\n' + (rd("account.html") if logged else rd("login.html")) + '      </div>\n' + extra + (rd("sidebar-in.html") if logged else "") + '      <div class="blk">\n' + soc + '      </div>\n'
     return (head.replace("<title>OpenHotel 2001</title>", f"<title>{title} · OpenHotel</title>") + '<body>\n<div class="page">\n'
       + '  <div class="grid2">\n    <main class="mainc">\n'
       + '      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="#home"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div>'
-      + f'<nav class="actions" aria-label="Site"><p>{title}</p>{nav}</nav></header>\n' + body + '    </main>\n    <aside class="side">\n' + side + '    </aside>\n  </div>\n' + foot.replace('</body>', GO + FIND + '</body>'))
+      + f'<nav class="actions" aria-label="Site">{nav}</nav></header>\n' + body + '    </main>\n    <aside class="side">\n' + side + '    </aside>\n  </div>\n' + foot.replace('</body>', GO + FIND + '</body>'))
 
 SUBBOX = open(T + "sub-news.html").read()
 news_list = '      <div class="blk box">\n        <h2>Hotel news</h2>\n        <ul class="newslist">\n' + "".join(
@@ -102,10 +106,16 @@ register = '''      <div class="blk box">
           <div class="row"><button class="btn main" type="submit">Register</button><span>Already registered? <a href="#home">Log in</a></span></div>
         </form>
       </div>
-      <div class="blk box">
+<!--SIDE-->      <div class="blk box">
         <h2>What happens next</h2>
-        <p>We send you an email to check the address. Then check in to the hotel, where you make your avatar. You can't change your avatar on the website, but it shows up here once you have one.</p>
-      </div>
+        <ol class="steps">
+          <li><b>Register.</b> Fill the form. One account works in every hotel.</li>
+          <li><b>Check your email.</b> We send a link to confirm the address. It works for one hour. Look in spam if it doesn't come.</li>
+          <li><b>Check in.</b> Open a hotel and make your avatar there. You can't change it on the website, but it shows here once you have one.</li>
+          <li><b>Pick your hotels.</b> Join the main hotel or any community hotel with the same login.</li>
+        </ol>
+        <p class="hint">Free. No credit card. Credits come from playing. You can turn on 2FA and delete your account at any time in My account.</p>
+      </div><!--/SIDE-->
 '''
 forgot = '''      <div class="blk box">
         <h2>Forgot your password?</h2>
