@@ -368,6 +368,12 @@ tr.sel td{font-weight:700}
 .chart .w{stroke-width:1;vector-effect:non-scaling-stroke}
 .chart .w.g{stroke:#2e9b4a}.chart .b.g{fill:#2e9b4a}
 .chart .w.r{stroke:#d03a3a}.chart .b.r{fill:#d03a3a}
+td.dr{min-width:0;white-space:nowrap}
+td.dr label{display:grid;grid-template-columns:3.2em minmax(0,1fr);align-items:center;gap:4px;font-size:11px;color:var(--soft);margin:0 0 3px}
+td.dr label.chk{display:flex;gap:5px;margin:2px 0 0;color:var(--ink)}
+td.dr input.in{font:11px/1.2 Verdana,Tahoma,sans-serif;padding:3px 4px;min-width:0;width:100%}
+td.dr input.in[type=date]{width:8.6em}
+td.dr input.in[type=date]{width:7.8em;font-size:10px}
 </style>
 </head>
 <body>
@@ -378,7 +384,7 @@ tr.sel td{font-weight:700}
       <nav class="blk subnav" aria-label="Network admin"><b>Network admin</b><a class="btn" href="retro-network-light.html">Overview</a><a class="btn" href="retro-network-hotels-light.html">Hotels</a><a class="btn" href="retro-network-accounts-light.html">Accounts</a><a class="btn" href="retro-network-blocked-light.html">Blocked</a><a class="btn" href="retro-network-emails-light.html">Emails</a><a class="btn main" href="retro-network-credits-light.html">Credit reports</a><a class="btn" href="retro-network-settings-light.html">Settings</a></nav>
       <div class="blk box dense">
         <h2>Credit reports</h2>
-<div class="tbl"><table><tr><th>Hotel</th><th>Last report</th><th class="num">Created 24h</th><th class="num">Destroyed 24h</th><th>Check</th></tr><tr><td>OpenHotel</td><td>Today 00:04</td><td class="num">310,000</td><td class="num">262,000</td><td><span class="badge on">OK</span></td></tr><tr><td>Pixel Plaza</td><td>Today 00:05</td><td class="num">82,000</td><td class="num">61,000</td><td><span class="badge on">OK</span></td></tr><tr><td>Neon Docks</td><td>Today 00:07</td><td class="num">3,100</td><td class="num">2,900</td><td><span class="badge on">OK</span></td></tr><tr><td>Moonbase Inn</td><td>3 days ago</td><td class="num">-</td><td class="num">-</td><td><span class="badge">Paused</span></td></tr></table></div><p class="hint">A hotel whose reports stop or don't add up is paused on the exchange.</p>
+<form class="mfind" onsubmit="event.preventDefault()"><input data-filter class="in" type="search" placeholder="Search credit reports" aria-label="Search credit reports"></form><div class="tbl"><table><tr><th>Hotel</th><th>Last report</th><th class="num">Created 24h</th><th class="num">Destroyed 24h</th><th>Check</th></tr><tr><td>OpenHotel</td><td>Today 00:04</td><td class="num">310,000</td><td class="num">262,000</td><td><span class="badge on">OK</span></td></tr><tr><td>Pixel Plaza</td><td>Today 00:05</td><td class="num">82,000</td><td class="num">61,000</td><td><span class="badge on">OK</span></td></tr><tr><td>Neon Docks</td><td>Today 00:07</td><td class="num">3,100</td><td class="num">2,900</td><td><span class="badge on">OK</span></td></tr><tr><td>Moonbase Inn</td><td>3 days ago</td><td class="num">-</td><td class="num">-</td><td><span class="badge">Paused</span></td></tr></table></div><p class="hint">A hotel whose reports stop or don't add up is paused on the exchange.</p>
       </div>
     </main>
     <aside class="side">
@@ -453,5 +459,6 @@ tr.sel td{font-weight:700}
   </footer>
 </div>
 <script>document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>
+<script>document.addEventListener("input",function(e){var i=e.target;if(!i.hasAttribute||!i.hasAttribute("data-filter"))return;var t=i.closest(".friends");if(!t){t=i.closest("form").nextElementSibling;while(t&&!t.classList.contains("tbl")&&t.tagName!="UL")t=t.nextElementSibling}if(!t)return;var q=i.value.toLowerCase();t.querySelectorAll("tr,li").forEach(function(r){if(r.querySelector("th"))return;r.hidden=!!q&&r.textContent.toLowerCase().indexOf(q)<0})})</script>
 </body>
 </html>

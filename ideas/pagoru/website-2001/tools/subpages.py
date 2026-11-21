@@ -14,14 +14,30 @@ NEWS = [("booths","21 Nov 2026","Telephone booths are here","Step into a booth a
         ("pool","30 Oct 2026","Rooftop pool party","Saturday at 20:00. Bring a towel and keep the splashing in the pool.")]
 
 GO = '<script>document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>\n'
+import re as _re
+FSKIP = ("Overview", "Needs attention", "Numbers", "Updates", "Who sends", "Email templates", "Latest trades", "Order book")
+def addfind(b):
+    b = b.replace('<input class="in" type="search"', '<input data-filter class="in" type="search"')
+    out, pos = "", 0
+    for m in _re.finditer('<div class="tbl">', b):
+        h2 = b.rfind("<h2>", 0, m.start())
+        title = _re.sub("<.*?>|\\s*\\(.*", "", b[h2 + 4:b.find("</h2>", h2)]) if h2 >= 0 else ""
+        seg = b[h2:m.start()] if h2 >= 0 else ""
+        if "mfind" in seg or any(title.startswith(k) for k in FSKIP) or b[m.start():b.find("</table>", m.start())].count("<tr") < 3:
+            continue
+        out += b[pos:m.start()] + f'<form class="mfind" onsubmit="event.preventDefault()"><input data-filter class="in" type="search" placeholder="Search {title.lower()}" aria-label="Search {title.lower()}"></form>'
+        pos = m.start()
+    return out + b[pos:]
+FIND = '<script>document.addEventListener("input",function(e){var i=e.target;if(!i.hasAttribute||!i.hasAttribute("data-filter"))return;var t=i.closest(".friends");if(!t){t=i.closest("form").nextElementSibling;while(t&&!t.classList.contains("tbl")&&t.tagName!="UL")t=t.nextElementSibling}if(!t)return;var q=i.value.toLowerCase();t.querySelectorAll("tr,li").forEach(function(r){if(r.querySelector("th"))return;r.hidden=!!q&&r.textContent.toLowerCase().indexOf(q)<0})})</script>\n'
 def page(title, tab, logged, body):
+    if 'class="blk subnav"' in body or title in ("Your creations", "Friends"): body = addfind(body)
     tabs = [("Home","home"),("News","news")] + ([("Friends","friends"),("Exchange","exchange"),("Marketplace","market"),("My account","account"),("Connections","connections"),("My hotels","hotels")] if logged else [("Register","register")])
     nav = "".join(f'<a class="btn{" main" if k == tab else ""}" href="#{k}">{n}</a>' for n, k in tabs)
     side = '      <div class="blk">\n' + (rd("account.html") if logged else rd("login.html")) + '      </div>\n' + (rd("sidebar-in.html") if logged else "") + '      <div class="blk">\n' + soc + '      </div>\n'
     return (head.replace("<title>OpenHotel 2001</title>", f"<title>{title} · OpenHotel</title>") + '<body>\n<div class="page">\n'
       + '  <div class="grid2">\n    <main class="mainc">\n'
       + '      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="#home"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div>'
-      + f'<nav class="actions" aria-label="Site"><p>{title}</p>{nav}</nav></header>\n' + body + '    </main>\n    <aside class="side">\n' + side + '    </aside>\n  </div>\n' + foot.replace('</body>', GO + '</body>'))
+      + f'<nav class="actions" aria-label="Site"><p>{title}</p>{nav}</nav></header>\n' + body + '    </main>\n    <aside class="side">\n' + side + '    </aside>\n  </div>\n' + foot.replace('</body>', GO + FIND + '</body>'))
 
 news_list = '      <div class="blk box">\n        <h2>Hotel news</h2>\n        <ul class="newslist">\n' + "".join(
     f'          <li><img src="assets/oh/news-{i}.png" width="64" height="64" alt=""><div><time>{d}</time><b>{t}</b><p>{x}</p><a href="#post">Read more</a> &gt;&gt;</div></li>\n' for i, d, t, x in NEWS

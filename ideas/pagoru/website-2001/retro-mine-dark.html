@@ -368,6 +368,12 @@ tr.sel td{font-weight:700}
 .chart .w{stroke-width:1;vector-effect:non-scaling-stroke}
 .chart .w.g{stroke:#2e9b4a}.chart .b.g{fill:#2e9b4a}
 .chart .w.r{stroke:#d03a3a}.chart .b.r{fill:#d03a3a}
+td.dr{min-width:0;white-space:nowrap}
+td.dr label{display:grid;grid-template-columns:3.2em minmax(0,1fr);align-items:center;gap:4px;font-size:11px;color:var(--soft);margin:0 0 3px}
+td.dr label.chk{display:flex;gap:5px;margin:2px 0 0;color:var(--ink)}
+td.dr input.in{font:11px/1.2 Verdana,Tahoma,sans-serif;padding:3px 4px;min-width:0;width:100%}
+td.dr input.in[type=date]{width:8.6em}
+td.dr input.in[type=date]{width:7.8em;font-size:10px}
 </style>
 </head>
 <body>
@@ -378,7 +384,7 @@ tr.sel td{font-weight:700}
       <div class="blk box dense">
         <h2>Your creations</h2>
         <p class="hint">4 assets · 1,262 hotels use them · <a href="retro-create-dark.html">Create an asset</a> · <a href="retro-link-dark.html">Link app</a></p>
-        <div class="tbl"><table><tr><th></th><th>Name</th><th>State</th><th class="num">Version</th><th>Schema</th><th class="num">Hotels</th><th class="num">Rating</th><th></th></tr>
+        <form class="mfind" onsubmit="event.preventDefault()"><input data-filter class="in" type="search" placeholder="Search your creations" aria-label="Search your creations"></form><div class="tbl"><table><tr><th></th><th>Name</th><th>State</th><th class="num">Version</th><th>Schema</th><th class="num">Hotels</th><th class="num">Rating</th><th></th></tr>
 <tr class="go"><td><div class="ct"><img src="assets/oh/furni-icon-telephone.png" width="24" height="50" alt=""></div></td><td><a href="retro-item-dark.html"><b>Telephone booth</b></a><br><span class="hint">Furniture</span></td><td><span class="badge on">Live</span></td><td class="num">1.2</td><td><span class="badge on">Schema 3</span></td><td class="num">1,204</td><td class="num"><span class="stars" title="4.8 of 5">★★★★★<span class="dim"></span></span></td><td class="ra"><a class="btn" href="retro-create-dark.html">Edit</a> <a class="btn" href="retro-create-dark.html">New version</a> <a class="btn" href="#">.furniture</a> <button class="btn" type="button" disabled title="Used by 1,204 hotels">Delete</button></td></tr>
 <tr class="go"><td><div class="ct"><img src="assets/oh/furni-icon-poster.png" width="16" height="24" alt=""></div></td><td><a href="retro-item-dark.html"><b>Neon sign</b></a><br><span class="hint">Furniture</span></td><td><span class="badge on">Live</span></td><td class="num">1.0</td><td><span class="badge on">Schema 3</span></td><td class="num">58</td><td class="num"><span class="stars" title="4.2 of 5">★★★★<span class="dim">★</span></span></td><td class="ra"><a class="btn" href="retro-create-dark.html">Edit</a> <a class="btn" href="retro-create-dark.html">New version</a> <a class="btn" href="#">.furniture</a> <button class="btn" type="button" disabled title="Used by 58 hotels">Delete</button></td></tr>
 <tr class="go"><td><div class="ct"><img src="assets/oh/furni-icon-flag.png" width="18" height="22" alt=""></div></td><td><a href="retro-item-dark.html"><b>Palm tree</b></a><br><span class="hint">Furniture</span></td><td><span class="badge">In review</span></td><td class="num">1.0</td><td><span class="badge on">Schema 3</span></td><td class="num">0</td><td class="num"></td><td class="ra"><a class="btn" href="retro-create-dark.html">Edit</a> <a class="btn" href="retro-create-dark.html">New version</a> <a class="btn" href="#">.furniture</a> <button class="btn danger-btn" type="button">Delete</button></td></tr>
@@ -476,5 +482,6 @@ tr.sel td{font-weight:700}
   </footer>
 </div>
 <script>document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>
+<script>document.addEventListener("input",function(e){var i=e.target;if(!i.hasAttribute||!i.hasAttribute("data-filter"))return;var t=i.closest(".friends");if(!t){t=i.closest("form").nextElementSibling;while(t&&!t.classList.contains("tbl")&&t.tagName!="UL")t=t.nextElementSibling}if(!t)return;var q=i.value.toLowerCase();t.querySelectorAll("tr,li").forEach(function(r){if(r.querySelector("th"))return;r.hidden=!!q&&r.textContent.toLowerCase().indexOf(q)<0})})</script>
 </body>
 </html>

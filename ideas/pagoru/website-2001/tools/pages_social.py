@@ -16,6 +16,7 @@ friends_body = '''      <div class="split3">
         <div class="col">
           <div class="blk box friends">
             <h2>Friends (6)</h2>
+            <form class="mfind" onsubmit="event.preventDefault()"><input data-filter class="in" type="search" placeholder="Search your friends" aria-label="Search your friends"></form>
             <h3>Online now (4)</h3>
             <ul>
 ''' + "".join(friend(*f) for f in FRIENDS if f[3]) + '''            </ul>

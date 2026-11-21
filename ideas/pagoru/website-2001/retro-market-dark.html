@@ -368,6 +368,12 @@ tr.sel td{font-weight:700}
 .chart .w{stroke-width:1;vector-effect:non-scaling-stroke}
 .chart .w.g{stroke:#2e9b4a}.chart .b.g{fill:#2e9b4a}
 .chart .w.r{stroke:#d03a3a}.chart .b.r{fill:#d03a3a}
+td.dr{min-width:0;white-space:nowrap}
+td.dr label{display:grid;grid-template-columns:3.2em minmax(0,1fr);align-items:center;gap:4px;font-size:11px;color:var(--soft);margin:0 0 3px}
+td.dr label.chk{display:flex;gap:5px;margin:2px 0 0;color:var(--ink)}
+td.dr input.in{font:11px/1.2 Verdana,Tahoma,sans-serif;padding:3px 4px;min-width:0;width:100%}
+td.dr input.in[type=date]{width:8.6em}
+td.dr input.in[type=date]{width:7.8em;font-size:10px}
 </style>
 </head>
 <body>
@@ -483,5 +489,6 @@ tr.sel td{font-weight:700}
   </footer>
 </div>
 <script>document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>
+<script>document.addEventListener("input",function(e){var i=e.target;if(!i.hasAttribute||!i.hasAttribute("data-filter"))return;var t=i.closest(".friends");if(!t){t=i.closest("form").nextElementSibling;while(t&&!t.classList.contains("tbl")&&t.tagName!="UL")t=t.nextElementSibling}if(!t)return;var q=i.value.toLowerCase();t.querySelectorAll("tr,li").forEach(function(r){if(r.querySelector("th"))return;r.hidden=!!q&&r.textContent.toLowerCase().indexOf(q)<0})})</script>
 </body>
 </html>

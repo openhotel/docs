@@ -368,6 +368,12 @@ tr.sel td{font-weight:700}
 .chart .w{stroke-width:1;vector-effect:non-scaling-stroke}
 .chart .w.g{stroke:#2e9b4a}.chart .b.g{fill:#2e9b4a}
 .chart .w.r{stroke:#d03a3a}.chart .b.r{fill:#d03a3a}
+td.dr{min-width:0;white-space:nowrap}
+td.dr label{display:grid;grid-template-columns:3.2em minmax(0,1fr);align-items:center;gap:4px;font-size:11px;color:var(--soft);margin:0 0 3px}
+td.dr label.chk{display:flex;gap:5px;margin:2px 0 0;color:var(--ink)}
+td.dr input.in{font:11px/1.2 Verdana,Tahoma,sans-serif;padding:3px 4px;min-width:0;width:100%}
+td.dr input.in[type=date]{width:8.6em}
+td.dr input.in[type=date]{width:7.8em;font-size:10px}
 </style>
 </head>
 <body>
@@ -378,7 +384,7 @@ tr.sel td{font-weight:700}
       <nav class="blk subnav" aria-label="Manage OpenHotel"><b>Manage OpenHotel</b><a class="btn" href="retro-admin-light.html">Overview</a><a class="btn" href="retro-admin-registration-light.html">Registration</a><a class="btn" href="retro-admin-accounts-light.html">Accounts</a><a class="btn" href="retro-admin-blocked-light.html">Blocked</a><a class="btn" href="retro-admin-rooms-light.html">Rooms</a><a class="btn main" href="retro-admin-moderation-light.html">Moderation</a><a class="btn" href="retro-admin-credits-light.html">Credits</a><a class="btn" href="retro-assets-light.html">Catalog</a><a class="btn" href="retro-admin-publicrooms-light.html">Public rooms</a><a class="btn" href="retro-admin-clothes-light.html">Clothes</a></nav>
       <div class="blk box dense">
         <h2>Reported messages (3)</h2>
-<div class="tbl"><table><tr><th>Message</th><th>Room</th><th>From</th><th class="num">Reports</th><th></th></tr><tr><td>“...buy credits at my site...”</td><td>The Atrium</td><td>Trollface</td><td class="num">5</td><td><button class="btn main" type="button">Delete</button> <button class="btn" type="button">Ignore</button></td></tr><tr><td>“you suck”</td><td>Mint garden</td><td>Rude99</td><td class="num">2</td><td><button class="btn" type="button">Mute</button> <button class="btn" type="button">Ignore</button></td></tr></table></div>
+<form class="mfind" onsubmit="event.preventDefault()"><input data-filter class="in" type="search" placeholder="Search reported messages" aria-label="Search reported messages"></form><div class="tbl"><table><tr><th>Message</th><th>Room</th><th>From</th><th class="num">Reports</th><th></th></tr><tr><td>“...buy credits at my site...”</td><td>The Atrium</td><td>Trollface</td><td class="num">5</td><td><button class="btn main" type="button">Delete</button> <button class="btn" type="button">Ignore</button></td></tr><tr><td>“you suck”</td><td>Mint garden</td><td>Rude99</td><td class="num">2</td><td><button class="btn" type="button">Mute</button> <button class="btn" type="button">Ignore</button></td></tr></table></div>
       </div>
       <div class="blk box dense">
         <h2>Blocked words (42)</h2>
@@ -458,5 +464,6 @@ tr.sel td{font-weight:700}
   </footer>
 </div>
 <script>document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>
+<script>document.addEventListener("input",function(e){var i=e.target;if(!i.hasAttribute||!i.hasAttribute("data-filter"))return;var t=i.closest(".friends");if(!t){t=i.closest("form").nextElementSibling;while(t&&!t.classList.contains("tbl")&&t.tagName!="UL")t=t.nextElementSibling}if(!t)return;var q=i.value.toLowerCase();t.querySelectorAll("tr,li").forEach(function(r){if(r.querySelector("th"))return;r.hidden=!!q&&r.textContent.toLowerCase().indexOf(q)<0})})</script>
 </body>
 </html>

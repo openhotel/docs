@@ -368,6 +368,12 @@ tr.sel td{font-weight:700}
 .chart .w{stroke-width:1;vector-effect:non-scaling-stroke}
 .chart .w.g{stroke:#2e9b4a}.chart .b.g{fill:#2e9b4a}
 .chart .w.r{stroke:#d03a3a}.chart .b.r{fill:#d03a3a}
+td.dr{min-width:0;white-space:nowrap}
+td.dr label{display:grid;grid-template-columns:3.2em minmax(0,1fr);align-items:center;gap:4px;font-size:11px;color:var(--soft);margin:0 0 3px}
+td.dr label.chk{display:flex;gap:5px;margin:2px 0 0;color:var(--ink)}
+td.dr input.in{font:11px/1.2 Verdana,Tahoma,sans-serif;padding:3px 4px;min-width:0;width:100%}
+td.dr input.in[type=date]{width:8.6em}
+td.dr input.in[type=date]{width:7.8em;font-size:10px}
 </style>
 </head>
 <body>
@@ -378,11 +384,11 @@ tr.sel td{font-weight:700}
       <nav class="blk subnav" aria-label="Manage OpenHotel"><b>Manage OpenHotel</b><a class="btn" href="retro-admin-dark.html">Overview</a><a class="btn" href="retro-admin-registration-dark.html">Registration</a><a class="btn" href="retro-admin-accounts-dark.html">Accounts</a><a class="btn main" href="retro-admin-blocked-dark.html">Blocked</a><a class="btn" href="retro-admin-rooms-dark.html">Rooms</a><a class="btn" href="retro-admin-moderation-dark.html">Moderation</a><a class="btn" href="retro-admin-credits-dark.html">Credits</a><a class="btn" href="retro-assets-dark.html">Catalog</a><a class="btn" href="retro-admin-publicrooms-dark.html">Public rooms</a><a class="btn" href="retro-admin-clothes-dark.html">Clothes</a></nav>
       <div class="blk box dense">
         <h2>Blocked here (6)</h2>
-<div class="tbl"><table><tr><th>Name</th><th>Reason</th><th>By</th><th>Date</th><th></th></tr><tr><td>Trollface</td><td>Spam in 3 rooms</td><td>Captain_K</td><td>20 Nov</td><td><button class="btn" type="button">Unblock</button></td></tr><tr><td>xX_cheat</td><td>Credit exploit</td><td>Nightowl</td><td>14 Nov</td><td><button class="btn" type="button">Unblock</button></td></tr><tr><td>Rude99</td><td>Harassment</td><td>Captain_K</td><td>09 Nov</td><td><button class="btn" type="button">Unblock</button></td></tr></table></div><div class="pager"><span class="hint">3 of 6</span><span><a href="retro-admin-blocked-dark.html">Next</a> &gt;&gt;</span></div>
+<form class="mfind" onsubmit="event.preventDefault()"><input data-filter class="in" type="search" placeholder="Search blocked here" aria-label="Search blocked here"></form><div class="tbl"><table><tr><th>Name</th><th>Reason</th><th>By</th><th>Date</th><th></th></tr><tr><td>Trollface</td><td>Spam in 3 rooms</td><td>Captain_K</td><td>20 Nov</td><td><button class="btn" type="button">Unblock</button></td></tr><tr><td>xX_cheat</td><td>Credit exploit</td><td>Nightowl</td><td>14 Nov</td><td><button class="btn" type="button">Unblock</button></td></tr><tr><td>Rude99</td><td>Harassment</td><td>Captain_K</td><td>09 Nov</td><td><button class="btn" type="button">Unblock</button></td></tr></table></div><div class="pager"><span class="hint">3 of 6</span><span><a href="retro-admin-blocked-dark.html">Next</a> &gt;&gt;</span></div>
       </div>
       <div class="blk box dense">
         <h2>Blocked on other hotels (2)</h2>
-<div class="tbl"><table><tr><th>Name</th><th>Hotel</th><th>Reason</th><th>Date</th><th></th></tr><tr><td>Sparrow</td><td>Pixel Plaza</td><td>Harassment</td><td>18 Nov</td><td><button class="btn main" type="button">Block here too</button> <button class="btn" type="button">Ignore</button></td></tr><tr><td>Wanda</td><td>Neon Docks</td><td>Credit exploit</td><td>12 Nov</td><td><button class="btn main" type="button">Block here too</button> <button class="btn" type="button">Ignore</button></td></tr></table></div><p class="hint">Guests of this hotel who were blocked in another hotel. Only the hotel, the reason and the date are shared. A network block (<a href="retro-network-blocked-dark.html">Network admin</a>) applies here automatically.</p>
+<form class="mfind" onsubmit="event.preventDefault()"><input data-filter class="in" type="search" placeholder="Search blocked on other hotels" aria-label="Search blocked on other hotels"></form><div class="tbl"><table><tr><th>Name</th><th>Hotel</th><th>Reason</th><th>Date</th><th></th></tr><tr><td>Sparrow</td><td>Pixel Plaza</td><td>Harassment</td><td>18 Nov</td><td><button class="btn main" type="button">Block here too</button> <button class="btn" type="button">Ignore</button></td></tr><tr><td>Wanda</td><td>Neon Docks</td><td>Credit exploit</td><td>12 Nov</td><td><button class="btn main" type="button">Block here too</button> <button class="btn" type="button">Ignore</button></td></tr></table></div><p class="hint">Guests of this hotel who were blocked in another hotel. Only the hotel, the reason and the date are shared. A network block (<a href="retro-network-blocked-dark.html">Network admin</a>) applies here automatically.</p>
       </div>
     </main>
     <aside class="side">
@@ -457,5 +463,6 @@ tr.sel td{font-weight:700}
   </footer>
 </div>
 <script>document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>
+<script>document.addEventListener("input",function(e){var i=e.target;if(!i.hasAttribute||!i.hasAttribute("data-filter"))return;var t=i.closest(".friends");if(!t){t=i.closest("form").nextElementSibling;while(t&&!t.classList.contains("tbl")&&t.tagName!="UL")t=t.nextElementSibling}if(!t)return;var q=i.value.toLowerCase();t.querySelectorAll("tr,li").forEach(function(r){if(r.querySelector("th"))return;r.hidden=!!q&&r.textContent.toLowerCase().indexOf(q)<0})})</script>
 </body>
 </html>

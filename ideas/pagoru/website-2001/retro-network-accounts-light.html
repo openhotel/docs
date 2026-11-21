@@ -368,6 +368,12 @@ tr.sel td{font-weight:700}
 .chart .w{stroke-width:1;vector-effect:non-scaling-stroke}
 .chart .w.g{stroke:#2e9b4a}.chart .b.g{fill:#2e9b4a}
 .chart .w.r{stroke:#d03a3a}.chart .b.r{fill:#d03a3a}
+td.dr{min-width:0;white-space:nowrap}
+td.dr label{display:grid;grid-template-columns:3.2em minmax(0,1fr);align-items:center;gap:4px;font-size:11px;color:var(--soft);margin:0 0 3px}
+td.dr label.chk{display:flex;gap:5px;margin:2px 0 0;color:var(--ink)}
+td.dr input.in{font:11px/1.2 Verdana,Tahoma,sans-serif;padding:3px 4px;min-width:0;width:100%}
+td.dr input.in[type=date]{width:8.6em}
+td.dr input.in[type=date]{width:7.8em;font-size:10px}
 </style>
 </head>
 <body>
@@ -378,7 +384,7 @@ tr.sel td{font-weight:700}
       <nav class="blk subnav" aria-label="Network admin"><b>Network admin</b><a class="btn" href="retro-network-light.html">Overview</a><a class="btn" href="retro-network-hotels-light.html">Hotels</a><a class="btn main" href="retro-network-accounts-light.html">Accounts</a><a class="btn" href="retro-network-blocked-light.html">Blocked</a><a class="btn" href="retro-network-emails-light.html">Emails</a><a class="btn" href="retro-network-credits-light.html">Credit reports</a><a class="btn" href="retro-network-settings-light.html">Settings</a></nav>
       <div class="blk box dense">
         <h2>Accounts on the network (1,204,311)</h2>
-        <form class="mfind" onsubmit="event.preventDefault()"><input class="in" type="search" placeholder="Search a name or email" aria-label="Search"><select class="in" aria-label="Filter"><option>Everyone</option><option>Online</option><option>Blocked on a hotel</option><option>Blocked on the network</option><option>No 2FA</option></select></form><div class="tbl"><table><tr><th>Name</th><th>Hotels</th><th>Since</th><th>Last seen</th><th>State</th><th></th></tr><tr><td>Mintleaf</td><td>3</td><td>Aug 2026</td><td>Online</td><td><span class="badge on">OK</span></td><td><button class="btn" type="button">Open</button> <button class="btn" type="button">Block on network</button></td></tr><tr><td>Sparrow</td><td>2</td><td>Nov 2026</td><td>Yesterday</td><td><span class="badge">Blocked on Pixel Plaza</span></td><td><button class="btn" type="button">Open</button> <button class="btn" type="button">Block on network</button></td></tr><tr><td>Wanda</td><td>2</td><td>Sep 2026</td><td>3 days ago</td><td><span class="badge">Blocked on Neon Docks</span></td><td><button class="btn" type="button">Open</button> <button class="btn" type="button">Block on network</button></td></tr><tr><td>Trollface</td><td>1</td><td>Oct 2026</td><td>20 Nov</td><td><span class="badge">Blocked on the network</span></td><td><button class="btn" type="button">Open</button> <button class="btn" type="button">Unblock</button></td></tr></table></div><div class="pager"><span class="hint">1-4 of 1,204,311</span><span><a href="retro-network-accounts-light.html">Next</a> &gt;&gt;</span></div>
+        <form class="mfind" onsubmit="event.preventDefault()"><input data-filter class="in" type="search" placeholder="Search a name or email" aria-label="Search"><select class="in" aria-label="Filter"><option>Everyone</option><option>Online</option><option>Blocked on a hotel</option><option>Blocked on the network</option><option>No 2FA</option></select></form><div class="tbl"><table><tr><th>Name</th><th>Hotels</th><th>Since</th><th>Last seen</th><th>State</th><th></th></tr><tr><td>Mintleaf</td><td>3</td><td>Aug 2026</td><td>Online</td><td><span class="badge on">OK</span></td><td><button class="btn" type="button">Open</button> <button class="btn" type="button">Block on network</button></td></tr><tr><td>Sparrow</td><td>2</td><td>Nov 2026</td><td>Yesterday</td><td><span class="badge">Blocked on Pixel Plaza</span></td><td><button class="btn" type="button">Open</button> <button class="btn" type="button">Block on network</button></td></tr><tr><td>Wanda</td><td>2</td><td>Sep 2026</td><td>3 days ago</td><td><span class="badge">Blocked on Neon Docks</span></td><td><button class="btn" type="button">Open</button> <button class="btn" type="button">Block on network</button></td></tr><tr><td>Trollface</td><td>1</td><td>Oct 2026</td><td>20 Nov</td><td><span class="badge">Blocked on the network</span></td><td><button class="btn" type="button">Open</button> <button class="btn" type="button">Unblock</button></td></tr></table></div><div class="pager"><span class="hint">1-4 of 1,204,311</span><span><a href="retro-network-accounts-light.html">Next</a> &gt;&gt;</span></div>
       </div>
       <div class="blk box dense">
         <h2>Block on the network</h2>
@@ -461,5 +467,6 @@ tr.sel td{font-weight:700}
   </footer>
 </div>
 <script>document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>
+<script>document.addEventListener("input",function(e){var i=e.target;if(!i.hasAttribute||!i.hasAttribute("data-filter"))return;var t=i.closest(".friends");if(!t){t=i.closest("form").nextElementSibling;while(t&&!t.classList.contains("tbl")&&t.tagName!="UL")t=t.nextElementSibling}if(!t)return;var q=i.value.toLowerCase();t.querySelectorAll("tr,li").forEach(function(r){if(r.querySelector("th"))return;r.hidden=!!q&&r.textContent.toLowerCase().indexOf(q)<0})})</script>
 </body>
 </html>

@@ -54,9 +54,9 @@ admin_publicrooms = AN("admin-publicrooms") + box("Public rooms (3)", '<div clas
     + '</table></div><p><a class="btn main" href="#market">Add rooms from the marketplace</a> <button class="btn" type="button">Save</button></p><p class="hint">Guests land in the first room when they enter the hotel.</p>')
 SKINS = ["#efcfb1", "#f6dcc8", "#d9a57a", "#c98e62", "#a8714a", "#7a4a2e"]
 def crow(t, n, by, sl, v, on, pr, d=("", "", False)):
-    return (f'<tr class="go"><td>{tb(t)}</td><td><a href="#item"><b>{n}</b></a><br><span class="hint">{by}</span></td><td>{sl}</td><td class="num">{v}</td><td>{sch(1)}</td>'
+    return (f'<tr class="go"><td>{tb(t)}</td><td><a href="#item"><b>{n}</b></a><br><span class="hint">{by} · {sl}</span></td><td class="num">{v}</td><td>{sch(1)}</td>'
             f'<td><input type="checkbox"{" checked" if on else ""} aria-label="In wardrobe"></td>'
-            f'<td class="dr"><label>From<input class="in" type="date" value="{d[0]}"></label><label>Until<input class="in" type="date" value="{d[1]}"></label><label class="chk"><input type="checkbox"{" checked" if d[2] else ""}> Every year</label></td><td class="num">{pr}</td></tr>')
+            f'<td class="dr"><input class="in" type="date" value="{d[0]}" aria-label="Publish"></td><td class="dr"><input class="in" type="date" value="{d[1]}" aria-label="Unpublish"><label class="chk"><input type="checkbox"{" checked" if d[2] else ""}> Repeat yearly</label></td><td class="num">{pr}</td></tr>')
 PRICE = lambda v: f'<input class="in price" type="number" value="{v}" aria-label="Price">'
 admin_clothes = AN("admin-clothes") + box("Character personalisation", '''        <p class="hint">What guests can change on their avatar in this hotel.</p>
         <h3>Skin colours</h3>
@@ -67,7 +67,7 @@ admin_clothes = AN("admin-clothes") + box("Character personalisation", '''      
         <form class="mfind" onsubmit="event.preventDefault()"><input class="in" placeholder="#a1b2c3" aria-label="New colour" style="max-width:110px"><button class="btn" type="submit">Add colour</button><label class="chk">Default skin <select class="in sel-s"><option>#efcfb1</option><option>#c98e62</option></select></label></form>
         <h3>Guests can change</h3>
         <label class="chk"><input type="checkbox" checked> Skin colour</label> <label class="chk"><input type="checkbox" checked> Hair colour</label> <label class="chk"><input type="checkbox" checked> Clothes colours</label>
-        <p><button class="btn main" type="button">Save</button></p>''') + box("Wardrobe (64)", '<div class="tbl"><table><tr><th></th><th>Clothes</th><th>Slot</th><th class="num">Version</th><th>Schema</th><th>In wardrobe</th><th>Available (empty = always)</th><th class="num">Price</th></tr>'
+        <p><button class="btn main" type="button">Save</button></p>''') + box("Wardrobe (64)", '<div class="tbl"><table><tr><th></th><th>Clothes</th><th class="num">Version</th><th>Schema</th><th>In wardrobe</th><th>Publish</th><th>Unpublish</th><th class="num">Price</th></tr>'
     + crow("c", "Striped shirt", "Wanda", "top", "1.0", True, '<span class="hint">free</span>') + crow("b", "Red jacket", "Lumen", "top", "1.0", True, PRICE(20), ("2026-12-01", "2027-01-06", True)) + crow("e", "Summer dress", "nightbus", "top", "1.2", False, PRICE(30), ("2026-06-01", "2026-09-15", True))
     + '</table></div>' + PAGER("3 of 64", "admin-clothes") + '<p><a class="btn main" href="#market">Add clothes from the marketplace</a></p>')
 
