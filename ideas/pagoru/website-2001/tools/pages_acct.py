@@ -89,7 +89,7 @@ connections = '''      <div class="blk box">
         <p>Every hotel you have entered with your OpenHotel account. A hotel only gets what is listed under it. Disconnect a hotel to take its access away.</p>
       </div>
 ''' + conn("main", "navigator", 23, 23, "OpenHotel", True, "client.openhotel.club", "openhotel.club", "Mar 2025", "Today, 15:40",
-           BASE + ["See your friends list", "Use your credits and furniture"]) \
+           BASE + ["See your friends list"]) \
     + conn("plaza", "console-off", 15, 23, "Pixel Plaza", False, "play.pixelplaza.example", "pixelplaza.example", "12 Aug 2026", "Yesterday, 21:12",
            BASE + ["See your friends list"]) \
     + conn("disco", "club", 23, 21, "Neon Docks", False, "neondocks.example/play", "neondocks.example", "02 Oct 2026", "3 weeks ago", BASE)

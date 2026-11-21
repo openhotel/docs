@@ -114,3 +114,21 @@
 .lic p{margin:0 0 8px}
 .newh .form{margin-top:4px}
 @media (max-width:560px){.mh{grid-template-columns:minmax(0,1fr)}}
+.friends ul{list-style:none;margin:0 0 6px;padding:0}
+.friends li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;align-items:center;padding:6px 0;border-top:1px dotted var(--line)}
+.friends li>img{height:32px;width:21px;object-fit:none;object-position:top}
+.friends li.off{opacity:.65}
+.friends b{color:var(--strong)}
+.friends i{color:var(--muted)}
+.friends p{margin:2px 0 0;color:var(--soft)}
+.friends .btn{padding:4px 10px}
+.reqs{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.reqs .acts{margin-top:4px}
+.reqs .btn{padding:3px 8px}
+.num{text-align:right!important;white-space:nowrap}
+.up{color:#2e7d32}
+.down{color:#c0392b}
+:root:not([data-theme="light"]) .up{color:#8fd694}
+:root:not([data-theme="light"]) .down{color:#ff8a7a}
+.book .tbl table{min-width:0}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) 72px;gap:6px}

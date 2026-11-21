@@ -244,13 +244,31 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .lic p{margin:0 0 8px}
 .newh .form{margin-top:4px}
 @media (max-width:560px){.mh{grid-template-columns:minmax(0,1fr)}}
+.friends ul{list-style:none;margin:0 0 6px;padding:0}
+.friends li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;align-items:center;padding:6px 0;border-top:1px dotted var(--line)}
+.friends li>img{height:32px;width:21px;object-fit:none;object-position:top}
+.friends li.off{opacity:.65}
+.friends b{color:var(--strong)}
+.friends i{color:var(--muted)}
+.friends p{margin:2px 0 0;color:var(--soft)}
+.friends .btn{padding:4px 10px}
+.reqs{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.reqs .acts{margin-top:4px}
+.reqs .btn{padding:3px 8px}
+.num{text-align:right!important;white-space:nowrap}
+.up{color:#2e7d32}
+.down{color:#c0392b}
+:root:not([data-theme="light"]) .up{color:#8fd694}
+:root:not([data-theme="light"]) .down{color:#ff8a7a}
+.book .tbl table{min-width:0}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) 72px;gap:6px}
 </style>
 </head>
 <body>
 <div class="page">
   <div class="grid2">
     <main class="mainc">
-      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-in-light.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"><p>Telephone booths are here</p><a class="btn" href="retro-lobby-in-light.html">Home</a><a class="btn main" href="retro-news-in-light.html">News</a><a class="btn" href="retro-account-light.html">My account</a><a class="btn" href="retro-connections-light.html">Connections</a><a class="btn" href="retro-my-hotels-light.html">My hotels</a></nav></header>
+      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-in-light.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"><p>Telephone booths are here</p><a class="btn" href="retro-lobby-in-light.html">Home</a><a class="btn main" href="retro-news-in-light.html">News</a><a class="btn" href="retro-friends-light.html">Friends</a><a class="btn" href="retro-exchange-light.html">Exchange</a><a class="btn" href="retro-account-light.html">My account</a><a class="btn" href="retro-connections-light.html">Connections</a><a class="btn" href="retro-my-hotels-light.html">My hotels</a></nav></header>
       <div class="split3">
         <div class="col">
       <div class="blk box article">
@@ -307,7 +325,7 @@ img{display:block;image-rendering:pixelated;max-width:none}
           <li><a href="retro-account-light.html">Account settings</a></li>
           <li><a href="retro-connections-light.html">Connected hotels</a></li>
           <li><a href="retro-my-hotels-light.html">My hotels (2)</a></li>
-          <li><a href="#">Friends online (4)</a></li>
+          <li><a href="retro-friends-light.html">Friends online (4)</a></li>
           <li><a href="retro-lobby-light.html">Log out</a></li>
         </ul>
       </section>

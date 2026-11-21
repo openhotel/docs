@@ -18,6 +18,7 @@ Everything is in [website-2001/](website-2001/): open `index.html` (page picker 
 | Home, community hotel | `retro-hotel`, `retro-hotel-in` |
 | News list, article | `retro-news[-in]`, `retro-post[-in]` |
 | Register, forgot password | `retro-register`, `retro-forgot` |
+| Friends, credit exchange | `retro-friends`, `retro-exchange` |
 | My account, connected hotels, my hotels | `retro-account`, `retro-connections`, `retro-my-hotels` |
 
 ## Proposal
@@ -31,6 +32,7 @@ Everything is in [website-2001/](website-2001/): open `index.html` (page picker 
 - **Connected hotels**: the only way to link a hotel. Shows the hotel, its permissions and Disconnect; the main hotel can't be disconnected.
 - **My hotels**: one licence per hotel, shown once; remake it to get a new one. Picture (160 x 72) and icon (max 24 x 24), public/private, client and web URLs. No integrations.
 - **Credits box**: credits come from playing; no paid credits.
+- **Friends** are network-wide; furniture and credits stay per hotel. Credits swap between hotels on an exchange: see [credit-exchange](credit-exchange.md).
 - **Footer**: socials, CC BY-NC-SA 4.0, hotel version.
 
 ## Impact
