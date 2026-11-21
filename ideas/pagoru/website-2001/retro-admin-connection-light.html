@@ -416,20 +416,15 @@ input[type=file]{max-width:100%;min-width:0}.fgrid>label{min-width:0}
 </div><div>      <div class="blk box dense">
         <h2>Addresses</h2>
         <form class="form" onsubmit="event.preventDefault()">
+          <label>Network<input class="in" value="https://openhotel.club" disabled></label><span class="hint">The network address is fixed.</span>
+          <label>Website (this site)<input class="in" type="url" value="https://openhotel.club"></label>
           <label>Client (where guests play)<input class="in" type="url" value="https://play.openhotel.club"></label>
-          <label>Website<input class="in" type="url" value="https://openhotel.club"></label>
-          <label>Assets (static)<input class="in" type="url" value="https://static.openhotel.club"></label>
-          <label>Allowed origins (one per line)<textarea class="in tx" rows="3">https://play.openhotel.club
-https://openhotel.club</textarea></label>
-          <label>Account login (auth)<input class="in" value="https://auth.openhotel.club" disabled></label>
-          <label>Network (onet)<input class="in" value="https://onet.openhotel.club" disabled></label>
-          <span class="hint">The last two are set by the network.</span>
           <div class="row"><button class="btn main" type="submit">Save</button> <button class="btn" type="button">Test addresses</button></div>
         </form>
       </div>
       <div class="blk box dense">
         <h2>Test results</h2>
-<div class="tbl"><table><tr><th>Address</th><th>Result</th></tr><tr><td>Client</td><td><span class="badge on">200 OK</span></td></tr><tr><td>Website</td><td><span class="badge on">200 OK</span></td></tr><tr><td>Assets</td><td><span class="badge on">200 OK</span></td></tr><tr><td>Auth</td><td><span class="badge on">200 OK</span></td></tr><tr><td>Network</td><td><span class="badge on">Connected</span></td></tr></table></div>
+<div class="tbl"><table><tr><th>Address</th><th>Result</th></tr><tr><td>Network</td><td><span class="badge on">Connected</span></td></tr><tr><td>Website</td><td><span class="badge on">200 OK</span></td></tr><tr><td>Client</td><td><span class="badge on">200 OK</span></td></tr></table></div>
       </div>
       <div class="blk box dense">
         <h2>Versions</h2>

@@ -61,13 +61,8 @@ admin_connection = AN("admin-connection") + '<div class="two wide"><div>' + box(
         <form class="form" onsubmit="event.preventDefault()"><label>Set a new licence<input class="in" type="password" placeholder="Paste the licence" autocomplete="off"></label>
           <span class="hint">The licence goes in the hotel server's config (proposal: <code>licence</code> in its config file or the OH_LICENCE variable). This page saves it there. A licence is shown once, when it is made in <a href="#hotels">My hotels</a>; lost it? Remake it there and paste the new one.</span>
           <div class="row"><button class="btn main" type="submit">Save licence</button> <button class="btn" type="button">Check it</button></div></form>''') + '</div><div>' + box("Addresses", '''        <form class="form" onsubmit="event.preventDefault()">
+          <label>Network<input class="in" value="https://openhotel.club" disabled></label><span class="hint">The network address is fixed.</span>
+          <label>Website (this site)<input class="in" type="url" value="https://openhotel.club"></label>
           <label>Client (where guests play)<input class="in" type="url" value="https://play.openhotel.club"></label>
-          <label>Website<input class="in" type="url" value="https://openhotel.club"></label>
-          <label>Assets (static)<input class="in" type="url" value="https://static.openhotel.club"></label>
-          <label>Allowed origins (one per line)<textarea class="in tx" rows="3">https://play.openhotel.club
-https://openhotel.club</textarea></label>
-          <label>Account login (auth)<input class="in" value="https://auth.openhotel.club" disabled></label>
-          <label>Network (onet)<input class="in" value="https://onet.openhotel.club" disabled></label>
-          <span class="hint">The last two are set by the network.</span>
           <div class="row"><button class="btn main" type="submit">Save</button> <button class="btn" type="button">Test addresses</button></div>
-        </form>''') + box("Test results", TBL(["Address", "Result"], [["Client", '<span class="badge on">200 OK</span>'], ["Website", '<span class="badge on">200 OK</span>'], ["Assets", '<span class="badge on">200 OK</span>'], ["Auth", '<span class="badge on">200 OK</span>'], ["Network", '<span class="badge on">Connected</span>']])) + box("Versions", KV([("Hotel", "v0.156.0"), ("Schemas it runs", "1 to 4"), ("Network asks for", "0.150.0 or newer")])) + '</div></div>'
+        </form>''') + box("Test results", TBL(["Address", "Result"], [["Network", '<span class="badge on">Connected</span>'], ["Website", '<span class="badge on">200 OK</span>'], ["Client", '<span class="badge on">200 OK</span>']])) + box("Versions", KV([("Hotel", "v0.156.0"), ("Schemas it runs", "1 to 4"), ("Network asks for", "0.150.0 or newer")])) + '</div></div>'
