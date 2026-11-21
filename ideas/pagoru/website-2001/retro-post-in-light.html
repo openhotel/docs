@@ -124,6 +124,27 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .pwrow label{display:grid;gap:2px;color:var(--soft)}
 .pwrow .otp{letter-spacing:.08em;padding-left:4px;padding-right:2px}
 .foot .ver b{color:var(--foot-link)}
+.credits{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;padding:10px 12px;border-color:#000;background:linear-gradient(var(--accent),var(--accent));color:var(--accent-ink)}
+.credits h3{margin:0 0 2px;font-size:12px;color:var(--accent-ink)}
+.credits p{margin:0}
+.credits img{margin-top:2px}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.visit .all{margin:8px 0 0}
+@media (max-width:560px){.duo{grid-template-columns:minmax(0,1fr)}}
+.fl ul{list-style:none;margin:0;padding:0}
+.fl li{display:grid;grid-template-columns:21px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 0;border-bottom:1px dotted var(--line)}
+.fl li:first-child{padding-top:0}
+.fl .av{width:21px;height:36px;overflow:hidden}
+.fl .av img{display:block}
+.fl b{display:block;font-size:12px}
+.fl li span{display:flex;gap:4px;align-items:center;font-size:11px;color:var(--muted);min-width:0}
+.fl .btn{padding:1px 6px;font-size:11px}
+.fl .all{margin:8px 0 0}
+.fl .all .off{color:var(--muted)}
+.subnews{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line)}
+.subnews p{margin:0}
+.subnews[hidden]{display:none}
+.in:disabled{opacity:.55;cursor:not-allowed}
 .top{margin:0}
 .hero.mini{height:110px}
 .hero.mini .room{top:-150px}
@@ -205,13 +226,179 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .cform .btn{justify-self:start}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media (max-width:900px){.split3{grid-template-columns:minmax(0,1fr)}}
+.tfa .st,.lic .st{display:none}
+.tfa[data-state="off"] .st-off,.tfa[data-state="enable"] .st-enable,.tfa[data-state="on"] .st-on,.tfa[data-state="disable"] .st-disable{display:block}
+.tfa[data-state="enable"] .st-enable,.tfa[data-state="disable"] .st-disable{display:grid}
+.lic[data-state="none"] .st-none,.lic[data-state="new"] .st-new,.lic[data-state="has"] .st-has{display:block}
+.demo{padding:6px 8px;border:1px dashed var(--line)}
+.demo .btn{padding:2px 8px}
+.qrrow{display:flex;gap:12px;align-items:center}
+.qr{width:96px;height:96px;display:grid;place-items:center;background:#fff;color:#777;border:1px solid #000;font-size:10px}
+.captcha{display:flex;justify-content:space-between;align-items:center;gap:8px;max-width:300px;padding:10px;border:1px solid var(--field-line);background:var(--field)}
+.otp.big{font-size:16px;max-width:140px}
+.danger-btn{background:#c0392b;color:#fff}
+.danger-btn:hover{color:#fff}
+.perms{margin:0 0 10px;padding-left:18px}
+.perms li{margin:2px 0}
+.fav{display:inline-block;vertical-align:middle;margin-right:4px}
+.conn .kv{margin-top:6px}
+.disc summary{list-style:none;display:inline-block}
+.disc summary::-webkit-details-marker{display:none}
+.disc[open] summary{margin-bottom:8px}
+.disc p{margin:0 0 8px}
+.mh-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 10px;align-items:center;margin-bottom:10px}
+.mh-head h3{margin:0;font-size:13px}
+.mh{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start}
+.media{display:grid;gap:10px}
+.media figure{margin:0;display:grid;gap:4px;justify-items:start}
+.media figcaption{color:var(--soft);font-size:10px}
+.iconbox{width:40px;height:40px;display:grid;place-items:center;border:1px solid #000;background:var(--hero)}
+.vis{border:1px solid var(--line);padding:6px 8px;margin:0;display:grid;gap:4px}
+.vis legend{color:var(--soft);padding:0 4px}
+.kv.wide{max-width:none;margin:12px 0 0;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));column-gap:16px}
+.key{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px;padding:8px;border:1px dashed var(--accent);background:var(--field)}
+.key code{font-size:12px;word-break:break-all;color:var(--strong)}
+.lic p{margin:0 0 8px}
+.newh .form{margin-top:4px}
+@media (max-width:560px){.mh{grid-template-columns:minmax(0,1fr)}}
+.friends ul{list-style:none;margin:0 0 6px;padding:0}
+.friends li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;align-items:center;padding:6px 0;border-top:1px dotted var(--line)}
+.friends li>img{height:32px;width:21px;object-fit:none;object-position:top}
+.friends li.off{opacity:.65}
+.friends b{color:var(--strong)}
+.friends i{color:var(--muted)}
+.friends p{margin:2px 0 0;color:var(--soft)}
+.friends .btn{padding:4px 10px}
+.reqs{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.reqs .acts{margin-top:4px}
+.reqs .btn{padding:3px 8px}
+.num{text-align:right!important;white-space:nowrap}
+.up{color:#2e7d32}
+.down{color:#c0392b}
+:root:not([data-theme="light"]) .up{color:#8fd694}
+:root:not([data-theme="light"]) .down{color:#ff8a7a}
+.book .tbl table{min-width:0}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) 72px;gap:6px}
+.tbl td.ic{text-align:center}
+.tbl img{display:block}
+.in.price{width:64px;padding:2px 4px}
+.mfind{display:flex;flex-wrap:wrap;gap:6px}.mfind .in[type=search]{flex:1 1 160px;min-width:0}.mfind select.in{width:auto}
+.agrid{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.agrid li{border:1px solid var(--line);padding:6px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.agrid .pv{height:104px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:4px;border-bottom:1px dotted var(--line)}
+.agrid .pv img,.canvas img{image-rendering:pixelated}
+.agrid .acts{margin-top:auto;padding-top:6px;display:flex;gap:4px;flex-wrap:wrap}
+.ed{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:stretch}
+.ed .tools{display:flex;flex-direction:column;gap:4px}
+.canvas{min-height:180px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);background-color:#fff;background-image:linear-gradient(45deg,#e4e4e4 25%,transparent 25%,transparent 75%,#e4e4e4 75%),linear-gradient(45deg,#e4e4e4 25%,transparent 25%,transparent 75%,#e4e4e4 75%);background-size:12px 12px;background-position:0 0,6px 6px}
+.pal{display:grid;grid-template-columns:repeat(2,18px);gap:3px;align-content:start}
+.sw{width:18px;height:18px;border:1px solid #000;padding:0;cursor:pointer}
+.dirs{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.apps h3{margin-top:10px}
+.code{font:700 22px/1 ui-monospace,monospace;letter-spacing:.1em;text-align:center;padding:8px;border:1px dashed var(--line)}
+@media (max-width:480px){.ed{grid-template-columns:minmax(0,1fr)}.ed .tools{flex-direction:row;flex-wrap:wrap}.pal{grid-template-columns:repeat(10,18px)}}
+.pair.tiles .in{max-width:70px}
+.dense .tbl{margin:6px 0}
+.dense .tbl th,.dense .tbl td{padding:2px 6px;font-size:12px}
+.dense p{margin:4px 0}
+.ct{width:44px;height:36px;overflow:hidden;display:flex;justify-content:center;align-items:flex-start}
+.ct img{object-fit:none;object-position:top;max-width:none}
+.ra{text-align:right;white-space:nowrap}
+.ra .btn,.dense .btn{padding:1px 6px;font-size:11px}
+.dl{font-size:11px;margin-left:4px}
+.sel-s{max-width:160px;padding:1px 4px;font-size:12px}
+.ktabs{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+.ktabs .btn{padding:1px 8px;font-size:12px}
+.mfind{align-items:center;margin:6px 0}
+.mfind .chk{display:flex;gap:4px;align-items:center;font-size:12px}
+.ihead{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.ihead>div:last-child{flex:1 1 220px;min-width:0}
+.ipv{display:flex;align-items:flex-end;justify-content:center;min-width:72px;padding:6px;border:1px solid var(--line);background:var(--box)}
+.ipv img{image-rendering:pixelated}
+.stars{color:var(--accent)}
+.kb .st{display:none}
+.kb[data-state="furn"] .st-furn,.kb[data-state="room"] .st-room,.kb[data-state="cloth"] .st-cloth{display:block}
+.pre{overflow-x:auto;font:11px/1.4 ui-monospace,monospace;padding:8px;border:1px solid var(--line);background:var(--box);margin:6px 0;white-space:pre}
+.steps{margin:6px 0;padding-left:20px}.steps li{margin:3px 0}
+.chart{position:relative;margin:8px 0 4px}
+.chart svg{display:block;width:100%;height:160px;border:1px solid var(--line)}
+.chart .ln{fill:none;stroke:var(--ink);stroke-width:2;vector-effect:non-scaling-stroke}
+.chart .ar{fill:var(--line);opacity:.5}
+.chart .axis{position:absolute;inset:0 4px;display:flex;flex-direction:column;justify-content:space-between;font-size:10px;color:var(--soft);pointer-events:none}
+.kb>.row{margin:8px 0}
+.explore .hint{display:block;font-size:11px}
+.f{display:flex;flex-direction:column;gap:2px;font-size:11px;color:var(--soft);min-width:0}
+.f .in{font-size:12px;padding:2px 4px;min-width:0;width:100%}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px 8px;align-items:end;margin:6px 0}
+.fgrid.tx{grid-template-columns:repeat(auto-fit,minmax(72px,1fr)) auto;padding:6px 0;border-top:1px dotted var(--line)}
+.fgrid.lg{grid-template-columns:100px minmax(0,1fr) minmax(0,1.5fr) auto}
+.ed2 h3{margin:14px 0 4px}
+.dir{margin:4px 0}
+.dir>summary{display:inline-block}
+.stepbar{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:4px 0 8px}
+.stepbar li{padding:1px 8px;border:1px solid var(--line);color:var(--soft);font-size:12px}
+.stepbar li.on{border-color:#000;color:var(--ink);font-weight:700}
+.cats{list-style:none;margin:0;padding:0}
+.cats li{display:flex;gap:6px;align-items:center;padding:3px 4px;border-bottom:1px dotted var(--line);border-left:3px solid transparent}
+.cats li.sel{border-left-color:var(--accent);font-weight:700}
+.cats .hint{margin-left:auto}
+.vp .st{display:none}
+.vp[data-state="v12"] .st-v12,.vp[data-state="v11"] .st-v11,.vp[data-state="v10"] .st-v10,.vp[data-state="v20"] .st-v20{display:block}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+.visit .all,.net .all{margin:8px 0 0}
+.stars .dim{color:var(--line)}
+.dense .badge{font-size:9px;padding:0 3px;white-space:nowrap}
+.split3.narrow{grid-template-columns:minmax(0,1fr) 200px}.split3.narrow .btn{font-size:11px}@media (max-width:900px){.split3.narrow{grid-template-columns:minmax(0,1fr)}}
+.fgrid.tx{grid-template-columns:minmax(0,1.7fr) repeat(6,minmax(0,1fr)) auto}
+.fgrid .btn{align-self:end;padding:2px 8px}
+@media (max-width:620px){.fgrid.tx,.fgrid.lg{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}}
+.tbl .sel-s{min-width:96px}
+.subnav{display:flex;flex-wrap:wrap;gap:4px;align-items:center;padding:6px 8px}
+.subnav b{font-size:11px;color:var(--head);margin-right:6px}
+.subnav .btn{padding:2px 8px;font-size:11px}
+td.c,th.c{text-align:center}
+tr.go{cursor:pointer}
+tr.go:hover td{background:rgba(128,128,128,.14)}
+tr.sel td{font-weight:700}
+.ord{white-space:nowrap}.ord .btn{padding:0 5px;font-size:11px;margin-right:2px}
+.skins{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin:6px 0}
+.skin{display:flex;gap:6px;align-items:center;font-size:11px}
+.skin span{display:block;width:26px;height:26px;border:1px solid #000}
+.sheet{position:relative;display:inline-block;margin:6px 0;border:1px solid var(--line);background:var(--box)}
+.sheet img{display:block;image-rendering:pixelated}
+.sheet i{position:absolute;outline:1px dashed #d33}
+.fgrid.fr{grid-template-columns:minmax(0,2fr) repeat(6,minmax(0,1fr)) auto}
+@media (max-width:620px){.fgrid.fr{grid-template-columns:repeat(auto-fit,minmax(70px,1fr))}}
+.chart .w{stroke-width:1;vector-effect:non-scaling-stroke}
+.chart .w.g{stroke:#2e9b4a}.chart .b.g{fill:#2e9b4a}
+.chart .w.r{stroke:#d03a3a}.chart .b.r{fill:#d03a3a}
+td.dr{min-width:0;white-space:nowrap}
+td.dr label{display:grid;grid-template-columns:3.2em minmax(0,1fr);align-items:center;gap:4px;font-size:11px;color:var(--soft);margin:0 0 3px}
+td.dr label.chk{display:flex;gap:5px;margin:2px 0 0;color:var(--ink)}
+td.dr input.in{font:11px/1.2 Verdana,Tahoma,sans-serif;padding:3px 4px;min-width:0;width:100%}
+td.dr input.in[type=date]{width:8.6em}
+td.dr input.in[type=date]{width:7.8em;font-size:10px}
+.two>div>.blk{margin-bottom:10px}
+.two.wide{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
+@media (max-width:720px){.two.wide{grid-template-columns:minmax(0,1fr)}}
+.subnews{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px}
+.subnews p{margin:0}
+.subnews[hidden]{display:none}
+.gstep{display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;padding:8px 0;border-top:1px dotted var(--line)}.gstep:first-of-type{border-top:0}.gstep h3{margin:0 0 3px}.gstep p{margin:0 0 4px}.gn{display:grid;place-items:center;width:30px;height:30px;border:1px solid #000;background:var(--accent);color:var(--accent-ink);font-size:14px}
+.two.wide2{grid-template-columns:minmax(0,5fr) minmax(0,2fr)}
+@media (max-width:720px){.two.wide2{grid-template-columns:minmax(0,1fr)}}
+.two.wide2>div>.blk{margin-bottom:10px}
 </style>
 </head>
 <body>
 <div class="page">
   <div class="grid2">
     <main class="mainc">
-      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-in-light.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"><p>Telephone booths are here</p><a class="btn" href="retro-lobby-in-light.html">Home</a><a class="btn main" href="retro-news-in-light.html">News</a><a class="btn" href="retro-account-light.html">My account</a><a class="btn" href="retro-my-hotels-light.html">My hotels</a></nav></header>
+      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-in-light.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"><a class="btn" href="retro-lobby-in-light.html">Home</a><a class="btn main" href="retro-news-in-light.html">News</a><a class="btn" href="retro-friends-light.html">Friends</a><a class="btn" href="retro-exchange-light.html">Exchange</a><a class="btn" href="retro-market-light.html">Marketplace</a><a class="btn" href="retro-account-light.html">My account</a><a class="btn" href="retro-connections-light.html">Connections</a><a class="btn" href="retro-my-hotels-light.html">My hotels</a></nav></header>
+      <div class="blk box subnews">
+        <p><b>Get the news by email.</b> News only, never spam. Unsubscribe any time.</p>
+        <button class="btn main" type="button" data-sub-btn>Subscribe</button>
+      </div>
       <div class="split3">
         <div class="col">
       <div class="blk box article">
@@ -266,10 +453,46 @@ img{display:block;image-rendering:pixelated;max-width:none}
         <a class="btn main" href="#">Enter hotel</a>
         <ul class="links">
           <li><a href="retro-account-light.html">Account settings</a></li>
+          <li><a href="retro-connections-light.html">Connected hotels</a></li>
           <li><a href="retro-my-hotels-light.html">My hotels (2)</a></li>
-          <li><a href="#">Friends online (4)</a></li>
+          <li><a href="retro-create-light.html">Create assets</a></li>
+          <li><a href="retro-friends-light.html">Friends online (4)</a></li>
           <li><a href="retro-lobby-light.html">Log out</a></li>
         </ul>
+      </section>
+      </div>
+      <div class="blk">
+      <section class="fl">
+        <h3>Friends online (4)</h3>
+        <ul>
+          <li><div class="av"><img src="assets/oh/av-idle-a.png" width="21" height="66" alt=""></div><div><b>Mintleaf</b><span><img src="assets/oh/icon-console-off.png" width="15" height="23" alt="">Pixel Plaza</span></div><a class="btn main" href="retro-friends-light.html">Join</a></li>
+          <li><div class="av"><img src="assets/oh/av-idle-c.png" width="21" height="66" alt=""></div><div><b>Captain_K</b><span><img src="assets/oh/icon-navigator.png" width="23" height="23" alt="">OpenHotel</span></div><a class="btn main" href="retro-friends-light.html">Join</a></li>
+          <li><div class="av"><img src="assets/oh/av-idle-b.png" width="21" height="66" alt=""></div><div><b>Pebbles</b><span><img src="assets/oh/icon-club.png" width="23" height="21" alt="">Neon Docks</span></div><a class="btn main" href="retro-friends-light.html">Join</a></li>
+          <li><div class="av"><img src="assets/oh/av-idle-e.png" width="21" height="66" alt=""></div><div><b>nightbus</b><span><img src="assets/oh/icon-navigator.png" width="23" height="23" alt="">OpenHotel</span></div><a class="btn main" href="retro-friends-light.html">Join</a></li>
+        </ul>
+        <p class="all"><a href="retro-friends-light.html">All friends (6)</a> &gt;&gt; &nbsp; <span class="off">2 offline</span></p>
+      </section>
+      </div>
+      <div class="blk">
+      <section class="net">
+        <h3>Manage OpenHotel</h3>
+        <dl>
+          <div><dt>Accounts</dt><dd>1.2M</dd></div>
+          <div><dt>Online now</dt><dd>1,820</dd></div>
+          <div><dt>Open reports</dt><dd>3</dd></div>
+          <div><dt>New registrations</dt><dd>Open</dd></div>
+        </dl>
+        <p class="all"><a class="btn main" href="retro-admin-light.html">Manage hotel</a></p>
+      </section>
+      </div>
+      <div class="blk">
+      <section class="net">
+        <h3>Network admin</h3>
+        <dl>
+          <div><dt>Hotels</dt><dd>128</dd></div>
+          <div><dt>Waiting for review</dt><dd>2</dd></div>
+        </dl>
+        <p class="all"><a href="retro-network-light.html">Manage the network</a> &gt;&gt;</p>
       </section>
       </div>
       <div class="blk">
@@ -291,5 +514,8 @@ img{display:block;image-rendering:pixelated;max-width:none}
     <p>Sample page: names and numbers are made up.</p>
   </footer>
 </div>
+<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-sub-btn]");if(b)b.closest(".subnews").hidden=true})</script>
+<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-sub-btn]");if(b)b.closest(".subnews").hidden=true});document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>
+<script>document.addEventListener("input",function(e){var i=e.target;if(!i.hasAttribute||!i.hasAttribute("data-filter"))return;var t=i.closest(".friends");if(!t){t=i.closest("form").nextElementSibling;while(t&&!t.classList.contains("tbl")&&t.tagName!="UL")t=t.nextElementSibling}if(!t)return;var q=i.value.toLowerCase();t.querySelectorAll("tr,li").forEach(function(r){if(r.querySelector("th"))return;r.hidden=!!q&&r.textContent.toLowerCase().indexOf(q)<0})})</script>
 </body>
 </html>

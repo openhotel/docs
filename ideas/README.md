@@ -60,4 +60,9 @@ Issues, PRs, related ideas.
 | [OpenHotel on Steam](pagoru/steam.md): free Steam release, deno desktop shell, official hotel only, Steam login and account linking. Parts: [accounts](pagoru/steam-accounts.md) | pagoru | proposed |
 | [Release manifest](pagoru/release-manifest.md): partial monorepo releases + `release.oh` with each app's real version, so updaters skip unchanged apps | pagoru | proposed |
 | [Shared migration](pagoru/shared-migration.md): replace @oh and @da libs and cross-app copies with app/shared, same dep versions, before monster replaces master. Parts: [libs](pagoru/shared-migration-libs.md), [duplicates](pagoru/shared-migration-duplicates.md), [versions](pagoru/shared-migration-versions.md) | pagoru | accepted |
-| [Website rework, 2001 style](pagoru/website-2001.md): static HTML mockups (home, news, auth pages, community hotel) with assets and generators in `pagoru/website-2001/` | pagoru | draft |
+| [Website rework, 2001 style](pagoru/website-2001.md): static HTML mockups with assets and generators | pagoru | draft |
+| [Credit exchange between hotels](pagoru/credit-exchange.md): each hotel's credits trade against OHC on an onet order book; friends network-wide, furniture stays | pagoru | draft |
+| [Asset library and marketplace](pagoru/asset-library.md): owners pick rooms, furniture and clothes from a network marketplace | pagoru | draft |
+| [Hotel admin in My account](pagoru/hotel-admin.md): hotel and network admin pages | pagoru | draft |
+| [Emails and templates](pagoru/emails.md): editable templates with preview | pagoru | draft |
+| [Aseprite link for assets](pagoru/aseprite-link.md): Link app and Lua extension to send a spritesheet from Aseprite to the website | pagoru | draft |

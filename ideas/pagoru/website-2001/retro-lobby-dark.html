@@ -124,6 +124,27 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .pwrow label{display:grid;gap:2px;color:var(--soft)}
 .pwrow .otp{letter-spacing:.08em;padding-left:4px;padding-right:2px}
 .foot .ver b{color:var(--foot-link)}
+.credits{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;padding:10px 12px;border-color:#000;background:linear-gradient(var(--accent),var(--accent));color:var(--accent-ink)}
+.credits h3{margin:0 0 2px;font-size:12px;color:var(--accent-ink)}
+.credits p{margin:0}
+.credits img{margin-top:2px}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.visit .all{margin:8px 0 0}
+@media (max-width:560px){.duo{grid-template-columns:minmax(0,1fr)}}
+.fl ul{list-style:none;margin:0;padding:0}
+.fl li{display:grid;grid-template-columns:21px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 0;border-bottom:1px dotted var(--line)}
+.fl li:first-child{padding-top:0}
+.fl .av{width:21px;height:36px;overflow:hidden}
+.fl .av img{display:block}
+.fl b{display:block;font-size:12px}
+.fl li span{display:flex;gap:4px;align-items:center;font-size:11px;color:var(--muted);min-width:0}
+.fl .btn{padding:1px 6px;font-size:11px}
+.fl .all{margin:8px 0 0}
+.fl .all .off{color:var(--muted)}
+.subnews{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line)}
+.subnews p{margin:0}
+.subnews[hidden]{display:none}
+.in:disabled{opacity:.55;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -157,7 +178,7 @@ img{display:block;image-rendering:pixelated;max-width:none}
           <li><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-cafe.png" width="160" height="72" alt="Casa Pixel"></a><div class="hn"><img src="assets/oh/icon-catalog.png" width="16" height="23" alt=""><div><a href="#">Casa Pixel</a><span>208 online</span></div></div></li>
           <li><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-disco.png" width="160" height="72" alt="Neon Docks"></a><div class="hn"><img src="assets/oh/icon-club.png" width="23" height="21" alt=""><div><a href="#">Neon Docks</a><span>164 online</span></div></div></li>
           <li><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-aurora.png" width="160" height="72" alt="Hotel Aurora"></a><div class="hn"><img src="assets/oh/icon-purse.png" width="18" height="20" alt=""><div><a href="#">Hotel Aurora</a><span>121 online</span></div></div></li>
-          <li><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-tower.png" width="160" height="72" alt="Moonbase Inn"></a><div class="hn"><img src="assets/oh/icon-inventory.png" width="20" height="19" alt=""><div><a href="#">Moonbase Inn</a><span>87 online</span></div></div></li>
+          <li><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-cafe.png" width="160" height="72" alt="Moonbase Inn"></a><div class="hn"><img src="assets/oh/icon-inventory.png" width="20" height="19" alt=""><div><a href="#">Moonbase Inn</a><span>87 online</span></div></div></li>
         </ul>
         <p class="all">Hotels on the OpenHotel network. <a href="#">All hotels</a> &gt;&gt;</p>
         </div>
@@ -166,11 +187,38 @@ img{display:block;image-rendering:pixelated;max-width:none}
           <p>OpenHotel is open source. Download the server and your hotel shows up in this list. <a href="https://github.com/openhotel" target="_blank" rel="noopener">Get the code</a> &gt;&gt;</p>
         </div>
       </div>
+      <div class="duo">
+        <div class="blk">
+        <section class="visit">
+          <h3>Marketplace</h3>
+          <ul>
+            <li><a href="retro-market-dark.html">Telephone booth</a><span>★★★★★</span></li>
+            <li><a href="retro-market-dark.html">The Atrium</a><span>★★★★★</span></li>
+            <li><a href="retro-market-dark.html">Pirate flag</a><span>★★★★☆</span></li>
+            <li><span>Free assets by guests</span></li>
+          </ul>
+          <p class="all"><a href="retro-market-dark.html">Open the marketplace</a> &gt;&gt;</p>
+        </section>
+        </div>
+        <div class="blk">
+        <section class="visit">
+          <h3>Credit exchange</h3>
+          <ul>
+            <li><a href="retro-coin-dark.html">OpenHotel · OHC</a><span>1.000</span></li>
+            <li><a href="retro-coin-dark.html">Pixel Plaza · PXP</a><span>0.420</span></li>
+            <li><a href="retro-coin-dark.html">Neon Docks · NDK</a><span>1.850</span></li>
+            <li><span>Prices in OHC</span></li>
+          </ul>
+          <p class="all"><a href="retro-exchange-dark.html">Open the exchange</a> &gt;&gt;</p>
+        </section>
+        </div>
+      </div>
     </div>
 
     <div class="news">
       <div class="blk newsbox">
         <h3>Hotel news</h3>
+
         <ul>
           <li><img src="assets/oh/news-booths.png" width="64" height="64" alt=""><div><time>21 Nov 2026</time><b>Telephone booths are here</b><p>Step into a booth and come out in another room, or in another hotel on the network.</p><a href="retro-post-dark.html">Read more</a> &gt;&gt;</div></li>
           <li><img src="assets/oh/news-flag.png" width="64" height="64" alt=""><div><time>14 Nov 2026</time><b>Pirate week</b><p>Hoist the flag in your room. The best decorated rooms win a spot on the front page.</p><a href="retro-post-dark.html">Read more</a> &gt;&gt;</div></li>
@@ -188,6 +236,11 @@ img{display:block;image-rendering:pixelated;max-width:none}
         </ul>
         <p class="all"><a href="retro-news-dark.html">All news</a> &gt;&gt;</p>
       </div>
+      <div class="blk credits">
+        <img src="assets/oh/icon-purse.png" width="18" height="20" alt="">
+        <div><h3>Want more credits?</h3>
+          <p>Just play. Credits come from playing, and everything in OpenHotel is free. No credit shop, no premium texts, no club fee. Your parents' phone bill is safe here.</p></div>
+      </div>
       <div class="blk">
       <section>
         <h3>New in the catalog</h3>
@@ -203,12 +256,13 @@ img{display:block;image-rendering:pixelated;max-width:none}
       <div class="blk">
       <section class="login">
         <h3>Guest login</h3>
-        <form onsubmit="event.preventDefault()">
+        <form id="lg" onsubmit="event.preventDefault();var o=this.querySelector('.otp');if(o.disabled){o.disabled=false;o.focus();document.getElementById('lg-msg').hidden=false}">
           <label>Email<input class="in" type="email" autocomplete="email"></label>
           <div class="pwrow">
             <label>Password<input class="in" type="password" autocomplete="current-password"></label>
-            <label title="Only if you turned on 2FA">2FA<input class="in otp" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="000000" aria-label="2FA code, if turned on"></label>
+            <label title="Asked after your password, only if your account has 2FA">2FA<input class="in otp" type="text" disabled inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="000000" aria-label="2FA code, if turned on"></label>
           </div>
+          <p class="hint" id="lg-msg" role="status" hidden>This account has 2FA. Type the 6-digit code from your app.</p>
           <div class="row"><button class="btn main" type="submit">Log in</button><a href="retro-forgot-dark.html">Forgot password?</a></div>
         </form>
         <p class="new">New to OpenHotel?<br><a href="retro-register-dark.html">Register for free</a> &gt;&gt;</p>
@@ -257,5 +311,6 @@ img{display:block;image-rendering:pixelated;max-width:none}
     <p>Sample page: names and numbers are made up.</p>
   </footer>
 </div>
+<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-sub-btn]");if(b)b.closest(".subnews").hidden=true})</script>
 </body>
 </html>

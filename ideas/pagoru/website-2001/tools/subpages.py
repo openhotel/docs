@@ -1,6 +1,6 @@
 # 2001 subpages + link wiring for all 2001 pages. Run after lightdark.py.
 import re, sys, glob, os
-site = sys.argv[1]; T = os.path.dirname(os.path.abspath(__file__)) + "/"
+site = sys.argv[1]; T = "/tmp/claude-0/oh/"
 rd = lambda f: open(T + f).read()
 tpl = rd("lobby.tpl.html")
 head = tpl[:tpl.index("<body>")].replace("{{CSS}}", rd("lobby.css") + rd("sub.css"))
@@ -13,15 +13,37 @@ NEWS = [("booths","21 Nov 2026","Telephone booths are here","Step into a booth a
         ("atrium","02 Nov 2026","The Atrium is open","A new public room with a fountain and two staircases. Come and see it before it gets busy."),
         ("pool","30 Oct 2026","Rooftop pool party","Saturday at 20:00. Bring a towel and keep the splashing in the pool.")]
 
+GO = '<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-sub-btn]");if(b)b.closest(".subnews").hidden=true});document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>\n'
+import re as _re
+FSKIP = ("What each kind needs", "Overview", "Needs attention", "Numbers", "Updates", "Who sends", "Email templates", "Latest trades", "Order book")
+def addfind(b):
+    b = b.replace('<input class="in" type="search"', '<input data-filter class="in" type="search"')
+    out, pos = "", 0
+    for m in _re.finditer('<div class="tbl">', b):
+        h2 = b.rfind("<h2>", 0, m.start())
+        title = _re.sub("<.*?>|\\s*\\(.*", "", b[h2 + 4:b.find("</h2>", h2)]) if h2 >= 0 else ""
+        seg = b[h2:m.start()] if h2 >= 0 else ""
+        if "mfind" in seg or any(title.startswith(k) for k in FSKIP) or b[m.start():b.find("</table>", m.start())].count("<tr") < 3:
+            continue
+        out += b[pos:m.start()] + f'<form class="mfind" onsubmit="event.preventDefault()"><input data-filter class="in" type="search" placeholder="Search {title.lower()}" aria-label="Search {title.lower()}"></form>'
+        pos = m.start()
+    return out + b[pos:]
+FIND = '<script>document.addEventListener("input",function(e){var i=e.target;if(!i.hasAttribute||!i.hasAttribute("data-filter"))return;var t=i.closest(".friends");if(!t){t=i.closest("form").nextElementSibling;while(t&&!t.classList.contains("tbl")&&t.tagName!="UL")t=t.nextElementSibling}if(!t)return;var q=i.value.toLowerCase();t.querySelectorAll("tr,li").forEach(function(r){if(r.querySelector("th"))return;r.hidden=!!q&&r.textContent.toLowerCase().indexOf(q)<0})})</script>\n'
 def page(title, tab, logged, body):
-    tabs = [("Home","home"),("News","news")] + ([("My account","account"),("My hotels","hotels")] if logged else [("Register","register")])
+    extra = ''
+    if '<!--SIDE-->' in body:
+        i, j = body.index('<!--SIDE-->'), body.index('<!--/SIDE-->')
+        extra, body = body[i + 11:j], body[:i] + body[j + 12:]
+    if 'class="blk subnav"' in body or title in ("Friends",): body = addfind(body)
+    tabs = [("Home","home"),("News","news")] + ([("Friends","friends"),("Exchange","exchange"),("Marketplace","market"),("My account","account"),("Connections","connections"),("My hotels","hotels")] if logged else [("Register","register")])
     nav = "".join(f'<a class="btn{" main" if k == tab else ""}" href="#{k}">{n}</a>' for n, k in tabs)
-    side = '      <div class="blk">\n' + (rd("account.html") if logged else rd("login.html")) + '      </div>\n      <div class="blk">\n' + soc + '      </div>\n'
+    side = '      <div class="blk">\n' + (rd("account.html") if logged else rd("login.html")) + '      </div>\n' + extra + (rd("sidebar-in.html") if logged else "") + '      <div class="blk">\n' + soc + '      </div>\n'
     return (head.replace("<title>OpenHotel 2001</title>", f"<title>{title} · OpenHotel</title>") + '<body>\n<div class="page">\n'
       + '  <div class="grid2">\n    <main class="mainc">\n'
       + '      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="#home"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div>'
-      + f'<nav class="actions" aria-label="Site"><p>{title}</p>{nav}</nav></header>\n' + body + '    </main>\n    <aside class="side">\n' + side + '    </aside>\n  </div>\n' + foot)
+      + f'<nav class="actions" aria-label="Site">{nav}</nav></header>\n' + body + '    </main>\n    <aside class="side">\n' + side + '    </aside>\n  </div>\n' + foot.replace('</body>', GO + FIND + '</body>'))
 
+SUBBOX = open(T + "sub-news.html").read()
 news_list = '      <div class="blk box">\n        <h2>Hotel news</h2>\n        <ul class="newslist">\n' + "".join(
     f'          <li><img src="assets/oh/news-{i}.png" width="64" height="64" alt=""><div><time>{d}</time><b>{t}</b><p>{x}</p><a href="#post">Read more</a> &gt;&gt;</div></li>\n' for i, d, t, x in NEWS
   ) + '        </ul>\n        <div class="pager"><span class="hint">Page 1 of 4</span><a href="#news">Older news</a> &gt;&gt;</div>\n      </div>\n'
@@ -69,7 +91,8 @@ def post(logged):
     assert MN in article
     return ('      <div class="split3">\n        <div class="col">\n' + article.replace(MN, inter + MN, 1) + '        </div>\n        <div class="col">\n'
             + comments(logged) + '        </div>\n      </div>\n')
-register = '''      <div class="blk box">
+register = '''<div class="two wide"><div>
+      <div class="blk box">
         <h2>Register</h2>
         <p>One account for OpenHotel and every hotel on the network. It takes a minute.</p>
         <form class="form" onsubmit="event.preventDefault()">
@@ -79,14 +102,23 @@ register = '''      <div class="blk box">
           <label>Password<input class="in" type="password" autocomplete="new-password"></label>
           <label>Repeat password<input class="in" type="password" autocomplete="new-password"></label>
           <label>Language<select class="in"><option>English</option><option>Español</option><option>Deutsch</option></select></label>
-          <label class="chk"><input type="checkbox"> I have read the <a href="#">hotel rules</a></label>
+          <label class="chk"><input type="checkbox" required> I accept the <a href="#">Terms of Service</a> and the <a href="#">EULA</a></label>
+          <label class="chk"><input type="checkbox"> Send me the news by email (optional, news only, never spam)</label>
           <div class="row"><button class="btn main" type="submit">Register</button><span>Already registered? <a href="#home">Log in</a></span></div>
         </form>
       </div>
+      </div><div>
       <div class="blk box">
         <h2>What happens next</h2>
-        <p>We send you an email to check the address. Then check in to the hotel, where you make your avatar. You can't change your avatar on the website, but it shows up here once you have one.</p>
+        <ol class="steps">
+          <li><b>Register.</b> Fill the form. One account works in every hotel.</li>
+          <li><b>Check your email.</b> We send a link to confirm the address. It works for one hour. Look in spam if it doesn't come.</li>
+          <li><b>Check in.</b> Open a hotel and make your avatar there. You can't change it on the website, but it shows here once you have one.</li>
+          <li><b>Pick your hotels.</b> Join the main hotel or any community hotel with the same login.</li>
+        </ol>
+        <p class="hint">Free. No credit card. Credits come from playing. You can turn on 2FA and delete your account at any time in My account.</p>
       </div>
+      </div></div>
 '''
 forgot = '''      <div class="blk box">
         <h2>Forgot your password?</h2>
@@ -101,63 +133,25 @@ forgot = '''      <div class="blk box">
         <p>Check your spam folder first. Still nothing after ten minutes? Ask on <a href="https://discord.gg/qBZfPdNWUj" target="_blank" rel="noopener">Discord</a> and a staff member will help.</p>
       </div>
 '''
-account = '''      <div class="blk box">
-        <h2>My account</h2>
-        <div class="two">
-          <div>
-            <dl class="kv">
-              <div><dt>Username</dt><dd>Nightowl</dd></div>
-              <div><dt>Email</dt><dd>n******@*****.com</dd></div>
-              <div><dt>Member since</dt><dd>Mar 2025</dd></div>
-              <div><dt>Role</dt><dd>Hotel owner</dd></div>
-            </dl>
-          </div>
-          <div class="avbox"><div class="av"><img src="assets/oh/av-wave-a.png" width="23" height="68" alt="Your avatar"></div><p class="hint">Your avatar as guests see it. You change it inside the hotel.</p></div>
-        </div>
-        <h3>Two-step login</h3>
-        <p><span class="badge">Off</span> Use an app like Aegis or Google Authenticator to add a code to your login.</p>
-        <a class="btn" href="#">Turn on two-step login</a>
-        <h3>Languages</h3>
-        <ul class="pills"><li>English <button type="button" aria-label="Remove English">x</button></li><li>Español <button type="button" aria-label="Remove Español">x</button></li></ul>
-        <div class="row" style="display:flex;gap:8px;max-width:340px"><select class="in"><option>Add a language</option><option>Deutsch</option><option>Français</option></select><button class="btn" type="button">Add</button></div>
-      </div>
-      <div class="blk box">
-        <h2>Connections and sessions</h2>
-        <div class="tbl"><table>
-          <tr><th>Where</th><th>Last used</th><th></th></tr>
-          <tr><td>OpenHotel, this browser</td><td>Now</td><td class="hint">This one</td></tr>
-          <tr><td>Pixel Plaza (hotel)</td><td>Yesterday</td><td><a href="#">Disconnect</a></td></tr>
-          <tr><td>OpenHotel, phone</td><td>3 days ago</td><td><a href="#">Log out</a></td></tr>
-        </table></div>
-        <p><a class="danger" href="#">Delete my account</a></p>
-      </div>
-'''
-def hotel(thumb, name, hid, vis, rows):
-    tr = "".join(f'          <tr><td>{a}</td><td>{b}</td><td><a href="#">{c}</a></td><td>{d}</td><td><a href="#">Licence</a> · <a class="danger" href="#">Remove</a></td></tr>\n' for a, b, c, d in rows)
-    return f'''      <div class="blk box">
-        <div class="hotel">
-          <div class="thumb"><img src="assets/oh/hotel-thumb-{thumb}.png" width="160" height="72" alt="{name}"></div>
-          <div><h3>{name} <span class="badge{' on' if vis == 'Public' else ''}">{vis}</span></h3><p class="id">{hid}</p><div class="acts"><a class="btn" href="#">Change picture</a><a class="btn" href="#">Add integration</a></div></div>
-        </div>
-        <div class="tbl"><table>
-          <tr><th>Integration</th><th>Type</th><th>URL</th><th>Accounts</th><th></th></tr>
-{tr}        </table></div>
-        <p><a class="danger" href="#">Delete hotel</a></p>
-      </div>
-'''
-hotels = '''      <div class="blk box">
-        <h2>My hotels</h2>
-        <p>Hotels you run on the OpenHotel network. Each one gets its own client and website, and guests log in with their OpenHotel account.</p>
-        <a class="btn main" href="#">Create a hotel</a>
-      </div>
-''' + hotel("plaza", "Sunset Plaza", "01M7XSPG3W92FQ0EEJ2EPHCY3C", "Public", [("Official client","Client","https://hotel1.example.com","2"),("Hotel website","Web","https://sunset.example.com","0")]) \
-    + hotel("cafe", "Pixel Inn", "01M7XSPG4KXBVQ8V0HYY57DZ69", "Private", [("Official client","Client","https://hotel2.example.com","2")])
+exec(open(T + "pages_acct.py").read())
+exec(open(T + "pages_social.py").read())
+exec(open(T + "pages_assets.py").read())
+exec(open(T + "pages_admin.py").read())
 
 PAGES = {  # key: (title, tab, logged, body)
-  "retro-news": ("News", "news", False, news_list), "retro-news-in": ("News", "news", True, news_list),
-  "retro-post": ("Telephone booths are here", "news", False, post(False)), "retro-post-in": ("Telephone booths are here", "news", True, post(True)),
+  "retro-news": ("News", "news", False, news_list), "retro-news-in": ("News", "news", True, SUBBOX + news_list),
+  "retro-post": ("Telephone booths are here", "news", False, post(False)), "retro-post-in": ("Telephone booths are here", "news", True, SUBBOX + post(True)),
   "retro-register": ("Register", "register", False, register), "retro-forgot": ("Forgot password", "", False, forgot),
   "retro-account": ("My account", "account", True, account), "retro-my-hotels": ("My hotels", "hotels", True, hotels),
+  "retro-connections": ("Connected hotels", "connections", True, connections),
+  "retro-friends": ("Friends", "friends", True, friends_body), "retro-exchange": ("Credit exchange", "exchange", True, exchange_body),
+  "retro-assets": ("Catalog", "", True, library), "retro-market": ("Marketplace", "market", True, market), "retro-create": ("Create an asset", "market", True, create), "retro-create-sheet": ("Spritesheet", "market", True, create_sheet), "retro-create-furniture": ("Furniture", "market", True, create_furniture), "retro-create-clothes": ("Clothes", "market", True, create_clothes), "retro-create-room": ("Room", "market", True, create_room),
+  "retro-item": ("Telephone booth", "market", True, item), "retro-collection": ("Beach set", "market", True, collection), 
+  "retro-link": ("OpenHotel Link", "market", True, CN("link") + link), "retro-mine-collections": ("Your collections", "market", True, mine_collections), "retro-coin": ("Pixel Plaza · PXP", "exchange", True, coin_body),
+  "retro-admin": ("Manage OpenHotel", "", True, admin), "retro-admin-registration": ("Registration", "", True, admin_registration), "retro-admin-accounts": ("Accounts", "", True, admin_accounts),
+  "retro-admin-blocked": ("Blocked", "", True, admin_blocked), "retro-admin-rooms": ("Rooms", "", True, admin_rooms), "retro-admin-moderation": ("Moderation", "", True, admin_moderation),
+  "retro-admin-credits": ("Credits", "", True, admin_credits), "retro-admin-publicrooms": ("Public rooms", "", True, admin_publicrooms), "retro-admin-clothes": ("Clothes", "", True, admin_clothes),
+  "retro-network": ("Network admin", "", True, network), "retro-network-hotels": ("Hotels", "", True, network_hotels), "retro-network-news": ("News", "", True, network_news), "retro-admin-news": ("News", "", True, admin_news), "retro-network-accounts": ("Accounts", "", True, network_accounts), "retro-network-blocked": ("Blocked", "", True, network_blocked), "retro-network-emails": ("Emails", "", True, network_emails), "retro-network-credits": ("Credit reports", "", True, network_credits), "retro-network-settings": ("Settings", "", True, network_settings),
 }
 for key, (title, tab, logged, body) in PAGES.items():
     h = page(title, tab, logged, body)
@@ -169,11 +163,12 @@ def wire(path, theme, logged, community):
     s = open(path).read()
     sfx = "-in" if logged else ""
     m = {"#home": f"retro-lobby{sfx}", "#news": f"retro-news{sfx}", "#post": f"retro-post{sfx}", "#register": "retro-register",
-         "#account": "retro-account", "#hotels": "retro-my-hotels"}
+         "#account": "retro-account", "#hotels": "retro-my-hotels", "#connections": "retro-connections", "#friends": "retro-friends", "#exchange": "retro-exchange", "#market": "retro-market", "#create": "retro-create", "#library": "retro-assets", "#item": "retro-item", "#collection": "retro-collection", "#mine": "retro-create", "#link": "retro-link", "#coin": "retro-coin", "#admin": "retro-admin", "#network": "retro-network"}
+    for k in PAGES: m.setdefault("#" + k[6:], k)
     for k, v in m.items(): s = s.replace(f'href="{k}"', f'href="{v}-{theme}.html"')
     txt = {"Register for free": "retro-register", "Register on OpenHotel": "retro-register", "Forgot password?": "retro-forgot",
-           "Account settings": "retro-account", "OpenHotel account": "retro-account", "My hotels (2)": "retro-my-hotels",
-           "All news": f"retro-news{sfx}", "Read more": f"retro-post{sfx}", "Log out": "retro-lobby", "Get the code": None}
+           "Account settings": "retro-account", "OpenHotel account": "retro-account", "My hotels (2)": "retro-my-hotels", "Connected hotels": "retro-connections", "Friends online (4)": "retro-friends",
+           "All news": f"retro-news{sfx}", "Read more": f"retro-post{sfx}", "Create assets": "retro-create", "Log out": "retro-lobby", "Get the code": None}
     if community:  # community pages link news inside the hotel site; keep its own home
         txt.update({"All news": None, "Read more": None, "Log out": "retro-hotel"})
     for t, v in txt.items():
@@ -183,6 +178,6 @@ def wire(path, theme, logged, community):
 for f in glob.glob(f"{site}/retro-*-light.html") + glob.glob(f"{site}/retro-*-dark.html"):
     n = os.path.basename(f); theme = "light" if n.endswith("-light.html") else "dark"; key = n.rsplit("-", 1)[0]
     if key in ("retro-orange", "retro-portal"): continue
-    logged = key.endswith("-in") or key in ("retro-account", "retro-my-hotels")
+    logged = key.endswith("-in") or (key in PAGES and PAGES[key][2])
     wire(f, theme, logged, key.startswith("retro-hotel"))
 print("ok")
