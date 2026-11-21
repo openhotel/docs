@@ -94,7 +94,7 @@ connections = '''      <div class="blk box">
            BASE + ["See your friends list"]) \
     + conn("disco", "club", 23, 21, "Neon Docks", False, "neondocks.example/play", "neondocks.example", "02 Oct 2026", "3 weeks ago", BASE)
 
-def myhotel(thumb, icon, iw, ih, name, hid, public, accounts, client, web, lic):
+def myhotel(thumb, icon, iw, ih, name, hid, public, accounts, client, web, lic, code):
     if lic:
         licb = f'''<div class="lic" data-state="has">
             <div class="st st-has"><p><span class="badge on">Active</span> Licence made on {lic}. It was shown once and can't be shown again.</p>
@@ -125,7 +125,8 @@ def myhotel(thumb, icon, iw, ih, name, hid, public, accounts, client, web, lic):
             <div class="row"><button class="btn main" type="submit">Save</button></div>
           </form>
         </div>
-        <dl class="kv wide"><div><dt>Accounts connected</dt><dd>{accounts}</dd></div><div><dt>Online now</dt><dd>{'312' if public else '0'}</dd></div></dl>
+        <dl class="kv wide"><div><dt>Credit code</dt><dd><b>{code}</b> <span class="hint">can't be changed</span></dd></div><div><dt>Accounts connected</dt><dd>{accounts}</dd></div><div><dt>Online now</dt><dd>{'312' if public else '0'}</dd></div></dl>
+        <p><a href="#library">Rooms, furniture and clothes in this hotel</a> &gt;&gt;</p>
         <h3>Licence</h3>
         {licb}
         <p><a class="danger" href="#">Delete hotel</a></p>
@@ -139,6 +140,8 @@ hotels = '''      <div class="blk box">
             <label>Name<input class="in" placeholder="My hotel"></label>
             <label>Client URL<input class="in" type="url" placeholder="https://play.myhotel.example"></label>
             <label>Website URL<input class="in" type="url" placeholder="https://myhotel.example"></label>
+            <label>Credit code<input class="in cc" placeholder="MYH" maxlength="3" pattern="[A-Z]{3}" autocapitalize="characters" style="max-width:80px;text-transform:uppercase"></label>
+            <span class="hint">3 letters, A to Z. Your hotel's credits use this name on the exchange. <b>You can't change it later.</b></span>
             <fieldset class="vis"><legend>Who can find it</legend>
               <label class="chk"><input type="radio" name="v-new" checked> Public</label>
               <label class="chk"><input type="radio" name="v-new"> Private</label>
@@ -147,8 +150,8 @@ hotels = '''      <div class="blk box">
           </form>
         </details>
       </div>
-''' + myhotel("plaza", "console-off", 15, 23, "Sunset Plaza", "01M7XSPG3W92FQ0EEJ2EPHCY3C", True, 2, "play.sunset.example", "sunset.example", "12 Nov 2026") \
-    + myhotel("cafe", "club", 23, 21, "Pixel Inn", "01M7XSPG4KXBVQ8V0HYY57DZ69", False, 0, "play.pixelinn.example", "pixelinn.example", None) + '''<script>
+''' + myhotel("plaza", "console-off", 15, 23, "Sunset Plaza", "01M7XSPG3W92FQ0EEJ2EPHCY3C", True, 2, "play.sunset.example", "sunset.example", "12 Nov 2026", "SNP") \
+    + myhotel("cafe", "club", 23, 21, "Pixel Inn", "01M7XSPG4KXBVQ8V0HYY57DZ69", False, 0, "play.pixelinn.example", "pixelinn.example", None, "PXI") + '''<script>
 document.querySelectorAll(".lic").forEach((box) => box.addEventListener("click", (e) => {
   const b = e.target.closest("[data-go]");
   if (b) { box.dataset.state = b.dataset.go; box.querySelectorAll("details").forEach((d) => (d.open = false)); }

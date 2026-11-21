@@ -14,7 +14,7 @@ NEWS = [("booths","21 Nov 2026","Telephone booths are here","Step into a booth a
         ("pool","30 Oct 2026","Rooftop pool party","Saturday at 20:00. Bring a towel and keep the splashing in the pool.")]
 
 def page(title, tab, logged, body):
-    tabs = [("Home","home"),("News","news")] + ([("Friends","friends"),("Exchange","exchange"),("My account","account"),("Connections","connections"),("My hotels","hotels")] if logged else [("Register","register")])
+    tabs = [("Home","home"),("News","news")] + ([("Friends","friends"),("Exchange","exchange"),("Marketplace","market"),("My account","account"),("Connections","connections"),("My hotels","hotels")] if logged else [("Register","register")])
     nav = "".join(f'<a class="btn{" main" if k == tab else ""}" href="#{k}">{n}</a>' for n, k in tabs)
     side = '      <div class="blk">\n' + (rd("account.html") if logged else rd("login.html")) + '      </div>\n      <div class="blk">\n' + soc + '      </div>\n'
     return (head.replace("<title>OpenHotel 2001</title>", f"<title>{title} · OpenHotel</title>") + '<body>\n<div class="page">\n'
@@ -103,6 +103,7 @@ forgot = '''      <div class="blk box">
 '''
 exec(open(T + "pages_acct.py").read())
 exec(open(T + "pages_social.py").read())
+exec(open(T + "pages_assets.py").read())
 
 PAGES = {  # key: (title, tab, logged, body)
   "retro-news": ("News", "news", False, news_list), "retro-news-in": ("News", "news", True, news_list),
@@ -111,6 +112,7 @@ PAGES = {  # key: (title, tab, logged, body)
   "retro-account": ("My account", "account", True, account), "retro-my-hotels": ("My hotels", "hotels", True, hotels),
   "retro-connections": ("Connected hotels", "connections", True, connections),
   "retro-friends": ("Friends", "friends", True, friends_body), "retro-exchange": ("Credit exchange", "exchange", True, exchange_body),
+  "retro-assets": ("Hotel assets", "hotels", True, library), "retro-market": ("Marketplace", "market", True, market), "retro-create": ("Create an asset", "market", True, create),
 }
 for key, (title, tab, logged, body) in PAGES.items():
     h = page(title, tab, logged, body)
@@ -122,7 +124,7 @@ def wire(path, theme, logged, community):
     s = open(path).read()
     sfx = "-in" if logged else ""
     m = {"#home": f"retro-lobby{sfx}", "#news": f"retro-news{sfx}", "#post": f"retro-post{sfx}", "#register": "retro-register",
-         "#account": "retro-account", "#hotels": "retro-my-hotels", "#connections": "retro-connections", "#friends": "retro-friends", "#exchange": "retro-exchange"}
+         "#account": "retro-account", "#hotels": "retro-my-hotels", "#connections": "retro-connections", "#friends": "retro-friends", "#exchange": "retro-exchange", "#market": "retro-market", "#create": "retro-create", "#library": "retro-assets"}
     for k, v in m.items(): s = s.replace(f'href="{k}"', f'href="{v}-{theme}.html"')
     txt = {"Register for free": "retro-register", "Register on OpenHotel": "retro-register", "Forgot password?": "retro-forgot",
            "Account settings": "retro-account", "OpenHotel account": "retro-account", "My hotels (2)": "retro-my-hotels", "Connected hotels": "retro-connections", "Friends online (4)": "retro-friends",
@@ -136,6 +138,6 @@ def wire(path, theme, logged, community):
 for f in glob.glob(f"{site}/retro-*-light.html") + glob.glob(f"{site}/retro-*-dark.html"):
     n = os.path.basename(f); theme = "light" if n.endswith("-light.html") else "dark"; key = n.rsplit("-", 1)[0]
     if key in ("retro-orange", "retro-portal"): continue
-    logged = key.endswith("-in") or key in ("retro-account", "retro-my-hotels", "retro-connections", "retro-friends", "retro-exchange")
+    logged = key.endswith("-in") or key in ("retro-account", "retro-my-hotels", "retro-connections", "retro-friends", "retro-exchange", "retro-assets", "retro-market", "retro-create")
     wire(f, theme, logged, key.startswith("retro-hotel"))
 print("ok")

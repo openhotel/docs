@@ -13,7 +13,7 @@ Friends are network-wide; furniture and credits stay in each hotel. Each hotel's
 Guests move between hotels but their credits don't. A fixed 1:1 rate would let one hotel print credits and drain the others, so the rate has to follow supply and demand.
 
 ## Proposal
-- **Units**: every hotel has a credit code (OHC for the main hotel, PXP, NDK...). OHC is the quote currency; every pair is `XXX/OHC`.
+- **Units**: every hotel has a credit code of 3 letters A-Z (OHC for the main hotel, PXP, NDK...), set when the hotel is created and never changed; codes are unique on the network. OHC is the quote currency; every pair is `XXX/OHC`.
 - **Order book per pair**, run by onet: limit and market orders, matched by price then time. Guests see price, 24h change, supply and volume.
 - **Settlement**: the seller's hotel burns the credits, the buyer's hotel mints the same value in its own credits. Both hotels sign the transfer with their licence, onet keeps the ledger.
 - **Supply is public**: each hotel reports credits created and destroyed per day (signed). Printing too much lowers its own price, which is the brake.
