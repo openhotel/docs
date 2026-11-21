@@ -52,9 +52,9 @@ market = f'''      <div class="split3 narrow"><div class="col">
       <div class="blk box dense"><h2>Make your own</h2>
         <p>Draw in Aseprite, edit the data here and upload it as an OpenHotel file.</p>
         <p><a class="btn main" href="#create">Create an asset</a> <a class="btn" href="#link">Link app</a></p></div>
-      <div class="blk box dense"><h2>Your creations (4)</h2>
+      <div class="blk box dense"><h2>Your assets (4)</h2>
         <dl class="kv"><div><dt>Telephone booth</dt><dd><span class="badge on">Live</span></dd></div><div><dt>Neon sign</dt><dd><span class="badge on">Live</span></dd></div><div><dt>Palm tree</dt><dd><span class="badge">In review</span></dd></div><div><dt>Beach towel</dt><dd><span class="badge">Draft</span></dd></div></dl>
-        <p><a href="#mine">See them all</a> &gt;&gt;</p></div>
+        <p><a href="#create">Create and manage</a> &gt;&gt;</p></div>
       <div class="blk box dense"><h2>{HOTEL}</h2>
         <p class="hint">Runs v{HV}: schemas 1 to {MAXS}.</p>
         <p><a href="#library">Hotel catalog</a> &gt;&gt; <b>2 updates</b></p></div>

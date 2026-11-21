@@ -20,6 +20,11 @@ account = f'''      <div class="blk box">
         <div class="row" style="display:flex;gap:8px;max-width:340px"><select class="in"><option>Add a language</option><option>Deutsch</option><option>Français</option></select><button class="btn" type="button">Add</button></div>
       </div>
       <div class="blk box">
+        <h2>Create assets</h2>
+        <p>Make furniture, clothes and rooms from your own pixel art, then share them on the marketplace.</p>
+        <p><a class="btn main" href="#create">Create an asset</a></p>
+      </div>
+      <div class="blk box">
         <h2>Email news</h2>
         <form class="form" onsubmit="event.preventDefault()">
           <label class="chk"><input type="checkbox"> Send me the news by email (network and the hotels I joined)</label>

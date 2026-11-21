@@ -34,7 +34,7 @@ def page(title, tab, logged, body):
     if '<!--SIDE-->' in body:
         i, j = body.index('<!--SIDE-->'), body.index('<!--/SIDE-->')
         extra, body = body[i + 11:j], body[:i] + body[j + 12:]
-    if 'class="blk subnav"' in body or title in ("Your creations", "Friends"): body = addfind(body)
+    if 'class="blk subnav"' in body or title in ("Friends",): body = addfind(body)
     tabs = [("Home","home"),("News","news")] + ([("Friends","friends"),("Exchange","exchange"),("Marketplace","market"),("My account","account"),("Connections","connections"),("My hotels","hotels")] if logged else [("Register","register")])
     nav = "".join(f'<a class="btn{" main" if k == tab else ""}" href="#{k}">{n}</a>' for n, k in tabs)
     side = '      <div class="blk">\n' + (rd("account.html") if logged else rd("login.html")) + '      </div>\n' + extra + (rd("sidebar-in.html") if logged else "") + '      <div class="blk">\n' + soc + '      </div>\n'
@@ -146,7 +146,7 @@ PAGES = {  # key: (title, tab, logged, body)
   "retro-connections": ("Connected hotels", "connections", True, connections),
   "retro-friends": ("Friends", "friends", True, friends_body), "retro-exchange": ("Credit exchange", "exchange", True, exchange_body),
   "retro-assets": ("Catalog", "", True, library), "retro-market": ("Marketplace", "market", True, market), "retro-create": ("Create an asset", "market", True, create), "retro-create-sheet": ("Spritesheet", "market", True, create_sheet), "retro-create-furniture": ("Furniture", "market", True, create_furniture), "retro-create-clothes": ("Clothes", "market", True, create_clothes), "retro-create-room": ("Room", "market", True, create_room),
-  "retro-item": ("Telephone booth", "market", True, item), "retro-collection": ("Beach set", "market", True, collection), "retro-mine": ("Your creations", "market", True, mine),
+  "retro-item": ("Telephone booth", "market", True, item), "retro-collection": ("Beach set", "market", True, collection), 
   "retro-link": ("OpenHotel Link", "market", True, CN("link") + link), "retro-mine-collections": ("Your collections", "market", True, mine_collections), "retro-coin": ("Pixel Plaza · PXP", "exchange", True, coin_body),
   "retro-admin": ("Manage OpenHotel", "", True, admin), "retro-admin-registration": ("Registration", "", True, admin_registration), "retro-admin-accounts": ("Accounts", "", True, admin_accounts),
   "retro-admin-blocked": ("Blocked", "", True, admin_blocked), "retro-admin-rooms": ("Rooms", "", True, admin_rooms), "retro-admin-moderation": ("Moderation", "", True, admin_moderation),
@@ -163,12 +163,12 @@ def wire(path, theme, logged, community):
     s = open(path).read()
     sfx = "-in" if logged else ""
     m = {"#home": f"retro-lobby{sfx}", "#news": f"retro-news{sfx}", "#post": f"retro-post{sfx}", "#register": "retro-register",
-         "#account": "retro-account", "#hotels": "retro-my-hotels", "#connections": "retro-connections", "#friends": "retro-friends", "#exchange": "retro-exchange", "#market": "retro-market", "#create": "retro-create", "#library": "retro-assets", "#item": "retro-item", "#collection": "retro-collection", "#mine": "retro-mine", "#link": "retro-link", "#coin": "retro-coin", "#admin": "retro-admin", "#network": "retro-network"}
+         "#account": "retro-account", "#hotels": "retro-my-hotels", "#connections": "retro-connections", "#friends": "retro-friends", "#exchange": "retro-exchange", "#market": "retro-market", "#create": "retro-create", "#library": "retro-assets", "#item": "retro-item", "#collection": "retro-collection", "#mine": "retro-create", "#link": "retro-link", "#coin": "retro-coin", "#admin": "retro-admin", "#network": "retro-network"}
     for k in PAGES: m.setdefault("#" + k[6:], k)
     for k, v in m.items(): s = s.replace(f'href="{k}"', f'href="{v}-{theme}.html"')
     txt = {"Register for free": "retro-register", "Register on OpenHotel": "retro-register", "Forgot password?": "retro-forgot",
            "Account settings": "retro-account", "OpenHotel account": "retro-account", "My hotels (2)": "retro-my-hotels", "Connected hotels": "retro-connections", "Friends online (4)": "retro-friends",
-           "All news": f"retro-news{sfx}", "Read more": f"retro-post{sfx}", "Log out": "retro-lobby", "Get the code": None}
+           "All news": f"retro-news{sfx}", "Read more": f"retro-post{sfx}", "Create assets": "retro-create", "Log out": "retro-lobby", "Get the code": None}
     if community:  # community pages link news inside the hotel site; keep its own home
         txt.update({"All news": None, "Read more": None, "Log out": "retro-hotel"})
     for t, v in txt.items():
