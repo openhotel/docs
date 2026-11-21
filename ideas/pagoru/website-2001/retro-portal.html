@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en" data-v="ember">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OpenHotel Portal 2006</title>
+<link rel="stylesheet" href="assets/oh/retro.css">
+<style>
+:root{--bgimg:url("assets/oh/bg-portal-ember.png");--bgc:#4b1c12;--bar:#1c0b07;--bar-line:#6b2b1a;--accent:#ffc04d;--soft:#f3d9c9;--win-ink:#5a2a06;--panel-ink:#5b1a10}
+:root[data-v="navy"]{--bgimg:url("assets/oh/bg-portal-navy.png");--bgc:#15233f;--bar:#0a1122;--bar-line:#2c4777;--accent:#8fd0ff;--soft:#d6e2f5;--win-ink:#2c3d66;--panel-ink:#1f3159}
+:root[data-v="grape"]{--bgimg:url("assets/oh/bg-portal-grape.png");--bgc:#2f1846;--bar:#150a22;--bar-line:#55307a;--accent:#ffb3e6;--soft:#e7d6f5;--win-ink:#3d2a6b;--panel-ink:#3b2366}
+:root[data-v="moss"]{--bgimg:url("assets/oh/bg-portal-moss.png");--bgc:#1e2d15;--bar:#0c140a;--bar-line:#3d5a2a;--accent:#d8f07a;--soft:#dfeccf;--win-ink:#24481a;--panel-ink:#24481a}
+.oh-win{border-image-source:url("assets/oh/win-orange.png")}
+.oh-panel{border-image-source:url("assets/oh/panel-red.png")}
+.oh-dark{border-image-source:url("assets/oh/win-dark-ember.png")}
+:root[data-v="navy"] .oh-win{border-image-source:url("assets/oh/win-blue.png")}
+:root[data-v="navy"] .oh-panel{border-image-source:url("assets/oh/panel-blue.png")}
+:root[data-v="navy"] .oh-dark{border-image-source:url("assets/oh/win-dark-navy.png")}
+:root[data-v="grape"] .oh-win{border-image-source:url("assets/oh/win-purple.png")}
+:root[data-v="grape"] .oh-panel{border-image-source:url("assets/oh/panel-purple.png")}
+:root[data-v="grape"] .oh-dark{border-image-source:url("assets/oh/win-dark-plum.png")}
+:root[data-v="moss"] .oh-win{border-image-source:url("assets/oh/win-green.png")}
+:root[data-v="moss"] .oh-panel{border-image-source:url("assets/oh/panel-green.png")}
+:root[data-v="moss"] .oh-dark{border-image-source:url("assets/oh/win-dark-moss.png")}
+.oh-panel{color:#2a1a14}
+body{background:var(--bgc) var(--bgimg) repeat;background-size:96px 192px;image-rendering:pixelated;color:var(--soft)}
+.wrap{max-width:1020px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right,0px)) 26px max(16px,env(safe-area-inset-left,0px));image-rendering:auto}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 18px;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px))) 16px;padding:8px max(16px,env(safe-area-inset-left,0px));background:var(--bar);border-bottom:2px solid var(--bar-line)}
+.topbar .me{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px}
+.topbar .me span{display:inline-flex;align-items:center;gap:6px}
+.topbar img{height:16px;width:auto}
+.topbar a{color:var(--accent)}
+.head{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:stretch}
+.banner{position:relative;min-height:260px;border:2px solid #000;border-radius:8px;overflow:hidden;background:#71b5ce url("assets/oh/hotel-front.png") right center / 600px 260px no-repeat;image-rendering:pixelated;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+.banner .logo{position:absolute;left:14px;bottom:10px;width:220px;height:172px;image-rendering:pixelated}
+.banner .flag{position:absolute;left:14px;top:12px;margin:0;padding:4px 10px;background:#000;color:var(--accent)}
+.enter{display:grid;gap:14px;align-content:start}
+.enter .oh-pda p{margin:0}
+.enter .n{font-size:32px;line-height:40px}
+.enter .oh-btn{width:100%}
+.tabs{display:flex;gap:2px;align-items:flex-end;margin:18px 0 0;padding:0 10px;overflow-x:auto;scrollbar-width:thin}
+.tabs .oh-tab{flex:none}
+.tabs img{height:23px;width:auto;margin:-6px 0 -4px}
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr) 250px;gap:16px;align-items:start;margin-top:-2px}
+.col{display:grid;gap:16px;min-width:0}
+.card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:end}
+.card .av{width:46px;height:136px;image-rendering:pixelated;margin:0 4px 2px}
+.card h3{margin:0 0 4px}
+.card p{margin:0 0 8px;color:#4b3b33;font-style:italic}
+.badges{display:flex;gap:6px;align-items:center;margin-bottom:8px}
+.badges span{display:grid;place-items:center;width:34px;height:34px;background:#fff7ea;border:2px solid #4d3a2c;border-radius:4px}
+.badges img{image-rendering:pixelated}
+.friends{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.friends li{display:flex;justify-content:space-between;gap:8px}
+.friends .off{color:#7f8c3e}
+.story .stage{position:relative;display:grid;place-items:center;padding:44px 0 6px;margin:-2px -2px 12px;background:radial-gradient(60% 70% at 50% 62%,rgba(255,255,255,.08),transparent 70%)}
+.story .stage img{display:block;width:348px;height:auto}
+.story .oh-bubble{position:absolute}
+.story h3{margin:0 0 6px;color:var(--accent)}
+.story p{margin:0 0 12px;font-size:13px;max-width:60ch}
+.list{list-style:none;margin:0;padding:0}
+.list li{display:grid;grid-template-columns:62px minmax(0,1fr);gap:4px 12px;padding:8px 0;border-bottom:2px dotted #e2c8a6}
+.list li:last-child{border:0}
+.list time{color:#a5520c}
+:root[data-v="navy"] .list time{color:#335ca6}:root[data-v="grape"] .list time{color:#6b3fa0}:root[data-v="moss"] .list time{color:#3e7a2a}
+.list p{grid-column:2;margin:0;color:#4d4a55}
+table{width:100%;border-collapse:collapse;background:#fff8f2;border:2px solid #3a1a12;border-radius:4px}
+th,td{text-align:left;padding:6px 8px;border-bottom:2px dotted #e6c3b6;font-size:12px}
+th{font-family:"OH Pixel Bold",monospace;font-size:16px;font-weight:400;background:rgba(0,0,0,.06)}
+tr:last-child td{border-bottom:0}
+.tbl{overflow-x:auto}
+.feat{text-align:center}
+.feat img{display:block;margin:0 auto 6px;width:156px;height:auto}
+.feat p{margin:0 0 10px;color:#4b3b33}
+.rooms{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px;text-align:left}
+.rooms li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 8px;background:#fff8f2;border:2px solid #3a1a12;border-radius:4px}
+.rooms img{width:23px;height:23px;image-rendering:pixelated}
+.bar{display:block;height:8px;width:56px;background:#e8d5c8;border:2px solid #3a1a12}
+.bar i{display:block;height:100%;background:#3fae4a}
+.poll{display:grid;gap:6px;margin:0;padding:0;border:0}
+.poll legend{margin-bottom:6px;font-size:12px}
+.poll label{display:flex;align-items:center;gap:8px;cursor:pointer}
+.poll input{accent-color:#c0581b;width:16px;height:16px}
+.staff{display:flex;justify-content:space-around;align-items:flex-end;padding-top:4px}
+.staff figure{margin:0;text-align:center}
+.staff img{display:block;margin:0 auto 4px;image-rendering:pixelated}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:22px;padding:10px 0 0;border-top:2px solid var(--bar-line);color:var(--soft)}
+.vbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+@media (max-width:980px){.grid{grid-template-columns:250px minmax(0,1fr)}.grid .right{grid-column:1 / -1;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}}
+@media (max-width:720px){.head{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.grid .mid{order:-1}.banner{background-size:450px 195px;min-height:200px}.banner .logo{width:165px;height:129px}}
+@media (max-width:420px){.banner{background-position:70% center}.story .oh-bubble.b2{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar pf">
+    <div class="me">
+      <span>Hi, <b class="pfb">sample_guest</b></span>
+      <span><img src="assets/oh/icon-coin.png" width="16" height="16" alt="">120 credits</span>
+      <span><img src="assets/oh/icon-club.png" width="18" height="16" alt="">Club: 12 days</span>
+    </div>
+    <div class="vbar">
+      <span>Colours</span>
+      <div class="variants" role="group" aria-label="Colour variant">
+        <button type="button" data-v="ember" title="Ember"><span class="sw"><i style="background:#c0581b"></i></span><span class="sr">Ember</span></button>
+        <button type="button" data-v="navy" title="Navy"><span class="sw"><i style="background:#335ca6"></i></span><span class="sr">Navy</span></button>
+        <button type="button" data-v="grape" title="Grape"><span class="sw"><i style="background:#7a4fb0"></i></span><span class="sr">Grape</span></button>
+        <button type="button" data-v="moss" title="Moss"><span class="sw"><i style="background:#5a8a3a"></i></span><span class="sr">Moss</span></button>
+      </div>
+      <a href="#">Sign out</a>
+    </div>
+  </div>
+
+  <header class="head">
+    <div class="banner" role="img" aria-label="The front of the OpenHotel building">
+      <p class="flag pf">HOTEL OPEN 24/7</p>
+      <img class="logo" src="assets/oh/logo-club.png" width="220" height="172" alt="OpenHotel Club">
+    </div>
+    <div class="enter">
+      <section class="oh-pda">
+        <h2 class="t pfb">ONLINE</h2>
+        <p class="pfb n">1,284</p>
+        <p class="pf">GUESTS IN 312 ROOMS</p>
+      </section>
+      <a class="oh-btn yellow big" href="#"><img src="assets/oh/icon-club.png" width="23" height="21" alt="">Enter hotel</a>
+      <a class="oh-btn white" href="#"><img src="assets/oh/icon-navigator.png" width="23" height="23" alt="">Open navigator</a>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Main">
+    <a class="oh-tab on" href="#" aria-current="page"><img src="assets/oh/icon-club.png" alt="">Home</a>
+    <a class="oh-tab" href="#"><img src="assets/oh/icon-navigator.png" alt="">Rooms</a>
+    <a class="oh-tab" href="#"><img src="assets/oh/icon-catalog.png" alt="">Catalog</a>
+    <a class="oh-tab" href="#"><img src="assets/oh/icon-inventory.png" alt="">Inventory</a>
+    <a class="oh-tab" href="#"><img src="assets/oh/icon-purse.png" alt="">Purse</a>
+    <a class="oh-tab" href="#"><img src="assets/oh/icon-console-off.png" alt="">Help</a>
+  </nav>
+
+  <div class="grid">
+    <div class="col left">
+      <section class="oh-win">
+        <h2 class="t pfb">My OpenHotel</h2>
+        <div class="card">
+          <img class="av" src="assets/oh/av-wave-a.png" width="46" height="136" alt="Your avatar, waving">
+          <div>
+            <h3 class="pfb">sample_guest</h3>
+            <p>"building a rooftop bar"</p>
+            <div class="badges">
+              <span title="Club member"><img src="assets/oh/icon-club.png" width="23" height="21" alt="Club member"></span>
+              <span title="Room of the week"><img src="assets/oh/icon-heart.png" width="14" height="14" alt="Room of the week"></span>
+              <span title="Collector"><img src="assets/oh/icon-coin.png" width="16" height="16" alt="Collector"></span>
+            </div>
+            <a class="oh-btn white" href="#">Edit look</a>
+          </div>
+        </div>
+      </section>
+      <section class="oh-pda">
+        <h2 class="t pfb">FRIENDS</h2>
+        <ul class="friends pf">
+          <li><span>lumi</span><span>CAFE</span></li>
+          <li><span>orbit</span><span>POOL</span></li>
+          <li><span>marta_k</span><span>DISCO</span></li>
+          <li class="off"><span>pixeljoe</span><span>AWAY</span></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="col mid">
+      <section class="oh-dark story">
+        <h2 class="t pfb">Top story</h2>
+        <div class="stage">
+          <img class="px" src="assets/oh/room-disco.png" width="348" height="252" alt="The Disco Hall: a purple room with six guests, two of them waving">
+          <span class="oh-bubble" style="left:calc(50% - 174px + 40px);top:8px"><b>marta_k:</b> party!!</span>
+          <span class="oh-bubble b2" style="left:calc(50% - 174px + 190px);top:40px"><b>lumi:</b> o/</span>
+        </div>
+        <h3 class="pfb x3">Disco Hall reopens</h3>
+        <p>Friday night is back. The Disco Hall has a new floor, a bigger stage and room for sixty guests. Doors open at 20:00 hotel time.</p>
+        <a class="oh-btn yellow" href="#">Go to the Disco Hall</a>
+      </section>
+
+      <section class="oh-win">
+        <h2 class="t pfb">Latest news</h2>
+        <ul class="list">
+          <li><time class="pf">20 NOV</time><b class="pfb">The Atrium opens</b><p>A public room with a fountain and two staircases.</p></li>
+          <li><time class="pf">14 NOV</time><b class="pfb">Navigator update</b><p>Rooms now sort by how many guests are inside.</p></li>
+          <li><time class="pf">09 NOV</time><b class="pfb">Daily credits</b><p>Check in every day and your purse fills up.</p></li>
+        </ul>
+      </section>
+
+      <section class="oh-panel">
+        <h2 class="t pfb">Events this week</h2>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Day</th><th>Event</th><th>Room</th></tr></thead>
+            <tbody>
+              <tr><td>Mon</td><td>Room building contest</td><td>Atrium</td></tr>
+              <tr><td>Wed</td><td>Quiz night</td><td>Cafe</td></tr>
+              <tr><td>Fri</td><td>Disco night</td><td>Disco Hall</td></tr>
+              <tr><td>Sun</td><td>Pool party</td><td>Rooftop Pool</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <div class="col right">
+      <section class="oh-win feat">
+        <h2 class="t pfb">Featured room</h2>
+        <img class="px" src="assets/oh/room-mini-b.png" width="156" height="180" alt="Garden Hut: a small green room">
+        <b class="pfb">Garden Hut</b>
+        <p>by orbit</p>
+        <ul class="rooms">
+          <li><img src="assets/oh/icon-navigator.png" alt=""><span>Red Lounge</span><span class="bar" title="18 of 25"><i style="width:72%"></i></span></li>
+          <li><img src="assets/oh/icon-navigator.png" alt=""><span>Sun Deck</span><span class="bar" title="9 of 25"><i style="width:36%"></i></span></li>
+          <li><img src="assets/oh/icon-navigator.png" alt=""><span>Rooftop Pool</span><span class="bar" title="23 of 25"><i style="width:92%;background:#e0a019"></i></span></li>
+        </ul>
+      </section>
+
+      <section class="oh-panel">
+        <h2 class="t pfb">Poll</h2>
+        <form onsubmit="event.preventDefault();this.querySelector('output').textContent='Thanks, vote counted (sample).'">
+          <fieldset class="poll">
+            <legend>Which public room should open next?</legend>
+            <label><input type="radio" name="poll" checked> Ice rink</label>
+            <label><input type="radio" name="poll"> Library</label>
+            <label><input type="radio" name="poll"> Arcade</label>
+          </fieldset>
+          <p style="margin:10px 0 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="oh-btn white" type="submit">Vote</button><output style="font-size:11px"></output></p>
+        </form>
+      </section>
+
+      <section class="oh-win">
+        <h2 class="t pfb">Staff on duty</h2>
+        <div class="staff">
+          <figure><img src="assets/oh/av-idle-c.png" width="21" height="66" alt=""><figcaption class="pfb">nova</figcaption></figure>
+          <figure><img src="assets/oh/av-wave-e.png" width="23" height="68" alt=""><figcaption class="pfb">kiko</figcaption></figure>
+          <figure><img src="assets/oh/av-idle-b.png" width="21" height="66" alt="" style="transform:scaleX(-1)"><figcaption class="pfb">dot</figcaption></figure>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="foot pf">
+    <span>OpenHotel · sample page</span>
+    <span>Art and fonts from the OpenHotel game</span>
+  </footer>
+</div>
+<script>
+(() => {
+  const KEY = "oh-retro-portal";
+  const buttons = document.querySelectorAll(".variants button");
+  const apply = (v) => {
+    document.documentElement.dataset.v = v;
+    buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === v)));
+    try { localStorage.setItem(KEY, v); } catch (e) {}
+  };
+  let start = "ember";
+  try { start = localStorage.getItem(KEY) || start; } catch (e) {}
+  buttons.forEach((b) => b.addEventListener("click", () => apply(b.dataset.v)));
+  apply(start);
+})();
+</script>
+</body>
+</html>

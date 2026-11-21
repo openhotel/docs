@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en" data-v="graphite">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OpenHotel 2001</title>
+<style>
+*{box-sizing:border-box}
+html{color-scheme:only dark}
+:root{--tile:url("assets/oh/bg-lobby-classic.png");--base:#2e3035;--box:#232427;--edge-r:#9a9a9a;--edge-b:#626262;--accent:#f2b630;--accent-ink:#2b1d00;--link:#ffffff;--head:#ffd166}
+:root[data-v="orange"]{--tile:url("assets/oh/bg-viv-orange.png");--base:#f08a1c}
+:root[data-v="blue"]{--tile:url("assets/oh/bg-viv-blue.png");--base:#2f6fd8}
+:root[data-v="teal"]{--tile:url("assets/oh/bg-viv-teal.png");--base:#0fa3a3}
+:root[data-v="purple"]{--tile:url("assets/oh/bg-viv-purple.png");--base:#8a3fd8}
+:root[data-v="red"]{--tile:url("assets/oh/bg-viv-red.png");--base:#d6382f}
+:root[data-v="green"]{--tile:url("assets/oh/bg-viv-green.png");--base:#3a9e3a}
+body{margin:0;background:var(--base) var(--tile) repeat;color:#d6d6d6;font:11px/1.45 Verdana,Tahoma,"DejaVu Sans",sans-serif}
+a{color:var(--link);font-weight:700}
+a:hover{color:var(--head)}
+img{display:block;image-rendering:pixelated;max-width:none}
+.page{max-width:740px;margin:0 auto;padding:14px max(16px,env(safe-area-inset-right,0px)) 18px max(16px,env(safe-area-inset-left,0px))}
+.vbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px;margin:0 0 12px;color:#bdbdbd}
+.vbar>span{padding:2px 6px;background:#1b1c1f;border:1px solid #000;color:#fff}
+.vbar button{width:20px;height:20px;padding:0;border:1px solid #000;cursor:pointer}
+.vbar button[aria-pressed="true"]{outline:1px solid #fff;outline-offset:1px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 206px;gap:12px 6px;align-items:start}
+.left{display:grid;gap:4px;min-width:0}
+/* extruded box: 1px black outline, light right face, darker bottom face */
+.blk{position:relative;background:var(--box);border:1px solid #000;margin:0 8px 8px 0}
+.blk::before,.blk::after{content:"";position:absolute;pointer-events:none}
+.blk::before{top:-1px;right:-9px;width:8px;bottom:-9px;background:var(--edge-r);clip-path:polygon(0 0,100% 8px,100% 100%,0 calc(100% - 8px))}
+.blk::after{left:-1px;right:-9px;bottom:-9px;height:8px;background:var(--edge-b);clip-path:polygon(0 0,calc(100% - 8px) 0,100% 100%,8px 100%)}
+.hero{position:relative;height:330px;background:#2e3035;overflow:hidden;border-bottom:1px solid #000}
+.hero .room{position:absolute;left:50%;top:24px;margin-left:-198px}
+.hero .logo{position:absolute;left:10px;top:10px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px}
+.actions p{margin:0 auto 0 0;color:#e6e6e6;font-weight:700}
+.btn{display:inline-block;padding:6px 12px;border:1px solid #000;background:#3b3c41;color:#fff;font:700 11px/1.2 Verdana,Tahoma,sans-serif;text-decoration:none;box-shadow:inset 1px 1px 0 rgba(255,255,255,.25),inset -1px -1px 0 rgba(0,0,0,.35)}
+.btn.main{background:var(--accent);color:var(--accent-ink)}
+.btn:hover{filter:brightness(1.1);color:inherit}
+.btn.main:hover{color:var(--accent-ink)}
+.btn:active{box-shadow:inset 1px 1px 0 rgba(0,0,0,.35)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 230px;min-width:0}
+.split.rev{grid-template-columns:230px minmax(0,1fr)}
+.split p{margin:0 0 8px}
+.txt{padding:10px 12px}
+.txt h3,.side h3{margin:0 0 6px;font-size:11px;color:var(--head)}
+.split .pic{width:230px;min-height:130px;align-self:stretch;overflow:hidden;position:relative}
+.split .pic img{position:absolute}
+.front img{left:-215px;top:-215px}
+.dio img{left:-60px;top:-300px}
+.split .pic{border-left:1px solid #000}
+.split.rev .pic{border-left:0;border-right:1px solid #000}
+.side section{padding:12px 12px 14px;border-top:5px solid #3a3b3f}
+.side section:first-child{border-top:0}
+.links{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.visit ul{list-style:none;margin:0;padding:0}
+.visit li{display:flex;justify-content:space-between;gap:8px;padding:2px 0;border-bottom:1px dotted #444}
+.visit li:last-child{border-bottom:0;color:#9a9a9a}
+.visit li a{font-weight:400;text-decoration:none}
+.visit li a:hover{text-decoration:underline}
+.visit li span:last-child{color:var(--head);font-weight:700}
+.visit .more{display:flex;justify-content:space-between}
+.furni{display:grid;grid-template-columns:48px minmax(0,1fr);gap:10px;align-items:end}
+.furni p{margin:0}
+.net dl{margin:0;display:grid;gap:3px}
+.net dl div{display:flex;justify-content:space-between;gap:8px;padding:2px 0;border-bottom:1px dotted #444}
+.net dl div:last-child{border-bottom:0}
+.net dt{color:#cfcfcf}
+.net dd{margin:0;color:var(--head);font-weight:700}
+.soc .links a{display:inline-flex;align-items:center;gap:6px}
+.soc svg path{fill:currentColor}
+.newsbox{padding:10px 12px 12px}
+.newsbox h3{margin:0 0 8px;font-size:11px;color:var(--head)}
+.newsbox ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.newsbox li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start;padding-top:10px;border-top:1px dotted #444}
+.newsbox li:first-child{padding-top:0;border-top:0}
+.newsbox li img{justify-self:center}
+.newsbox time{display:block;color:#9a9a9a}
+.newsbox b{display:block;color:#fff;margin:1px 0 2px}
+.newsbox p{margin:0 0 3px}
+.foot{margin:14px 8px 0 0;padding:10px 12px;text-align:center;color:#b5b5b5;background:#1b1c1f;border:1px solid #000}
+.foot p{margin:0 0 4px}
+.foot a{color:#e6e6e6}
+.foot .social{display:flex;justify-content:center;gap:8px;margin-bottom:8px;font-size:12px}
+.foot .social span{color:#777}
+@media (max-width:720px){.grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.split,.split.rev{grid-template-columns:minmax(0,1fr)}.split .pic,.split.rev .pic{width:100%;height:150px;order:-1;border:0;border-bottom:1px solid #000}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="vbar" role="group" aria-label="Background colour">
+    <span>Colour</span>
+    <button type="button" data-v="graphite" title="Graphite" style="background:#2e3035"></button>
+    <button type="button" data-v="orange" title="Orange" style="background:#f08a1c"></button>
+    <button type="button" data-v="blue" title="Blue" style="background:#2f6fd8"></button>
+    <button type="button" data-v="teal" title="Teal" style="background:#0fa3a3"></button>
+    <button type="button" data-v="purple" title="Purple" style="background:#8a3fd8"></button>
+    <button type="button" data-v="red" title="Red" style="background:#d6382f"></button>
+    <button type="button" data-v="green" title="Green" style="background:#3a9e3a"></button>
+  </div>
+
+  <div class="grid">
+    <div class="left">
+      <div class="blk">
+        <div class="hero">
+          <img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt="The hotel lobby with seven guests, a door, telephone booths, flags and posters">
+          <img class="logo" src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel">
+        </div>
+        <div class="actions">
+          <p>Welcome to OpenHotel</p>
+          <a class="btn main" href="#">Check in</a>
+          <a class="btn" href="#">Create your avatar</a>
+        </div>
+      </div>
+
+      <div class="blk split">
+        <div class="txt">
+          <h3>About OpenHotel</h3>
+          <p>OpenHotel is a chill-out space where you can hang out with your friends. Guests are represented in the hotel by a little pixel person you design yourself. Anyone can check in.</p>
+          <p><a href="#">Go on a tour of the hotel</a> &gt;&gt;</p>
+        </div>
+        <div class="pic front"><img src="assets/oh/hotel-diorama.png" width="748" height="579" alt="The hotel building seen from above"></div>
+      </div>
+
+      <div class="blk split rev">
+        <div class="pic dio"><img src="assets/oh/hotel-diorama.png" width="748" height="579" alt="The hotel grounds seen from above"></div>
+        <div class="txt">
+          <h3>Run your own hotel</h3>
+          <p>OpenHotel is open source. Download the server and you can open a hotel for your friends, your school or your whole town.</p>
+          <p><a href="#">Get the code</a> &gt;&gt;</p>
+        </div>
+      </div>
+      <div class="blk newsbox">
+        <h3>Hotel news</h3>
+        <ul>
+          <li><img src="assets/oh/furni-icon-telephone.png" width="24" height="50" alt=""><div><time>21 Nov 2026</time><b>Telephone booths are here</b><p>Step into a booth and come out in another room, or in another hotel on the network.</p><a href="#">Read more</a> &gt;&gt;</div></li>
+          <li><img src="assets/oh/furni-icon-flag.png" width="18" height="22" alt=""><div><time>14 Nov 2026</time><b>Pirate week</b><p>Hoist the flag in your room. The best decorated rooms win a spot on the front page.</p><a href="#">Read more</a> &gt;&gt;</div></li>
+          <li><img src="assets/oh/furni-icon-poster.png" width="16" height="24" alt=""><div><time>02 Nov 2026</time><b>The Atrium is open</b><p>A new public room with a fountain and two staircases. Come and see it before it gets busy.</p><a href="#">Read more</a> &gt;&gt;</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <aside class="blk side">
+      <section>
+        <ul class="links">
+          <li><a href="#">Introduction to OpenHotel</a></li>
+          <li><a href="#">Guest help</a></li>
+          <li><a href="#">Hotel rules</a></li>
+          <li><a href="#">Invite your friends</a></li>
+          <li><a href="#">Contact us</a></li>
+        </ul>
+      </section>
+      <section class="soc">
+        <h3>Find us on</h3>
+        <ul class="links">
+          <li><a href="https://github.com/openhotel" target="_blank" rel="noopener"><svg width="13" height="13" aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.24667C6.4775 2.24667 2 6.72334 2 12.2467C2 16.665 4.865 20.4133 8.83833 21.7358C9.33833 21.8283 9.52167 21.5192 9.52167 21.255C9.52167 21.0167 9.5125 20.2292 9.50833 19.3933C6.72667 19.9983 6.13917 18.2133 6.13917 18.2133C5.68417 17.0575 5.02917 16.75 5.02917 16.75C4.12167 16.1292 5.0975 16.1425 5.0975 16.1425C6.10167 16.2133 6.63 17.1733 6.63 17.1733C7.52167 18.7017 8.96917 18.26 9.54 18.0042C9.63 17.3575 9.88917 16.9167 10.175 16.6667C7.95417 16.4142 5.61917 15.5567 5.61917 11.725C5.61917 10.6333 6.01 9.74084 6.65 9.04084C6.54583 8.78834 6.20333 7.77167 6.74667 6.39417C6.74667 6.39417 7.58667 6.12584 9.4975 7.41917C10.295 7.19751 11.15 7.08667 12 7.08251C12.85 7.08667 13.7058 7.19751 14.505 7.41917C16.4133 6.12501 17.2525 6.39417 17.2525 6.39417C17.7967 7.77167 17.4542 8.78834 17.3508 9.04084C17.9917 9.74084 18.38 10.6333 18.38 11.725C18.38 15.5658 16.0408 16.4117 13.8142 16.6592C14.1725 16.9692 14.4925 17.5783 14.4925 18.5108C14.4925 19.8492 14.4808 20.9258 14.4808 21.255C14.4808 21.5208 14.6608 21.8333 15.1675 21.735C19.1392 20.4108 22.0008 16.6642 22.0008 12.2475C22 6.72417 17.5225 2.24667 12 2.24667Z" fill="white"></path><path d="M5.7875 16.605C5.76583 16.655 5.6875 16.67 5.61583 16.6358C5.54333 16.6033 5.5025 16.535 5.52583 16.4858C5.5475 16.435 5.62583 16.4208 5.69833 16.455C5.77083 16.4867 5.8125 16.555 5.7875 16.605Z" fill="white"></path><path d="M6.19249 17.0567C6.14499 17.1008 6.05166 17.08 5.98833 17.0108C5.92249 16.9408 5.91083 16.8475 5.95916 16.8033C6.00833 16.7592 6.09833 16.78 6.16416 16.85C6.22999 16.9192 6.24249 17.0117 6.19249 17.0567Z" fill="white"></path><path d="M6.58667 17.6325C6.525 17.675 6.425 17.635 6.36334 17.5467C6.30167 17.4575 6.30167 17.3508 6.365 17.3083C6.42667 17.2658 6.52584 17.3042 6.58834 17.3925C6.64917 17.4825 6.64917 17.5892 6.58667 17.6325Z" fill="white"></path><path d="M7.12667 18.1892C7.07167 18.25 6.95501 18.2333 6.87001 18.1508C6.78251 18.07 6.75834 17.9558 6.81334 17.895C6.86917 17.8342 6.98667 17.8517 7.07251 17.9333C7.15917 18.0142 7.18501 18.1292 7.12667 18.1892Z" fill="white"></path><path d="M7.8725 18.5117C7.84833 18.59 7.73583 18.6258 7.6225 18.5925C7.50917 18.5583 7.435 18.4667 7.45833 18.3875C7.48167 18.3083 7.595 18.2717 7.70917 18.3075C7.82167 18.3408 7.89583 18.4325 7.8725 18.5117Z" fill="white"></path><path d="M8.69083 18.5717C8.69333 18.6542 8.5975 18.7225 8.47833 18.7242C8.35917 18.7267 8.26167 18.66 8.26083 18.5792C8.26083 18.4958 8.355 18.4283 8.47417 18.4258C8.59333 18.4233 8.69083 18.49 8.69083 18.5717Z" fill="white"></path><path d="M9.4525 18.4425C9.46666 18.5225 9.38416 18.6058 9.26583 18.6275C9.15 18.6492 9.0425 18.5992 9.0275 18.5192C9.01333 18.4367 9.0975 18.3542 9.21333 18.3325C9.33083 18.3117 9.4375 18.36 9.4525 18.4425Z" fill="white"></path></svg> GitHub</a></li>
+          <li><a href="https://discord.gg/qBZfPdNWUj" target="_blank" rel="noopener"><svg width="13" height="13" aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4C14.9868 3.99958 14.9738 4.00205 14.9617 4.00723C14.9496 4.01241 14.9388 4.02019 14.93 4.03C14.75 4.36 14.54 4.79 14.4 5.12C12.809 4.88 11.191 4.88 9.6 5.12C9.46 4.78 9.25 4.36 9.06 4.03C9.05 4.01 9.02 4 8.99 4C7.49 4.26 6.06 4.71 4.72 5.33C4.71 5.33 4.7 5.34 4.69 5.35C1.97 9.42 1.22 13.38 1.59 17.3C1.59 17.32 1.6 17.34 1.62 17.35C3.42 18.67 5.15 19.47 6.86 20C6.89 20.01 6.92 20 6.93 19.98C7.33 19.43 7.69 18.85 8 18.24C8.02 18.2 8 18.16 7.96 18.15C7.39 17.93 6.85 17.67 6.32 17.37C6.28 17.35 6.28 17.29 6.31 17.26C6.42 17.18 6.53 17.09 6.64 17.01C6.66 16.99 6.69 16.99 6.71 17C10.15 18.57 13.86 18.57 17.26 17C17.28 16.99 17.31 16.99 17.33 17.01C17.44 17.1 17.55 17.18 17.66 17.27C17.7 17.3 17.7 17.36 17.65 17.38C17.13 17.69 16.58 17.94 16.01 18.16C15.97 18.17 15.96 18.22 15.97 18.25C16.29 18.86 16.65 19.44 17.04 19.99C17.07 20 17.1 20.01 17.13 20C18.85 19.47 20.58 18.67 22.38 17.35C22.4 17.34 22.41 17.32 22.41 17.3C22.85 12.77 21.68 8.84 19.31 5.35C19.3 5.34 19.29 5.33 19.27 5.33ZM8.52 14.91C7.49 14.91 6.63 13.96 6.63 12.79C6.63 11.62 7.47 10.67 8.52 10.67C9.58 10.67 10.42 11.63 10.41 12.79C10.41 13.96 9.57 14.91 8.52 14.91ZM15.49 14.91C14.46 14.91 13.6 13.96 13.6 12.79C13.6 11.62 14.44 10.67 15.49 10.67C16.55 10.67 17.39 11.63 17.38 12.79C17.38 13.96 16.55 14.91 15.49 14.91Z" fill="white"></path></svg> Discord</a></li>
+          <li><a href="https://bsky.app/profile/openhotel.club" target="_blank" rel="noopener"><svg width="13" height="13" aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 11.388C11.094 9.627 8.628 6.344 6.335 4.726C4.138 3.176 3.301 3.443 2.752 3.693C2.116 3.978 2 4.955 2 5.528C2 6.103 2.315 10.237 2.52 10.928C3.2 13.208 5.614 13.978 7.84 13.731C4.58 14.214 1.683 15.401 5.48 19.629C9.658 23.954 11.206 18.702 12 16.039C12.794 18.702 13.708 23.765 18.444 19.629C22 16.039 19.421 14.214 16.161 13.731C18.386 13.978 20.801 13.208 21.48 10.928C21.685 10.238 22 6.103 22 5.529C22 4.954 21.884 3.979 21.248 3.691C20.699 3.443 19.862 3.174 17.665 4.724C15.372 6.345 12.905 9.628 12 11.388Z" fill="white"></path></svg> Bluesky</a></li>
+        </ul>
+      </section>
+      <section class="net">
+        <h3>OpenHotel network</h3>
+        <dl>
+          <div><dt>Registered guests</dt><dd>12,480</dd></div>
+          <div><dt>Public hotels</dt><dd>37</dd></div>
+          <div><dt>Online in all hotels</dt><dd>1,284</dd></div>
+        </dl>
+      </section>
+      <section class="visit">
+        <h3>In this hotel: 188</h3>
+        <ul>
+          <li><a href="#">Disco Hall</a><span>36</span></li>
+          <li><a href="#">Lobby</a><span>25</span></li>
+          <li><a href="#">The Cafe</a><span>16</span></li>
+          <li><a href="#">Red Lounge</a><span>10</span></li>
+          <li><a href="#">Rooftop Pool</a><span>7</span></li>
+          <li><a href="#">Garden Hut</a><span>5</span></li>
+          <li><span>Private rooms</span><span>48</span></li>
+        </ul>
+      </section>
+      <section>
+        <h3>New in the catalog</h3>
+        <div class="furni">
+          <img src="assets/oh/furni-telephone.png" width="48" height="98" alt="Telephone booth">
+          <p><b style="color:#fff">Telephone booth</b><br>Step in and come out in another room. <a href="#">See it</a></p>
+        </div>
+      </section>
+    </aside>
+  </div>
+  <footer class="foot">
+    <p class="social"><a href="https://github.com/openhotel" target="_blank" rel="noopener">GitHub</a><span>·</span><a href="https://discord.gg/qBZfPdNWUj" target="_blank" rel="noopener">Discord</a><span>·</span><a href="https://bsky.app/profile/openhotel.club" target="_blank" rel="noopener">Bluesky</a></p>
+    <p>OpenHotel is open source. Art and content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.</p>
+    <p>Sample page: names and numbers are made up.</p>
+  </footer>
+</div>
+<script>
+(() => {
+  const KEY = "oh-retro-lobby-v4";
+  const buttons = document.querySelectorAll(".vbar button");
+  const apply = (v) => {
+    document.documentElement.dataset.v = v;
+    buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === v)));
+    try { localStorage.setItem(KEY, v); } catch (e) {}
+  };
+  let start = "graphite";
+  try { start = localStorage.getItem(KEY) || start; } catch (e) {}
+  buttons.forEach((b) => b.addEventListener("click", () => apply(b.dataset.v)));
+  apply(start);
+})();
+</script>
+</body>
+</html>
