@@ -15,7 +15,7 @@ NEWS = [("booths","21 Nov 2026","Telephone booths are here","Step into a booth a
 
 GO = '<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-sub-btn]");if(b)b.closest(".subnews").hidden=true});document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>\n'
 import re as _re
-FSKIP = ("What each kind needs", "Overview", "Needs attention", "Numbers", "Updates", "Who sends", "Email templates", "Latest trades", "Order book")
+FSKIP = ("Test results", "Home sections", "Custom boxes", "What each kind needs", "Overview", "Needs attention", "Numbers", "Updates", "Who sends", "Email templates", "Latest trades", "Order book")
 def addfind(b):
     b = b.replace('<input class="in" type="search"', '<input data-filter class="in" type="search"')
     out, pos = "", 0
@@ -151,7 +151,7 @@ PAGES = {  # key: (title, tab, logged, body)
   "retro-admin": ("Manage OpenHotel", "", True, admin), "retro-admin-registration": ("Registration", "", True, admin_registration), "retro-admin-accounts": ("Accounts", "", True, admin_accounts),
   "retro-admin-blocked": ("Blocked", "", True, admin_blocked), "retro-admin-rooms": ("Rooms", "", True, admin_rooms), "retro-admin-moderation": ("Moderation", "", True, admin_moderation),
   "retro-admin-credits": ("Credits", "", True, admin_credits), "retro-admin-publicrooms": ("Public rooms", "", True, admin_publicrooms), "retro-admin-clothes": ("Clothes", "", True, admin_clothes),
-  "retro-network": ("Network admin", "", True, network), "retro-network-hotels": ("Hotels", "", True, network_hotels), "retro-network-news": ("News", "", True, network_news), "retro-admin-news": ("News", "", True, admin_news), "retro-network-accounts": ("Accounts", "", True, network_accounts), "retro-network-blocked": ("Blocked", "", True, network_blocked), "retro-network-emails": ("Emails", "", True, network_emails), "retro-network-credits": ("Credit reports", "", True, network_credits), "retro-network-settings": ("Settings", "", True, network_settings),
+  "retro-network": ("Network admin", "", True, network), "retro-network-hotels": ("Hotels", "", True, network_hotels), "retro-network-news": ("News", "", True, network_news), "retro-admin-news": ("News", "", True, admin_news), "retro-admin-website": ("Website", "", True, admin_website), "retro-admin-connection": ("Connection", "", True, admin_connection), "retro-network-accounts": ("Accounts", "", True, network_accounts), "retro-network-blocked": ("Blocked", "", True, network_blocked), "retro-network-emails": ("Emails", "", True, network_emails), "retro-network-credits": ("Credit reports", "", True, network_credits), "retro-network-settings": ("Settings", "", True, network_settings),
 }
 for key, (title, tab, logged, body) in PAGES.items():
     h = page(title, tab, logged, body)
