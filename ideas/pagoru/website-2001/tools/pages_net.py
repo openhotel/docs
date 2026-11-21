@@ -26,8 +26,8 @@ EM_BODY = """<div style="font-family:Verdana,Arial,sans-serif;background:#efefef
     </div>
   </div>
 </div>"""
-EM_NAMES = [("Welcome", "Verify your OpenHotel account", True), ("Verify email", "Your code is {{code}}", True), ("Reset password", "Reset your password", True), ("2FA changed", "Two-factor changed on your account", True), ("Account blocked", "Your account was blocked", True), ("Hotel connected", "{{hotel}} was connected to your account", False)]
-emrows = "".join(f'<tr><td><b>{n}</b></td><td>{sub}</td><td><span class="badge{" on" if on else ""}">{"On" if on else "Off"}</span></td><td>{"Default" if i < 5 else "Custom"}</td></tr>' for i, (n, sub, on) in enumerate(EM_NAMES))
+EM_NAMES = [("Welcome", "Verify your OpenHotel account", True), ("Verify email", "Your code is {{code}}", True), ("Reset password", "Reset your password", True), ("2FA changed", "Two-factor changed on your account", True), ("Account blocked", "Your account was blocked", True), ("Hotel connected", "{{hotel}} was connected to your account", False), ("Newsletter", "{{title}}", True)]
+emrows = "".join(f'<tr><td><b>{n}</b></td><td>{sub}</td><td><span class="badge{" on" if on else ""}">{"On" if on else "Off"}</span></td><td>{"Default" if i < 5 or n == "Newsletter" else "Custom"}</td></tr>' for i, (n, sub, on) in enumerate(EM_NAMES))
 EM_JS = """<script>(function(){
 var $=function(i){return document.getElementById(i)},body=$('em-body'),subj=$('em-subj'),pv=$('em-pv'),st=$('em-st'),name=$('em-name'),list=$('em-list'),v=4;
 var P={username:'Nightowl',email:'night@example.com',hotel:'OpenHotel',code:'482 913',link:'https://auth.openhotel.club/confirm/x7Qp',reason:'Harassment',date:'21 Nov'};
@@ -40,13 +40,13 @@ $('em-new').addEventListener('click',function(){var tr=document.createElement('t
 $('em-test').addEventListener('click',function(){st.textContent='Test sent to night@example.com.';});
 document.querySelectorAll('[data-dev]').forEach(function(b){b.addEventListener('click',function(){pv.style.width=b.dataset.dev;document.querySelectorAll('[data-dev]').forEach(function(x){x.classList.toggle('main',x===b);});});});
 })();</script>"""
-network_emails = NN("network-emails") + box("Email templates (6)", '<div class="tbl"><table id="em-list"><tr><th>Template</th><th>Subject</th><th>Sending</th><th></th></tr>' + emrows + '</table></div>') + '<div class="two">' + box("Edit template", '''        <form class="form" onsubmit="event.preventDefault()">
+network_emails = NN("network-emails") + box("Email templates (7)", '<div class="tbl"><table id="em-list"><tr><th>Template</th><th>Subject</th><th>Sending</th><th></th></tr>' + emrows + '</table></div>') + '<div class="two">' + box("Edit template", '''        <form class="form" onsubmit="event.preventDefault()">
           <label>Name<input class="in" id="em-name" value="Welcome"></label>
           <label>From<input class="in" value="OpenHotel &lt;no-reply@openhotel.club&gt;"></label>
           <label>Subject<input class="in" id="em-subj" value="Verify your OpenHotel account"></label>
           <label>Body (HTML)<textarea class="in tx" id="em-body" rows="14" spellcheck="false">''' + _h.escape(EM_BODY) + '''</textarea></label>
           <span class="hint">Click a parameter to add it where the cursor is.</span>
-          <p>''' + " ".join(f'<button class="btn" type="button" data-p="{p}">{{{{{p}}}}}</button>' for p in ["username", "email", "hotel", "code", "link", "reason", "date"]) + '''</p>
+          <p>''' + " ".join(f'<button class="btn" type="button" data-p="{p}">{{{{{p}}}}}</button>' for p in ["username", "email", "hotel", "code", "link", "reason", "date", "title", "text"]) + '''</p>
           <div class="row"><button class="btn main" type="button" id="em-save">Save template</button> <button class="btn" type="button" id="em-new">Save as new template</button> <button class="btn" type="button" id="em-test">Send a test to me</button></div>
           <p class="hint" id="em-st" role="status">Last saved 16 Nov, version 4. Older versions can be restored.</p>
         </form>''') + box("Preview", '''        <p class="hint">Subject: <b id="em-psub"></b></p>
@@ -55,3 +55,21 @@ network_emails = NN("network-emails") + box("Email templates (6)", '<div class="
         <p class="hint">Sample values: Nightowl, night@example.com, OpenHotel.</p>''') + '</div>' + box("Images and style", '''        <p class="hint">Upload the picture here: it goes to the static server and you get a full https URL for an <code>&lt;img&gt;</code>. Don't embed pictures in the email: Gmail blocks them.</p>
         <p><input type="file" accept="image/png,image/jpeg" aria-label="Image"></p>
         <p class="hint">Tailwind works if it is compiled before sending: the classes become inline <code>style</code> attributes (Maizzle or React Email do this). Mail apps don't run Tailwind themselves.</p>''') + box("Who sends", '''        <p class="hint">Emails are sent by the network (auth), never by a hotel.</p>''') + EM_JS
+
+def news_rows(items):
+    return "".join(f'<tr class="go"><td><a href="#post"><b>{t}</b></a><br><span class="hint">{d}</span></td><td>{st}</td><td>{em}</td><td>{BTN("Edit")} {BTN("Delete")}</td></tr>' for t, d, st, em in items)
+def news_editor(scope, who, count, mail_note):
+    return box("Write news", f'''        <form class="form" onsubmit="event.preventDefault()">
+          <label>Title<input class="in" value="Telephone booths are here"></label>
+          <label>Text<textarea class="in tx" rows="6">Meet a friend in another hotel: step into a telephone booth and dial their hotel.</textarea></label>
+          <label>Picture<input type="file" accept="image/png,image/jpeg" aria-label="Picture"></label>
+          <span class="hint">64 x 64, shown as it is.</span>
+          <label>Publish on<input class="in" type="date" style="max-width:10em"></label>
+          <label class="chk"><input type="checkbox" id="nm-{scope}" checked> Send by email to {who} ({count} subscribed)</label>
+          <span class="hint">{mail_note}</span>
+          <div class="row"><button class="btn" type="button">Save draft</button> <button class="btn main" type="submit">Publish</button> <button class="btn" type="button">Preview email</button></div>
+        </form>''')
+admin_news = AN("admin-news") + box("Hotel news (4)", TBL(["News", "State", "Email", ""], [], ) .replace("</table>", news_rows([("Telephone booths are here", "Publishes 24 Nov", '<span class="badge">Draft</span>', '<span class="badge">Requested</span>'), ("Winter room contest", "15 Nov", '<span class="badge on">Published</span>', '<span class="badge on">Sent to 1,102</span>'), ("Maintenance on Friday", "08 Nov", '<span class="badge on">Published</span>', "Not sent"), ("New clothes", "01 Nov", '<span class="badge on">Published</span>', '<span class="badge on">Sent to 1,085</span>')]) + "</table>") + PAGER("4 of 12", "admin-news")) + news_editor("hotel", "the subscribers of OpenHotel", "1,240", "The hotel never sees any email address. Ticking this sends a request to the main hotel, which sends the email with the Newsletter template. Guests subscribe in My account. The main hotel can refuse a request that breaks its limits (for example 2 per week).")
+network_news = NN("network-news") + box("Network news (3)", TBL(["News", "State", "Email", ""], [], ).replace("</table>", news_rows([("Network update 0.157", "Draft", '<span class="badge">Draft</span>', "Not sent"), ("New hotel: Neon Docks", "Published 12 Nov", '<span class="badge on">Published</span>', '<span class="badge on">Sent to 410,200</span>'), ("Credit exchange is open", "Published 02 Nov", '<span class="badge on">Published</span>', '<span class="badge on">Sent to 398,000</span>')]) + "</table>") + PAGER("3 of 8", "network-news")) + box("Email requests from hotels (2)", TBL(
+    ["Hotel", "News", "Would reach", "This week", ""], [["Pixel Plaza", "Summer party", "9,400", "1 of 2", BTN("Preview") + " " + BTN("Send", True) + " " + BTN("Refuse")], ["Neon Docks", "New DJ room", "2,100", "2 of 2", BTN("Preview") + " " + BTN("Send", True) + " " + BTN("Refuse")]], (2,))
+    + '<p class="hint">A hotel asks, the network sends. The hotel only gets the result (sent, refused, how many). Hotels never get addresses. Limits per hotel are in <a href="#network-settings">Settings</a>.</p>') + news_editor("net", "all subscribers of the network", "410,200", "Sent from the network with the Newsletter template. Subscribers can unsubscribe in one click and the link is added to every email.")

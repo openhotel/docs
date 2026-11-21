@@ -10,8 +10,8 @@ PAGER = lambda t, k: f'<div class="pager"><span class="hint">{t}</span><span><a 
 def subnav(items, cur, title):
     return (f'      <nav class="blk subnav" aria-label="{title}"><b>{title}</b>' + "".join(f'<a class="btn{" main" if k == cur else ""}" href="#{k}">{n}</a>' for k, n in items) + '</nav>\n')
 ADMIN_NAV = [("admin", "Overview"), ("admin-registration", "Registration"), ("admin-accounts", "Accounts"), ("admin-blocked", "Blocked"), ("admin-rooms", "Rooms"),
-             ("admin-moderation", "Moderation"), ("admin-credits", "Credits"), ("library", "Catalog"), ("admin-publicrooms", "Public rooms"), ("admin-clothes", "Clothes")]
-NET_NAV = [("network", "Overview"), ("network-hotels", "Hotels"), ("network-accounts", "Accounts"), ("network-blocked", "Blocked"), ("network-emails", "Emails"), ("network-credits", "Credit reports"), ("network-settings", "Settings")]
+             ("admin-moderation", "Moderation"), ("admin-news", "News"), ("admin-credits", "Credits"), ("library", "Catalog"), ("admin-publicrooms", "Public rooms"), ("admin-clothes", "Clothes")]
+NET_NAV = [("network", "Overview"), ("network-hotels", "Hotels"), ("network-accounts", "Accounts"), ("network-blocked", "Blocked"), ("network-emails", "Emails"), ("network-news", "News"), ("network-credits", "Credit reports"), ("network-settings", "Settings")]
 AN = lambda cur: subnav(ADMIN_NAV, cur, "Manage OpenHotel")
 NN = lambda cur: subnav(NET_NAV, cur, "Network admin")
 
@@ -38,10 +38,11 @@ admin_rooms = AN("admin-rooms") + box("Rooms (184,020)", TBL(
     ["Room", "Owner", "Now", "Messages 24h", ""], [["Mint garden", "Mintleaf", "12", "1.1k", BTN("Close") + " " + BTN("Delete")], ["Pebbles' pad", "Pebbles", "0", "0", BTN("Delete")], ["Disco night", "Lumen", "7", "620", BTN("Close") + " " + BTN("Delete")]], (2, 3))
     + PAGER("3 of 184,020", "admin-rooms") + '<p class="hint">Public rooms are managed in <a href="#admin-publicrooms">Public rooms</a>.</p>')
 admin_moderation = AN("admin-moderation") + box("Reported messages (3)", TBL(
-    ["Message", "Room", "From", "Reports", ""], [["“...buy credits at my site...”", "The Atrium", "Trollface", "5", BTN("Delete", True) + " " + BTN("Ignore")], ["“you suck”", "Mint garden", "Rude99", "2", BTN("Mute") + " " + BTN("Ignore")]], (3,))) + box("Blocked words (42)", '''        <form class="mfind" onsubmit="event.preventDefault()"><input class="in" placeholder="Word" aria-label="Word"><input class="in" placeholder="Replace with (default ***)" aria-label="Replace with"><button class="btn" type="submit">Add</button></form>''' + TBL(
-    ["Word", "Replace with", ""], [["casino", '<input class="in" value="***" aria-label="Replace with">', BTN("Remove")], ["free credits", '<input class="in" value="***" aria-label="Replace with">', BTN("Remove")], ["discord.gg", '<input class="in" value="[link removed]" aria-label="Replace with">', BTN("Remove")]]) + PAGER("3 of 42", "admin-moderation")
-    + '''<p class="hint">The word is replaced in the chat message. Every word starts with ***; you can set a different text for each one.</p>
-        <form class="form" onsubmit="event.preventDefault()"><label class="chk"><input type="checkbox" checked> Mute a guest for 10 minutes after 3 blocked messages</label><div class="row"><button class="btn main" type="submit">Save</button></div></form>''')
+    ["Message", "Room", "From", "Reports", ""], [["“...buy credits at my site...”", "The Atrium", "Trollface", "5", BTN("Delete", True) + " " + BTN("Ignore")], ["“you suck”", "Mint garden", "Rude99", "2", BTN("Mute") + " " + BTN("Ignore")]], (3,))) + box("Blocked words (42)", '''        <form class="form" onsubmit="event.preventDefault()"><label>Replace every blocked word with<input class="in" value="***" style="max-width:200px"></label>
+          <span class="hint">One text for all the words, like ***. Guests see it in the chat instead of the word.</span>
+          <label class="chk"><input type="checkbox" checked> Mute a guest for 10 minutes after 3 blocked messages</label><div class="row"><button class="btn main" type="submit">Save</button></div></form>
+        <form class="mfind" onsubmit="event.preventDefault()"><input class="in" placeholder="Add a word" aria-label="Word"><button class="btn" type="submit">Add</button></form>''' + TBL(
+    ["Word", ""], [["casino", BTN("Remove")], ["free credits", BTN("Remove")], ["discord.gg", BTN("Remove")]]) + PAGER("3 of 42", "admin-moderation"))
 admin_credits = AN("admin-credits") + box("Credits", KV([("Credit", "OHC (quote currency of the exchange)"), ("In circulation", "2.1M"), ("Created 24h", "310,000"), ("Destroyed 24h", "262,000"), ("Exchange price", "1.000 OHC")])) + box("Purchases", TBL(
     ["When", "Who", "Bought", "Price"], [["15:20", "Mintleaf", "Telephone booth", "25 OHC"], ["15:02", "Pebbles", "Pirate flag", "10 OHC"], ["14:48", "Wanda", "Striped shirt", "free"]], (3,)) + PAGER("3 of 48,210 today", "admin-credits"))
 PR = [("atrium", "The Atrium", "1.2", 2, True, True, 80), ("pool", "Rooftop Pool", "2.0", 2, True, False, 40), ("disco", "Disco Hall", "1.0", 2, False, False, 40)]
@@ -85,6 +86,7 @@ network_credits = NN("network-credits") + box("Credit reports", TBL(
     + '<p class="hint">A hotel whose reports stop or don\'t add up is paused on the exchange.</p>')
 network_settings = NN("network-settings") + box("Settings", '''        <form class="form" onsubmit="event.preventDefault()"><label class="chk"><input type="checkbox" checked> New hotels can be created</label>
           <label class="chk"><input type="checkbox"> Pause the whole credit exchange</label>
+          <label>News emails a hotel can request per week<input class="in" type="number" value="2" style="max-width:6em"></label>
           <label>Oldest hotel version allowed<input class="in" value="0.150.0" style="max-width:120px"></label>
           <label>Newest schema the network accepts<input class="in" value="4" style="max-width:120px"></label>
           <div class="row"><button class="btn main" type="submit">Save</button></div></form>''')

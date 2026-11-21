@@ -12,6 +12,8 @@ The network sends emails (verify, reset password, 2FA, block notice). Network ad
 ## Proposal
 - **Sender**: only auth sends email, never a hotel. One From address for the network.
 - **Templates**: name, subject, HTML body, on/off. Defaults: Welcome, Verify email, Reset password, 2FA changed, Account blocked, Hotel connected. Admins can save, save as a new template, send a test to themselves and restore older versions.
+- **News by email**: news can be mailed to subscribed guests. Guests subscribe in My account (network news, and each hotel's news). The Newsletter template carries `{{title}}`, `{{text}}` and an unsubscribe link.
+- **Hotels have no addresses**: a hotel ticking "send by email" on its news sends a request to the main hotel (onet to auth). The network sends it to that hotel's subscribers and returns the result (sent, refused, count). Network admins can preview, send or refuse, and cap requests per hotel per week.
 - **Parameters**: `{{username}}`, `{{email}}`, `{{hotel}}`, `{{code}}`, `{{link}}`, `{{reason}}`, `{{date}}`. Each template says which it can use. Unknown ones are refused on save.
 - **Preview**: rendered with sample values, desktop and phone width, in a sandboxed frame.
 - **Tailwind**: mail apps don't run it. Write with Tailwind, compile before sending so classes become inline `style` attributes (Maizzle or React Email). The editor keeps the compiled HTML.
