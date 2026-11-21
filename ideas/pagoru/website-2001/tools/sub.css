@@ -245,3 +245,4 @@ input[type=file]{max-width:100%;min-width:0}.fgrid>label{min-width:0}
 .form .skins .skin{display:flex;flex-direction:row;align-items:center;gap:6px;margin:0}
 
 .gsteps{margin:0;padding:0;list-style:none}.gsteps li{padding:5px 8px;border-top:1px dotted var(--line)}.gsteps li:first-child{border-top:0}.gsteps li.cur{background:var(--accent);color:var(--accent-ink)}
+.gsteps li{cursor:pointer}.gsteps li.done b:after{content:" \2713"}
