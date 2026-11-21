@@ -131,6 +131,16 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .visit .all{margin:8px 0 0}
 @media (max-width:560px){.duo{grid-template-columns:minmax(0,1fr)}}
+.fl ul{list-style:none;margin:0;padding:0}
+.fl li{display:grid;grid-template-columns:21px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 0;border-bottom:1px dotted var(--line)}
+.fl li:first-child{padding-top:0}
+.fl .av{width:21px;height:36px;overflow:hidden}
+.fl .av img{display:block}
+.fl b{display:block;font-size:12px}
+.fl li span{display:flex;gap:4px;align-items:center;font-size:11px;color:var(--muted);min-width:0}
+.fl .btn{padding:1px 6px;font-size:11px}
+.fl .all{margin:8px 0 0}
+.fl .all .off{color:var(--muted)}
 </style>
 </head>
 <body>
@@ -161,10 +171,10 @@ img{display:block;image-rendering:pixelated;max-width:none}
         <ul class="hgrid">
           <li class="official"><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-main.png" width="160" height="72" alt="OpenHotel"><span class="tag">Official</span></a><div class="hn"><img src="assets/oh/icon-navigator.png" width="23" height="23" alt=""><div><a href="#">OpenHotel</a><span>420 online</span></div></div></li>
           <li><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-plaza.png" width="160" height="72" alt="Pixel Plaza"></a><div class="hn"><img src="assets/oh/icon-console-off.png" width="15" height="23" alt=""><div><a href="#">Pixel Plaza</a><span>312 online</span></div></div></li>
-          <li><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-tower.png" width="160" height="72" alt="Sunset Plaza"></a><div class="hn"><img src="assets/oh/icon-catalog.png" width="16" height="23" alt=""><div><a href="#">Sunset Plaza</a><span>208 online</span></div></div></li>
+          <li><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-cafe.png" width="160" height="72" alt="Casa Pixel"></a><div class="hn"><img src="assets/oh/icon-catalog.png" width="16" height="23" alt=""><div><a href="#">Casa Pixel</a><span>208 online</span></div></div></li>
           <li><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-disco.png" width="160" height="72" alt="Neon Docks"></a><div class="hn"><img src="assets/oh/icon-club.png" width="23" height="21" alt=""><div><a href="#">Neon Docks</a><span>164 online</span></div></div></li>
           <li><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-aurora.png" width="160" height="72" alt="Hotel Aurora"></a><div class="hn"><img src="assets/oh/icon-purse.png" width="18" height="20" alt=""><div><a href="#">Hotel Aurora</a><span>121 online</span></div></div></li>
-          <li><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-tower.png" width="160" height="72" alt="Moonbase Inn"></a><div class="hn"><img src="assets/oh/icon-inventory.png" width="20" height="19" alt=""><div><a href="#">Moonbase Inn</a><span>87 online</span></div></div></li>
+          <li><a class="thumb" href="#"><img src="assets/oh/hotel-thumb-cafe.png" width="160" height="72" alt="Moonbase Inn"></a><div class="hn"><img src="assets/oh/icon-inventory.png" width="20" height="19" alt=""><div><a href="#">Moonbase Inn</a><span>87 online</span></div></div></li>
         </ul>
         <p class="all">Hotels on the OpenHotel network. <a href="#">All hotels</a> &gt;&gt;</p>
         </div>
@@ -190,7 +200,7 @@ img{display:block;image-rendering:pixelated;max-width:none}
         <section class="visit">
           <h3>Credit exchange</h3>
           <ul>
-            <li><a href="retro-coin-light.html">Sunset Plaza · SNP</a><span>0.310</span></li>
+            <li><a href="retro-coin-light.html">OpenHotel · OHC</a><span>1.000</span></li>
             <li><a href="retro-coin-light.html">Pixel Plaza · PXP</a><span>0.420</span></li>
             <li><a href="retro-coin-light.html">Neon Docks · NDK</a><span>1.850</span></li>
             <li><span>Prices in OHC</span></li>

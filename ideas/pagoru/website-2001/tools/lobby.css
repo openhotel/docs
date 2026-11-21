@@ -124,3 +124,13 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .visit .all{margin:8px 0 0}
 @media (max-width:560px){.duo{grid-template-columns:minmax(0,1fr)}}
+.fl ul{list-style:none;margin:0;padding:0}
+.fl li{display:grid;grid-template-columns:21px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 0;border-bottom:1px dotted var(--line)}
+.fl li:first-child{padding-top:0}
+.fl .av{width:21px;height:36px;overflow:hidden}
+.fl .av img{display:block}
+.fl b{display:block;font-size:12px}
+.fl li span{display:flex;gap:4px;align-items:center;font-size:11px;color:var(--muted);min-width:0}
+.fl .btn{padding:1px 6px;font-size:11px}
+.fl .all{margin:8px 0 0}
+.fl .all .off{color:var(--muted)}

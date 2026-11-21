@@ -150,7 +150,7 @@ hotels = '''      <div class="blk box">
           </form>
         </details>
       </div>
-''' + myhotel("tower", "catalog", 16, 23, "Sunset Plaza", "01M7XSPG3W92FQ0EEJ2EPHCY3C", True, 2, "play.sunset.example", "sunset.example", "12 Nov 2026", "SNP") \
+''' + myhotel("main", "navigator", 23, 23, "OpenHotel", "01M7XSPG3W92FQ0EEJ2EPHCY3C", True, "1,204,311", "client.openhotel.club", "openhotel.club", "12 Nov 2026", "OHC") \
     + myhotel("cafe", "club", 23, 21, "Pixel Inn", "01M7XSPG4KXBVQ8V0HYY57DZ69", False, 0, "play.pixelinn.example", "pixelinn.example", None, "PXI") + '''<script>
 document.querySelectorAll(".lic").forEach((box) => box.addEventListener("click", (e) => {
   const b = e.target.closest("[data-go]");

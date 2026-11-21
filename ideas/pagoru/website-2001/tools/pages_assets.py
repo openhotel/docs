@@ -1,7 +1,7 @@
 # Marketplace, item, collection, creations, create, catalog, link. Exec'd by subpages.py after pages_social.py.
 def img(f, w, h, alt=""): return f'<img src="assets/oh/{f}.png" width="{w}" height="{h}" alt="{alt}">'
 def ct(f, w, h): return f'<div class="ct">{img(f, w, h)}</div>'
-HOTEL = "Sunset Plaza"; HV = "0.156.0"; MAXS = 4  # the hotel version runs schemas 1 to MAXS
+HOTEL = "OpenHotel"; HV = "0.156.0"; MAXS = 4  # the hotel version runs schemas 1 to MAXS
 TH = {"tel": ("furni-icon-telephone", 24, 50), "flag": ("furni-icon-flag", 18, 22), "poster": ("furni-icon-poster", 16, 24),
       "pool": ("news-pool", 64, 64), "disco": ("news-disco", 64, 64), "atrium": ("news-atrium", 64, 64),
       "c": ("av-idle-c", 21, 66), "b": ("av-idle-b", 21, 66), "e": ("av-idle-e", 21, 66), "coll": ("news-flag", 64, 64)}
@@ -30,20 +30,23 @@ ITEMS = [
  ("Clothes", "e", "Summer dress", "nightbus", "1.2", 1, "205", "3.8", None),
  ("Furniture", "poster", "Neon sign", "Nightowl", "1.0", 3, "58", "4.2", None),
 ]
+def author(by): return f'<a href="#">{by}</a>' + (' <span class="badge on" title="Comes with the OpenHotel default catalog">Official</span>' if by == "OpenHotel" else "")
 def mrow(k, t, n, by, v, sc, ho, r, mine):
     link = "#collection" if k == "Collection" else "#item"
     note = (f'{mine}' + (' <b>update</b>' if mine != v else '')) if mine else '<span class="hint">-</span>'
-    return (f'<tr><td>{tb(t)}</td><td><a href="{link}"><b>{n}</b></a><br><span class="hint">{k} · {by}</span></td>'
-            f'<td class="num">{v}</td><td><span class="badge{" on" if sc <= MAXS else ""}" title="Schema {sc}">{sc}</span></td><td class="num">{note}</td><td class="num">{ho}</td><td class="num">{stars(r)}</td></tr>\n')
+    return (f'<tr class="go"><td>{tb(t)}</td><td><a href="{link}"><b>{n}</b></a><br><span class="hint">{k} · {author(by)}</span></td>'
+            f'<td class="num">{v}</td><td class="c"><span class="badge{" on" if sc <= MAXS else ""}" title="Schema {sc}">{sc}</span></td><td class="num">{note}</td><td class="num">{ho}</td><td class="num">{stars(r)}</td></tr>\n')
 market = f'''      <div class="split3 narrow"><div class="col">
       <div class="blk box dense">
         <h2>Marketplace</h2>
         <form class="mfind" onsubmit="event.preventDefault()"><input class="in" type="search" placeholder="Search" aria-label="Search">
           <select class="in" aria-label="Kind"><option>Everything</option><option>Public rooms</option><option>Furniture</option><option>Clothes</option><option>Collections</option></select>
           <select class="in" aria-label="Sort"><option>Most used</option><option>Newest</option><option>Best rated</option></select>
+          <select class="in" aria-label="Author"><option>Everyone</option><option>Official (OpenHotel)</option><option>My creations</option></select>
           <label class="chk"><input type="checkbox" checked> Only schemas {HOTEL} runs (1 to {MAXS})</label></form>
-        <div class="tbl"><table><tr><th></th><th>Name</th><th class="num">Version</th><th>Schema</th><th class="num">Yours</th><th class="num">Hotels</th><th class="num">Rating</th></tr>
+        <div class="tbl"><table><tr><th></th><th>Name</th><th class="num">Version</th><th class="c" title="The data shape. Your hotel runs schemas 1 to 4">Schema</th><th class="num" title="The version in your hotel catalog">In catalog</th><th class="num" title="Hotels that use it">Used by</th><th class="num">Rating</th></tr>
 ''' + "".join(mrow(*i) for i in ITEMS) + f'''        </table></div>
+        <p class="hint">Used by: hotels that have it. In catalog: the version in your catalog. Official: comes with the OpenHotel default catalog.</p>
         <div class="pager"><span class="hint">1-12 of 1,860 · 2 hidden: schema 5 needs a newer hotel</span><span><a href="#market">Next</a> &gt;&gt;</span></div>
       </div></div><div class="col">
       <div class="blk box dense"><h2>Make your own</h2>
@@ -80,7 +83,7 @@ item = f'''      <div class="blk box">
         <p class="crumb"><a href="#market">Marketplace</a> &gt; Furniture &gt; Telephone booth</p>
         <div class="ihead"><div class="ipv">{img("furni-telephone", 48, 98, "Telephone booth")}</div>
           <div><h2>Telephone booth</h2>
-            <p class="hint">by <a href="#">OpenHotel</a> · Furniture · id <code>teleports@telephone</code> · used by 1,204 hotels</p>
+            <p class="hint">by <a href="#">OpenHotel</a> <span class="badge on">Official</span> · Furniture · id <code>teleports@telephone</code> · used by 1,204 hotels</p><p class="hint">Comes with the OpenHotel default catalog.</p>
             <p>Step in, wait for the light and come out in another booth. Link it to any other booth you own.</p></div></div>
       </div>
       <div class="split3"><div class="col">
@@ -98,7 +101,7 @@ item = f'''      <div class="blk box">
       </div>
 ''' + cmts + f'''      </div><div class="col">
       <div class="blk box dense"><h2>In {HOTEL}</h2>
-        {kv([("In catalog", "Teleports"), ("Version", "1.1 · <b>1.2 is out</b>"), ("Price", "25 SNP")])}
+        {kv([("In catalog", "Teleports"), ("Version", "1.1 · <b>1.2 is out</b>"), ("Price", "25 OHC")])}
         <p><a class="btn main" href="#library">Open the catalog</a></p></div>
 ''' + inter.replace("4.2", "4.8").replace("86 votes", "1,102 votes").replace("1,204</b> views", "1,204</b> hotels") + '''      <div class="blk box dense">
         <h2>Information</h2>
@@ -148,7 +151,7 @@ MINE = [("Furniture", "tel", "Telephone booth", "1.2", "Live", 3, "1,204", "4.8"
 def mine_row(k, t, n, v, s, sc, ho, r):
     b = '<span class="badge on">Live</span>' if s == "Live" else f'<span class="badge">{s}</span>'
     dele = f'<button class="btn" type="button" disabled title="Used by {ho} hotels">Delete</button>' if ho != "0" else '<button class="btn danger-btn" type="button">Delete</button>'
-    return (f'<tr><td>{tb(t)}</td><td><a href="#item"><b>{n}</b></a><br><span class="hint">{k}</span></td><td>{b}</td><td class="num">{v}</td><td>{sch(sc)}</td>'
+    return (f'<tr class="go"><td>{tb(t)}</td><td><a href="#item"><b>{n}</b></a><br><span class="hint">{k}</span></td><td>{b}</td><td class="num">{v}</td><td>{sch(sc)}</td>'
             f'<td class="num">{ho}</td><td class="num">{stars(r) if r else ""}</td><td class="ra"><a class="btn" href="#create">Edit</a> <a class="btn" href="#create">New version</a> <a class="btn" href="#">.furniture</a> {dele}</td></tr>\n')
 mine = '''      <div class="blk box dense">
         <h2>Your creations</h2>
@@ -176,87 +179,82 @@ mine = '''      <div class="blk box dense">
       </div>
 '''
 
-# ---------- Create (an editor like asset-editor) ----------
+# ---------- Create: spritesheet first, then forms for each kind ----------
 def F(label, inner): return f'<label class="f">{label}{inner}</label>'
 def I(v="", ph="", t="text", dis=False): return f'<input class="in" type="{t}" value="{v}" placeholder="{ph}"{" disabled" if dis else ""}>'
 def S(opts, cur=None): return '<select class="in">' + "".join(f'<option{" selected" if o == cur else ""}>{o}</option>' for o in opts) + '</select>'
-TEX = ["telephone-n", "telephone-n-top", "telephone-e", "telephone-icon"]
+FRAMES = [("telephone-n", 0, 0, 48, 98, 24, 98), ("telephone-n-top", 48, 0, 48, 98, 24, 98), ("telephone-e", 0, 98, 48, 98, 24, 98), ("telephone-icon", 48, 98, 24, 50, 12, 50)]
+TEX = [f[0] for f in FRAMES]
+def frow(n, x, y, w, h, ax, ay):
+    return ('<div class="fgrid fr">' + F("frame", I(n)) + F("x", I(x, t="number")) + F("y", I(y, t="number")) + F("w", I(w, t="number")) + F("h", I(h, t="number"))
+            + F("anchor.x", I(ax, t="number")) + F("anchor.y", I(ay, t="number")) + '<button class="btn" type="button" aria-label="Remove frame">x</button></div>')
+LG = lambda lang, n, d: f'<div class="fgrid lg">{F("language", S(["English", "Español", "Deutsch"], lang))}{F("name", I(n))}{F("description", I(d))}<button class="btn" type="button" aria-label="Remove language">x</button></div>'
+LANGS = LG("English", "Telephone booth", "Dial a friend") + LG("Español", "Cabina", "Llama a un amigo") + '<button class="btn" type="button">Add language</button>'
 def tex_row(tx, z, px, py, x, zz, act):
     return ('<div class="fgrid tx">' + F("texture", S(TEX, tx)) + F("zIndex", I(z, t="number")) + F("pivot.x", I(px, t="number")) + F("pivot.y", I(py, t="number"))
             + F("position.x", I(x, t="number")) + F("position.z", I(zz, t="number")) + F("actions.door", S(["-", "closed", "open"], act)) + '<button class="btn" type="button" aria-label="Remove texture">x</button></div>')
 def direction(d, rows, op=False):
     return f'<details class="disc dir"{" open" if op else ""}><summary class="btn">{d} ({len(rows)})</summary>' + "".join(tex_row(*r) for r in rows) + '<button class="btn" type="button">Add texture</button></details>'
-create = f'''      <div class="blk box dense">
+st_furn = (f'<div class="fgrid">{F("id", I("teleports@telephone"))}{F("revision", I("01JD3QZ8M0K4V7R2XW9H5T6BNC", dis=True))}{F("type", S(["furniture", "frame"], "furniture"))}</div>'
+  f'<div class="fgrid">{F("size.width", I("1", t="number"))}{F("size.depth", I("1", t="number"))}{F("size.height", I("2", t="number"))}{F("icon.texture", S(TEX, "telephone-icon"))}</div>'
+  f'<h3>Actions</h3><div class="fgrid">{F("id", I("door"))}{F("label", I("Door"))}{F("states (comma separated)", I("closed, open"))}{F("defaultState", I("closed"))}<button class="btn" type="button" aria-label="Remove action">x</button></div><button class="btn" type="button">Add action</button>'
+  f'<h3>Lang</h3>{LANGS}<h3>Directions</h3>'
+  + direction("north", [("telephone-n", 0, 24, 98, 0, 0, "closed"), ("telephone-n-top", 1, 24, 98, 0, 0, "open")], True) + direction("east", [("telephone-e", 0, 24, 98, 0, 0, "closed")], True) + direction("south", []) + direction("west", []))
+st_room = (f'<div class="fgrid">{F("id", I("rooftop-pool"))}{F("revision", I("01JD3QZ8M0K4V7R2XW9H5T6BNC", dis=True))}{F("max users", I("40", t="number"))}</div>'
+  f'<div class="fgrid">{F("size.width", I("12", t="number"))}{F("size.depth", I("9", t="number"))}{F("wall height", I("3", t="number"))}</div>'
+  f'<div class="fgrid">{F("floor texture", S(TEX, "telephone-n"))}{F("wall texture", S(TEX, "telephone-e"))}</div>'
+  f'<h3>Door and spawn</h3><div class="fgrid">{F("door.x", I("0", t="number"))}{F("door.z", I("4", t="number"))}{F("door.direction", S(["north", "east", "south", "west"], "east"))}{F("spawn.x", I("1", t="number"))}{F("spawn.z", I("4", t="number"))}</div>'
+  f'<h3>Lang</h3>{LANGS}<h3>Furniture placed</h3><div class="fgrid">{F("furniture", I("teleports@telephone"))}{F("x", I("0", t="number"))}{F("z", I("0", t="number"))}{F("direction", S(["north", "east", "south", "west"], "east"))}<button class="btn" type="button" aria-label="Remove">x</button></div><button class="btn" type="button">Add furniture</button>'
+  '<p class="hint">Room fields are a proposal; the room format is not final.</p>')
+st_cloth = (f'<div class="fgrid">{F("id", I("striped-shirt"))}{F("revision", I("01JD3QZ8M0K4V7R2XW9H5T6BNC", dis=True))}{F("slot", S(["hat", "hair", "top", "legs", "shoes", "accessory"], "top"))}</div>'
+  '<label class="chk"><input type="checkbox"> Takes the skin colour of the guest</label> <label class="chk"><input type="checkbox" checked> Guests can recolour it</label>'
+  f'<h3>Lang</h3>{LANGS}<h3>Frames</h3>'
+  + "".join(f'<div class="fgrid">{F("direction", S(["north", "east", "south", "west"], d))}{F("action", S(["idle", "walk", "wave"], a))}{F("frames", I(fr))}<button class="btn" type="button" aria-label="Remove">x</button></div>' for d, a, fr in [("north", "idle", "telephone-n"), ("east", "idle", "telephone-e")])
+  + '<button class="btn" type="button">Add frames</button><p class="hint">Clothes fields are a proposal; the clothes format is not final.</p>')
+create = f'''<div class="kb" data-state="furn">
+      <div class="blk box dense">
         <h2>Create an asset</h2>
-        <ol class="stepbar"><li class="on">1 Load</li><li class="on">2 Edit</li><li>3 Send</li></ol>
-        <div class="row" role="group" aria-label="Kind"><span class="btn main">Furniture</span> <span class="btn">Collection</span> <span class="btn" aria-disabled="true" title="Not in the editor yet">Public room · soon</span> <span class="btn" aria-disabled="true" title="Not in the editor yet">Clothes · soon</span></div>
-        <form class="form" onsubmit="event.preventDefault()"><label>Load a file<input class="in" type="file" accept=".furniture,.collection,.oha"></label>
-          <span class="hint">Only OpenHotel files (.furniture, .collection) can be uploaded. Or fill the form from an Aseprite export: <a href="#link">Link app</a>.</span></form>
+        <ol class="stepbar"><li class="on">1 Spritesheet</li><li class="on">2 Details</li><li>3 Send</li></ol>
+        <p class="hint">Every asset starts from a spritesheet image. Pick it (or sync it from Aseprite), cut the frames, then fill the details of the furniture, room or clothes with the forms.</p>
       </div>
       <div class="split3"><div class="col">
       <div class="blk box dense">
-        <h2>Data</h2>
+        <h2>1 · Spritesheet</h2>
+        <form class="form" onsubmit="event.preventDefault()"><label>Image<input class="in" type="file" accept="image/png"></label><span class="hint">PNG only. The only file you upload.</span></form>
+        {kv([("Image", "telephone.png"), ("Size", "96 × 196"), ("Scale", "1"), ("Format", "png")])}
+        <div class="sheet"><img src="assets/oh/furni-telephone.png" width="48" height="98" alt="Spritesheet"><i style="left:0;top:0;width:48px;height:98px"></i></div>
+        <h3>Frames (4)</h3>
+        {"".join(frow(*f) for f in FRAMES)}<button class="btn" type="button">Add frame</button>
+        <h3>Animations</h3>
+        <div class="fgrid">{F("animation", I("door-open"))}{F("frames (comma separated)", I("telephone-n, telephone-n-top"))}<button class="btn" type="button" aria-label="Remove animation">x</button></div><button class="btn" type="button">Add animation</button>
+      </div>
+      <div class="blk box dense">
+        <h2>2 · Details</h2>
+        <div class="row" role="group" aria-label="Kind"><button class="btn main" type="button" data-go="furn">Furniture</button> <button class="btn" type="button" data-go="room">Public room</button> <button class="btn" type="button" data-go="cloth">Clothes</button></div>
         <form class="ed2" onsubmit="event.preventDefault()">
-          <div class="fgrid">{F("id", I("teleports@telephone"))}{F("revision", I("01JD3QZ8M0K4V7R2XW9H5T6BNC", dis=True))}{F("type", S(["furniture", "frame"], "furniture"))}</div>
-          <div class="fgrid">{F("size.width", I("1", t="number"))}{F("size.depth", I("1", t="number"))}{F("size.height", I("2", t="number"))}{F("icon.texture", S(TEX, "telephone-icon"))}</div>
-          <h3>Actions</h3>
-          <div class="fgrid">{F("id", I("door"))}{F("label", I("Door"))}{F("states (comma separated)", I("closed, open"))}{F("defaultState", I("closed"))}<button class="btn" type="button" aria-label="Remove action">x</button></div>
-          <button class="btn" type="button">Add action</button>
-          <h3>Lang</h3>
-          <div class="fgrid lg">{F("language", S(["English", "Español", "Deutsch"], "English"))}{F("name", I("Telephone booth"))}{F("description", I("Dial a friend"))}<button class="btn" type="button" aria-label="Remove language">x</button></div>
-          <div class="fgrid lg">{F("language", S(["English", "Español", "Deutsch"], "Español"))}{F("name", I("Cabina"))}{F("description", I("Llama a un amigo"))}<button class="btn" type="button" aria-label="Remove language">x</button></div>
-          <button class="btn" type="button">Add language</button>
-          <h3>Directions</h3>
-          {direction("north", [("telephone-n", 0, 24, 98, 0, 0, "closed"), ("telephone-n-top", 1, 24, 98, 0, 0, "open")], True)}
-          {direction("east", [("telephone-e", 0, 24, 98, 0, 0, "closed")], True)}
-          {direction("south", [])}{direction("west", [])}
+          <div class="st st-furn">{st_furn}</div><div class="st st-room">{st_room}</div><div class="st st-cloth">{st_cloth}</div>
         </form>
       </div>
+      <div class="blk box dense">
+        <h2>3 · Send</h2>
+        <ul class="perms"><li>Spritesheet is a valid PNG</li><li>Every frame is inside the image</li><li>Name and description in English</li><li>Icon frame exists</li><li>2 of 4 directions have textures</li></ul>
+        <p><button class="btn main" type="button">Send for review</button> <button class="btn" type="button">Save draft</button></p>
+        <p class="hint">Schema {sch(3)} is set by the editor. Once live, an asset can't be deleted while a hotel uses it; send a new version instead.</p>
+      </div>
       </div><div class="col">
+      <div class="blk box dense"><h2>Aseprite</h2>
+        <p><span class="badge on">Linked</span> Aseprite on PC · seen 2 min ago</p>
+        <p><button class="btn main" type="button">Sync from Aseprite</button></p>
+        <p class="hint">Reads the sprite open in Aseprite: image, frames and tags. Not linked yet? <a href="#link">Get the Link app</a>.</p></div>
       <div class="blk box dense"><h2>Preview</h2>
         <div class="ipv">{img("furni-telephone", 48, 98, "Preview, north")}</div>
-        {kv([("Sprite sheet", "png · 96 × 196 · scale 1"), ("Frames", "9"), ("Animations", "2"), ("Schema", sch(3) + " <span class=\"hint\">set by the editor</span>")])}
-      </div>
-      <div class="blk box dense"><h2>Checks</h2><ul class="perms"><li>Revision is valid</li><li>Name and description in English</li><li>Icon texture exists in the sheet</li><li>2 of 4 directions have textures</li><li>No frame is outside the image</li></ul>
-        <p><button class="btn main" type="button">Send for review</button> <button class="btn" type="button">Save draft</button></p>
-        <p class="hint">Once live, an asset can't be deleted while a hotel uses it. Send a new version instead.</p></div>
+        {kv([("Frame", "telephone-n"), ("Position", "0, 0"), ("Size", "48 × 98")])}</div>
       </div></div>
-'''
-
-# ---------- Hotel catalog (owner) ----------
-CATS = [("Alpha", "Enabled", 5), ("Flags", "Enabled", 14), ("Teleports", "Enabled", 3), ("Summer", "Scheduled", 12), ("Pirate week", "Off", 8)]
-BADGE = {"Enabled": '<span class="badge on">Enabled</span>', "Scheduled": '<span class="badge">Scheduled</span>', "Off": '<span class="badge">Off</span>'}
-def catrow(n, st, c, sel):
-    return f'<li{" class=sel" if sel else ""}><a href="#library">{n}</a> {BADGE[st]}<span class="hint">{c}</span></li>'
-def furow(t, n, fid, cur, latest, price):
-    vs = [latest, "1.0"] if cur == latest else [latest, cur]
-    opts = "".join(f'<option{" selected" if v == cur else ""}>{v}{" (latest)" if v == latest else ""}</option>' for v in vs)
-    upd = '' if cur == latest else ' <span class="badge">Update</span>'
-    return (f'<tr><td>{tb(t)}</td><td><b>{n}</b>{upd}<br><span class="hint">{fid}</span></td><td><select class="in sel-s" aria-label="Version">{opts}</select></td><td>{sch(3)}</td>'
-            f'<td class="num"><input class="in price" type="number" value="{price}" min="0" aria-label="Price in SNP"></td><td class="ra"><button class="btn" type="button" aria-label="Remove">x</button></td></tr>\n')
-library = f'''      <div class="split3"><div class="col">
-      <div class="blk box dense">
-        <h2>Hotel catalog · {HOTEL}</h2>
-        <p class="hint">The catalog guests see in the hotel, edited from the web. {HOTEL} runs v{HV}: schemas 1 to {MAXS}. Prices are in SNP.</p>
-        <form class="form" onsubmit="event.preventDefault()">
-          <div class="fgrid">{F("Category", I("Teleports"))}{F("Description", I("Step in, come out somewhere else."))}</div>
-          <div class="fgrid">{F("Available from", I("", t="date"))}{F("Available until", I("", t="date"))}<label class="chk"><input type="checkbox" checked> Enabled</label></div>
-          <div class="row"><button class="btn main" type="submit">Save category</button></div>
-        </form>
-        <div class="tbl"><table><tr><th></th><th>Furniture</th><th>Version</th><th>Schema</th><th class="num">Price</th><th></th></tr>
-''' + furow("tel", "Telephone booth", "teleports@telephone", "1.1", "1.2", 25) + furow("tel", "Red booth", "teleports@red-booth", "1.0", "1.0", 25) + furow("flag", "Door sign", "teleports@door-sign", "1.0", "1.0", 5) + '''        </table></div>
-        <p><a class="btn main" href="#market">Add furniture from the marketplace</a> <a class="btn" href="#collection">Add a collection</a></p>
-      </div>
-      </div><div class="col">
-      <div class="blk box dense"><h2>Categories (9)</h2>
-        <ul class="cats">''' + "".join(catrow(n, st, c, n == "Teleports") for n, st, c in CATS) + '''</ul>
-        <p><button class="btn" type="button">New category</button></p></div>
-      <div class="blk box dense"><h2>Updates (2)</h2>
-        <dl class="kv"><div><dt>Telephone booth</dt><dd>1.1 to 1.2</dd></div><div><dt>Rooftop Pool</dt><dd>2.0 to 2.1</dd></div></dl>
-        <p><button class="btn main" type="button">Update both</button></p></div>
-      <div class="blk box dense"><h2>Public rooms (3)</h2>
-        <div class="tbl"><table><tr><td>The Atrium</td><td class="num">1.2</td><td><span class="badge on">Open</span></td></tr><tr><td>Rooftop Pool</td><td class="num">2.0</td><td><span class="badge on">Open</span></td></tr><tr><td>Disco Hall</td><td class="num">1.0</td><td><span class="badge">Closed</span></td></tr></table></div>
-        <p class="hint">The Atrium is the first room.</p></div>
-      <div class="blk box dense"><h2>Clothes (64)</h2><p class="hint">Striped shirt, Red jacket and 62 more. <a href="#library">Manage</a></p></div>
-      </div></div>
+</div>
+<script>
+document.querySelectorAll(".kb").forEach((box) => box.addEventListener("click", (e) => {{
+  const b = e.target.closest("[data-go]");
+  if (b) {{ box.dataset.state = b.dataset.go; box.querySelectorAll(".row .btn").forEach((x) => x.classList.toggle("main", x === b)); }}
+}}));
+</script>
 '''

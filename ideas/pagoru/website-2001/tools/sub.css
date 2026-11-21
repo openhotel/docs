@@ -206,3 +206,19 @@
 .fgrid .btn{align-self:end;padding:2px 8px}
 @media (max-width:620px){.fgrid.tx,.fgrid.lg{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}}
 .tbl .sel-s{min-width:96px}
+.subnav{display:flex;flex-wrap:wrap;gap:4px;align-items:center;padding:6px 8px}
+.subnav b{font-size:11px;color:var(--head);margin-right:6px}
+.subnav .btn{padding:2px 8px;font-size:11px}
+td.c,th.c{text-align:center}
+tr.go{cursor:pointer}
+tr.go:hover td{background:rgba(128,128,128,.14)}
+tr.sel td{font-weight:700}
+.ord{white-space:nowrap}.ord .btn{padding:0 5px;font-size:11px;margin-right:2px}
+.skins{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin:6px 0}
+.skin{display:flex;gap:6px;align-items:center;font-size:11px}
+.skin span{display:block;width:26px;height:26px;border:1px solid #000}
+.sheet{position:relative;display:inline-block;margin:6px 0;border:1px solid var(--line);background:var(--box)}
+.sheet img{display:block;image-rendering:pixelated}
+.sheet i{position:absolute;outline:1px dashed #d33}
+.fgrid.fr{grid-template-columns:minmax(0,2fr) repeat(6,minmax(0,1fr)) auto}
+@media (max-width:620px){.fgrid.fr{grid-template-columns:repeat(auto-fit,minmax(70px,1fr))}}

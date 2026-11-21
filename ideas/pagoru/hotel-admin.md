@@ -10,12 +10,11 @@
 Boxes in the right bar for hotel admins, and one more for owners of the main hotel. Mockup: [website-2001](website-2001/) `retro-lobby-in`, `retro-admin`, `retro-network`.
 
 ## Proposal
-- **Manage this hotel** (right bar box): accounts, online, open reports, registration state, links to admin and catalog. The registration lock lives on the admin page: existing accounts still enter, new accounts can't connect.
-- **Friends online** (right bar box) sits above them.
-- **Hotel admin page**, per hotel: registration (lock, message, verified email), accounts (search, mute, block, role), blocked list with reason and unblock, rooms (close, delete), chat and moderation (reported messages, blocked words, auto-mutes), credits and purchases, hotel catalog (see [asset-library](asset-library.md)).
-- **Network admin** (right bar box, main hotel owners only): hotels, online, hotels waiting for review. Page: allow new hotels, pause the whole [credit exchange](credit-exchange.md), oldest allowed hotel version, hotel table (owner, version, accounts, online, credit code, state; approve, pause trading, suspend), daily credit reports with a check.
-- **Data**: the hotel server exposes these lists and actions to its admins through onet; auth only says who is an admin. The website shows data it gets from the hotel, it doesn't store it.
-- **Roles**: owner, admin, moderator with different actions (not final).
+- **Right bar boxes** (logged in): Friends online (avatar, name, hotel, Join), Manage OpenHotel (key numbers, links), Network admin (main hotel owners only). The mockup manages the main hotel, OpenHotel.
+- **Manage sub nav**, one page per section: Overview, Registration (lock new accounts, message, verified email), Accounts (mute, block, role), Blocked, Rooms, Moderation (reports, blocked words, auto-mute), Credits (stats, purchases), Catalog ([asset-library](asset-library.md)), Public rooms (open, first room, max users), Clothes (wardrobe and character personalisation: allowed skin colours, default skin, what guests can recolour).
+- **Network sub nav** (main hotel only): Overview, Hotels (approve, pause trading, suspend), Credit reports, Settings (new hotels, pause the [exchange](credit-exchange.md), oldest version and newest schema allowed).
+- **Data**: the hotel server exposes lists and actions to its admins through onet; auth only says who is an admin. The website doesn't store hotel data.
+- **Roles**: owner, admin, moderator (not final).
 
 ## Impact
 - openhotel (server): admin read/write endpoints, registration lock, moderation log.

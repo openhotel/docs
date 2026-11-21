@@ -24,11 +24,6 @@ link = f'''      <div class="blk box">
         <p>Written in Lua and installed as <code>openhotel.aseprite-extension</code>. Aseprite 1.3 has a <code>WebSocket</code> in its scripting API, which is what talks to Link. If your version lacks it, the extension saves to <code>~/OpenHotel/outbox</code> and Link picks the files up. <span class="hint">To verify against the Aseprite API docs.</span></p>
         <pre class="pre">{LUA}</pre>
       </div></div><div class="col">
-      <div class="blk box dense"><h2>Resprite (iPad)</h2>
-        <p>Resprite can't run a plugin and the iPad has no <code>localhost</code> for this website to reach, so Link isn't possible there. Use files instead:</p>
-        <ol class="steps"><li>Export a sprite sheet (.png + .json) or .aseprite to Files.</li><li>Open <a href="#create">Create an asset</a> in Safari and pick the file.</li></ol>
-        <p class="hint">If Resprite has a share sheet or URL scheme for sending to a web page, we can use it later. Unverified.</p>
-      </div>
       <div class="blk box dense"><h2>Linked programs</h2>
         ''' + kv([("Aseprite on PC", '<a class="danger" href="#">Unlink</a>'), ("Link app", "v0.1 · up to date")]) + '''
       </div>

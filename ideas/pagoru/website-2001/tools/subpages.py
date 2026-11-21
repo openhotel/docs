@@ -13,6 +13,7 @@ NEWS = [("booths","21 Nov 2026","Telephone booths are here","Step into a booth a
         ("atrium","02 Nov 2026","The Atrium is open","A new public room with a fountain and two staircases. Come and see it before it gets busy."),
         ("pool","30 Oct 2026","Rooftop pool party","Saturday at 20:00. Bring a towel and keep the splashing in the pool.")]
 
+GO = '<script>document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>\n'
 def page(title, tab, logged, body):
     tabs = [("Home","home"),("News","news")] + ([("Friends","friends"),("Exchange","exchange"),("Marketplace","market"),("My account","account"),("Connections","connections"),("My hotels","hotels")] if logged else [("Register","register")])
     nav = "".join(f'<a class="btn{" main" if k == tab else ""}" href="#{k}">{n}</a>' for n, k in tabs)
@@ -20,7 +21,7 @@ def page(title, tab, logged, body):
     return (head.replace("<title>OpenHotel 2001</title>", f"<title>{title} · OpenHotel</title>") + '<body>\n<div class="page">\n'
       + '  <div class="grid2">\n    <main class="mainc">\n'
       + '      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="#home"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div>'
-      + f'<nav class="actions" aria-label="Site"><p>{title}</p>{nav}</nav></header>\n' + body + '    </main>\n    <aside class="side">\n' + side + '    </aside>\n  </div>\n' + foot)
+      + f'<nav class="actions" aria-label="Site"><p>{title}</p>{nav}</nav></header>\n' + body + '    </main>\n    <aside class="side">\n' + side + '    </aside>\n  </div>\n' + foot.replace('</body>', GO + '</body>'))
 
 news_list = '      <div class="blk box">\n        <h2>Hotel news</h2>\n        <ul class="newslist">\n' + "".join(
     f'          <li><img src="assets/oh/news-{i}.png" width="64" height="64" alt=""><div><time>{d}</time><b>{t}</b><p>{x}</p><a href="#post">Read more</a> &gt;&gt;</div></li>\n' for i, d, t, x in NEWS
@@ -113,10 +114,13 @@ PAGES = {  # key: (title, tab, logged, body)
   "retro-account": ("My account", "account", True, account), "retro-my-hotels": ("My hotels", "hotels", True, hotels),
   "retro-connections": ("Connected hotels", "connections", True, connections),
   "retro-friends": ("Friends", "friends", True, friends_body), "retro-exchange": ("Credit exchange", "exchange", True, exchange_body),
-  "retro-assets": ("Hotel catalog", "hotels", True, library), "retro-market": ("Marketplace", "market", True, market), "retro-create": ("Create an asset", "market", True, create),
+  "retro-assets": ("Catalog", "", True, library), "retro-market": ("Marketplace", "market", True, market), "retro-create": ("Create an asset", "market", True, create),
   "retro-item": ("Telephone booth", "market", True, item), "retro-collection": ("Beach set", "market", True, collection), "retro-mine": ("Your creations", "market", True, mine),
   "retro-link": ("OpenHotel Link", "market", True, link), "retro-coin": ("Pixel Plaza · PXP", "exchange", True, coin_body),
-  "retro-admin": ("Hotel admin", "account", True, admin), "retro-network": ("Network", "account", True, network),
+  "retro-admin": ("Manage OpenHotel", "", True, admin), "retro-admin-registration": ("Registration", "", True, admin_registration), "retro-admin-accounts": ("Accounts", "", True, admin_accounts),
+  "retro-admin-blocked": ("Blocked", "", True, admin_blocked), "retro-admin-rooms": ("Rooms", "", True, admin_rooms), "retro-admin-moderation": ("Moderation", "", True, admin_moderation),
+  "retro-admin-credits": ("Credits", "", True, admin_credits), "retro-admin-publicrooms": ("Public rooms", "", True, admin_publicrooms), "retro-admin-clothes": ("Clothes", "", True, admin_clothes),
+  "retro-network": ("Network admin", "", True, network), "retro-network-hotels": ("Hotels", "", True, network_hotels), "retro-network-credits": ("Credit reports", "", True, network_credits), "retro-network-settings": ("Settings", "", True, network_settings),
 }
 for key, (title, tab, logged, body) in PAGES.items():
     h = page(title, tab, logged, body)
@@ -129,6 +133,7 @@ def wire(path, theme, logged, community):
     sfx = "-in" if logged else ""
     m = {"#home": f"retro-lobby{sfx}", "#news": f"retro-news{sfx}", "#post": f"retro-post{sfx}", "#register": "retro-register",
          "#account": "retro-account", "#hotels": "retro-my-hotels", "#connections": "retro-connections", "#friends": "retro-friends", "#exchange": "retro-exchange", "#market": "retro-market", "#create": "retro-create", "#library": "retro-assets", "#item": "retro-item", "#collection": "retro-collection", "#mine": "retro-mine", "#link": "retro-link", "#coin": "retro-coin", "#admin": "retro-admin", "#network": "retro-network"}
+    for k in PAGES: m.setdefault("#" + k[6:], k)
     for k, v in m.items(): s = s.replace(f'href="{k}"', f'href="{v}-{theme}.html"')
     txt = {"Register for free": "retro-register", "Register on OpenHotel": "retro-register", "Forgot password?": "retro-forgot",
            "Account settings": "retro-account", "OpenHotel account": "retro-account", "My hotels (2)": "retro-my-hotels", "Connected hotels": "retro-connections", "Friends online (4)": "retro-friends",
