@@ -60,3 +60,4 @@ Issues, PRs, related ideas.
 | [OpenHotel on Steam](pagoru/steam.md): free Steam release, deno desktop shell, official hotel only, Steam login and account linking. Parts: [accounts](pagoru/steam-accounts.md) | pagoru | proposed |
 | [Release manifest](pagoru/release-manifest.md): partial monorepo releases + `release.oh` with each app's real version, so updaters skip unchanged apps | pagoru | proposed |
 | [Shared migration](pagoru/shared-migration.md): replace @oh and @da libs and cross-app copies with app/shared, same dep versions, before monster replaces master. Parts: [libs](pagoru/shared-migration-libs.md), [duplicates](pagoru/shared-migration-duplicates.md), [versions](pagoru/shared-migration-versions.md) | pagoru | accepted |
+| [Website rework, 2001 style](pagoru/website-2001.md): static HTML mockups (home, news, auth pages, community hotel) with assets and generators in `pagoru/website-2001/` | pagoru | draft |

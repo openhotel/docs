@@ -1,0 +1,86 @@
+<title>OpenHotel Current Render</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+:root{--bg:#efefef;--fg:#2b2b33;--muted:#6b6b78;--bar:#fcfcfc;--line:#d9d9de;--accent:#335ca6;--on-accent:#ffffff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1d22;--fg:#ececf0;--muted:#a0a0ad;--bar:#26262c;--line:#3a3a42;--accent:#4976c4;--on-accent:#ffffff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d1d22;--fg:#ececf0;--muted:#a0a0ad;--bar:#26262c;--line:#3a3a42;--accent:#4976c4;--on-accent:#ffffff;color-scheme:dark}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:ui-sans-serif,system-ui,sans-serif;display:flex;flex-direction:column}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem;padding-block:.5rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:var(--bar);border-bottom:1px solid var(--line)}
+header strong{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+select,button{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:.35rem .5rem}
+select{min-width:0;max-width:100%}
+.theme{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.theme button{border:0;border-radius:0;background:transparent;cursor:pointer}
+.theme button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+select:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+header span{margin-left:auto;color:var(--muted);font-size:.8rem}
+iframe{flex:1;width:100%;border:0;background:var(--bg)}
+</style>
+<header>
+  <strong>OpenHotel</strong>
+  <label for="page" hidden>Page</label>
+  <select id="page">
+    <optgroup label="Main hotel">
+      <option value="retro-lobby">Home, logged out</option>
+      <option value="retro-lobby-in">Home, logged in</option>
+      <option value="retro-news">News</option>
+      <option value="retro-post">News article</option>
+      <option value="retro-register">Register</option>
+      <option value="retro-forgot">Forgot password</option>
+      <option value="retro-account">My account</option>
+      <option value="retro-my-hotels">My hotels</option>
+      <option value="retro-news-in" hidden>News, logged in</option>
+      <option value="retro-post-in" hidden>News article, logged in</option>
+    </optgroup>
+    <optgroup label="Community hotel">
+      <option value="retro-hotel">Home, logged out</option>
+      <option value="retro-hotel-in">Home, logged in</option>
+    </optgroup>
+  </select>
+  <div class="theme" role="group" aria-label="Theme">
+    <button type="button" id="theme-light" data-theme-value="light">Light</button>
+    <button type="button" id="theme-dark" data-theme-value="dark">Dark</button>
+  </div>
+  <span>2001 style · sample data</span>
+</header>
+<iframe id="view" title="Page render"></iframe>
+<script>
+const view = document.getElementById("view");
+const select = document.getElementById("page");
+const KEYS = [...select.options].map((o) => o.value);
+let theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+try { theme = localStorage.getItem("oh-theme") || theme; } catch (e) {}
+
+let shown = null;
+const currentKey = () => (KEYS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "retro-lobby");
+const show = () => {
+  const key = currentKey();
+  const src = `${key}-${theme}.html`;
+  if (shown !== src) {
+    shown = src;
+    view.src = src;
+  }
+  select.value = key;
+  document.querySelectorAll(".theme button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.themeValue === theme)));
+};
+select.addEventListener("change", () => { location.hash = select.value; });
+document.querySelectorAll(".theme button").forEach((b) =>
+  b.addEventListener("click", () => {
+    theme = b.dataset.themeValue;
+    try { localStorage.setItem("oh-theme", theme); } catch (e) {}
+    show();
+  }),
+);
+view.addEventListener("load", () => {
+  try {
+    const file = view.contentWindow.location.pathname.split("/").pop();
+    const match = file.match(/^(.*)-(light|dark)\.html$/);
+    if (!match || !KEYS.includes(match[1])) return;
+    shown = file;
+    if (match[1] !== currentKey()) location.hash = match[1];
+  } catch (e) {}
+});
+addEventListener("hashchange", show);
+show();
+</script>
