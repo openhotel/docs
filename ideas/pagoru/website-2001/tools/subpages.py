@@ -96,8 +96,8 @@ register = '''      <div class="blk box">
           <label>Password<input class="in" type="password" autocomplete="new-password"></label>
           <label>Repeat password<input class="in" type="password" autocomplete="new-password"></label>
           <label>Language<select class="in"><option>English</option><option>Español</option><option>Deutsch</option></select></label>
-          <label class="chk"><input type="checkbox"> I have read the <a href="#">hotel rules</a></label>
-          <label class="chk"><input type="checkbox"> Send me the OpenHotel news by email (optional, you can change it later)</label>
+          <label class="chk"><input type="checkbox" required> I accept the <a href="#">Terms of Service</a> and the <a href="#">EULA</a></label>
+          <label class="chk"><input type="checkbox"> Send me the news by email (optional, news only, never spam)</label>
           <div class="row"><button class="btn main" type="submit">Register</button><span>Already registered? <a href="#home">Log in</a></span></div>
         </form>
       </div>

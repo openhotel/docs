@@ -22,10 +22,8 @@ account = f'''      <div class="blk box">
       <div class="blk box">
         <h2>Email news</h2>
         <form class="form" onsubmit="event.preventDefault()">
-          <label class="chk"><input type="checkbox"> Send me the OpenHotel network news by email</label>
-          <label class="chk"><input type="checkbox"> OpenHotel news (hotel you joined)</label>
-          <label class="chk"><input type="checkbox"> Pixel Plaza news (hotel you joined)</label>
-          <span class="hint">Off until you turn it on. Hotels never see your email: the network sends it for them. Every email has an unsubscribe link. Account emails (verify, password, security) are always sent.</span>
+          <label class="chk"><input type="checkbox"> Send me the news by email (network and the hotels I joined)</label>
+          <span class="hint">Off until you turn it on. News only, never spam. Hotels never see your email: the network sends it for them. Every email has an unsubscribe link. Account emails (verify, password, security) are always sent.</span>
           <div class="row"><button class="btn main" type="submit">Save</button></div>
         </form>
       </div>
