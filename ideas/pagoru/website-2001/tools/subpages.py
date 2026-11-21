@@ -15,7 +15,7 @@ NEWS = [("booths","21 Nov 2026","Telephone booths are here","Step into a booth a
 
 GO = '<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-sub-btn]");if(b)b.closest(".subnews").hidden=true});document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>\n'
 import re as _re
-FSKIP = ("Overview", "Needs attention", "Numbers", "Updates", "Who sends", "Email templates", "Latest trades", "Order book")
+FSKIP = ("What each kind needs", "Overview", "Needs attention", "Numbers", "Updates", "Who sends", "Email templates", "Latest trades", "Order book")
 def addfind(b):
     b = b.replace('<input class="in" type="search"', '<input data-filter class="in" type="search"')
     out, pos = "", 0
@@ -145,9 +145,9 @@ PAGES = {  # key: (title, tab, logged, body)
   "retro-account": ("My account", "account", True, account), "retro-my-hotels": ("My hotels", "hotels", True, hotels),
   "retro-connections": ("Connected hotels", "connections", True, connections),
   "retro-friends": ("Friends", "friends", True, friends_body), "retro-exchange": ("Credit exchange", "exchange", True, exchange_body),
-  "retro-assets": ("Catalog", "", True, library), "retro-market": ("Marketplace", "market", True, market), "retro-create": ("Create an asset", "market", True, CN("create") + create),
+  "retro-assets": ("Catalog", "", True, library), "retro-market": ("Marketplace", "market", True, market), "retro-create": ("Create an asset", "market", True, create), "retro-create-sheet": ("Spritesheet", "market", True, create_sheet), "retro-create-furniture": ("Furniture", "market", True, create_furniture), "retro-create-clothes": ("Clothes", "market", True, create_clothes), "retro-create-room": ("Room", "market", True, create_room),
   "retro-item": ("Telephone booth", "market", True, item), "retro-collection": ("Beach set", "market", True, collection), "retro-mine": ("Your creations", "market", True, mine),
-  "retro-link": ("OpenHotel Link", "market", True, CN("link") + link), "retro-mine-sheets": ("Spritesheets", "market", True, mine_sheets), "retro-mine-furniture": ("Your furniture", "market", True, mine_furniture), "retro-mine-clothes": ("Your clothes", "market", True, mine_clothes), "retro-mine-rooms": ("Your rooms", "market", True, mine_rooms), "retro-mine-collections": ("Your collections", "market", True, mine_collections), "retro-coin": ("Pixel Plaza · PXP", "exchange", True, coin_body),
+  "retro-link": ("OpenHotel Link", "market", True, CN("link") + link), "retro-mine-collections": ("Your collections", "market", True, mine_collections), "retro-coin": ("Pixel Plaza · PXP", "exchange", True, coin_body),
   "retro-admin": ("Manage OpenHotel", "", True, admin), "retro-admin-registration": ("Registration", "", True, admin_registration), "retro-admin-accounts": ("Accounts", "", True, admin_accounts),
   "retro-admin-blocked": ("Blocked", "", True, admin_blocked), "retro-admin-rooms": ("Rooms", "", True, admin_rooms), "retro-admin-moderation": ("Moderation", "", True, admin_moderation),
   "retro-admin-credits": ("Credits", "", True, admin_credits), "retro-admin-publicrooms": ("Public rooms", "", True, admin_publicrooms), "retro-admin-clothes": ("Clothes", "", True, admin_clothes),

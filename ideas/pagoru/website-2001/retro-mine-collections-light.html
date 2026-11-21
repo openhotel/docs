@@ -384,6 +384,10 @@ td.dr input.in[type=date]{width:7.8em;font-size:10px}
 .subnews{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px}
 .subnews p{margin:0}
 .subnews[hidden]{display:none}
+.gstep{display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;padding:8px 0;border-top:1px dotted var(--line)}.gstep:first-of-type{border-top:0}.gstep h3{margin:0 0 3px}.gstep p{margin:0 0 4px}.gn{display:grid;place-items:center;width:30px;height:30px;border:1px solid #000;background:var(--accent);color:var(--accent-ink);font-size:14px}
+.two.wide2{grid-template-columns:minmax(0,5fr) minmax(0,2fr)}
+@media (max-width:720px){.two.wide2{grid-template-columns:minmax(0,1fr)}}
+.two.wide2>div>.blk{margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -391,7 +395,7 @@ td.dr input.in[type=date]{width:7.8em;font-size:10px}
   <div class="grid2">
     <main class="mainc">
       <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-in-light.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"><a class="btn" href="retro-lobby-in-light.html">Home</a><a class="btn" href="retro-news-in-light.html">News</a><a class="btn" href="retro-friends-light.html">Friends</a><a class="btn" href="retro-exchange-light.html">Exchange</a><a class="btn main" href="retro-market-light.html">Marketplace</a><a class="btn" href="retro-account-light.html">My account</a><a class="btn" href="retro-connections-light.html">Connections</a><a class="btn" href="retro-my-hotels-light.html">My hotels</a></nav></header>
-      <nav class="blk subnav" aria-label="Create"><a class="btn" href="retro-create-light.html">Create</a><a class="btn" href="retro-mine-light.html">Your creations</a><a class="btn" href="retro-mine-sheets-light.html">Spritesheets</a><a class="btn" href="retro-mine-furniture-light.html">Furniture</a><a class="btn" href="retro-mine-clothes-light.html">Clothes</a><a class="btn" href="retro-mine-rooms-light.html">Rooms</a><a class="btn main" href="retro-mine-collections-light.html">Collections</a><a class="btn" href="retro-link-light.html">Link app</a></nav>
+      <nav class="blk subnav" aria-label="Create"><a class="btn" href="retro-create-light.html">Create</a><a class="btn" href="retro-create-sheet-light.html">Spritesheet</a><a class="btn" href="retro-create-furniture-light.html">Furniture</a><a class="btn" href="retro-create-clothes-light.html">Clothes</a><a class="btn" href="retro-create-room-light.html">Room</a><a class="btn" href="retro-mine-light.html">Your creations</a><a class="btn main" href="retro-mine-collections-light.html">Collections</a><a class="btn" href="retro-link-light.html">Link app</a></nav>
       <div class="blk box dense">
         <h2>Your collections</h2>
         <div class="tbl"><table><tr><th></th><th>Collection</th><th class="num">Items</th><th class="num">Version</th><th class="num">Hotels</th><th></th></tr>

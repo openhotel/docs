@@ -17,7 +17,7 @@ Today each hotel ships the assets in its server folder, so sharing a room or a p
 - **Catalog on the web**: today `catalog.yml` (categories with id, label, description, enabled, optional from/to, furniture `id` + `price`). The owner edits it in the manage area: collections in order, name, items, visible, publish/unpublish dates (seasonal, optional yearly repeat), version and price per item, bulk price.
 - **Marketplace** (onet): list with version, schema, version in my catalog, hotels using it, stars, author and an Official tag (ships in the OpenHotel default catalog). Whole rows are clickable. No downloads and no one-click add on the list; add from the item page or the catalog.
 - **Item and collection pages**: version picker, history with "use this one", stars and comments once, who uses it.
-- **Creator sub nav**: Create, Your creations, Spritesheets (uploaded PNGs, reuse, delete when unused), Furniture, Clothes, Rooms, Collections, Link app.
+- **Creator sub nav**: Create (what you need in each step), Spritesheet, Furniture, Clothes, Room, Your creations (assets and uploaded sheets, reusable and deletable when unused), Collections, Link app.
 - **Your creations**: state, versions, hotels using each, rating, new version, edit collections. Download of own files only. **Delete only while no hotel uses it.**
 - **Create**: the only upload is a PNG spritesheet (as the asset-editor sprite-sheet section). Cut frames and animations, then fill the form for the kind: furniture (asset-editor fields), public room or clothes (proposed fields). Revision is a ULID.
 - **Aseprite**: Link app plus Lua extension, see [aseprite-link](aseprite-link.md). Resprite dropped.
