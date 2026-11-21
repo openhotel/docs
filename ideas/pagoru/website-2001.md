@@ -2,7 +2,7 @@
 
 - Author: pagoru
 - Status: draft
-- Created: 2026-11-21 · Updated: 2026-11-21
+- Created: 2026-11-21 · Updated: 2026-11-21 (v2)
 - Affects: web, auth, onet
 - Discussion: none
 
@@ -18,7 +18,7 @@ Everything is in [website-2001/](website-2001/): open `index.html` (page picker 
 | Home, community hotel | `retro-hotel`, `retro-hotel-in` |
 | News list, article | `retro-news[-in]`, `retro-post[-in]` |
 | Register, forgot password | `retro-register`, `retro-forgot` |
-| My account, my hotels | `retro-account`, `retro-my-hotels` |
+| My account, connected hotels, my hotels | `retro-account`, `retro-connections`, `retro-my-hotels` |
 
 ## Proposal
 - **Layout**: 1060px max, three columns on home (main · news · sidebar), two on subpages (content · same sidebar). Subpages reuse a short version of the home hero as header.
@@ -27,6 +27,10 @@ Everything is in [website-2001/](website-2001/): open `index.html` (page picker 
 - **Network**: registered guests, public hotels, online in all hotels; "Hotels online now" grid with picture + favicon per hotel, official hotel always first.
 - **News**: 4 items with 64x64 images on home; article with rating, views and comments.
 - **Avatar**: shown on the web, never edited there.
+- **Account**: 2FA on/off both need a captcha and a 6-digit code. Delete account stays here.
+- **Connected hotels**: the only way to link a hotel. Shows the hotel, its permissions and Disconnect; the main hotel can't be disconnected.
+- **My hotels**: one licence per hotel, shown once; remake it to get a new one. Picture (160 x 72) and icon (max 24 x 24), public/private, client and web URLs. No integrations.
+- **Credits box**: credits come from playing; no paid credits.
 - **Footer**: socials, CC BY-NC-SA 4.0, hotel version.
 
 ## Impact

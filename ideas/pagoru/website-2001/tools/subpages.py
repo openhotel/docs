@@ -14,7 +14,7 @@ NEWS = [("booths","21 Nov 2026","Telephone booths are here","Step into a booth a
         ("pool","30 Oct 2026","Rooftop pool party","Saturday at 20:00. Bring a towel and keep the splashing in the pool.")]
 
 def page(title, tab, logged, body):
-    tabs = [("Home","home"),("News","news")] + ([("My account","account"),("My hotels","hotels")] if logged else [("Register","register")])
+    tabs = [("Home","home"),("News","news")] + ([("My account","account"),("Connections","connections"),("My hotels","hotels")] if logged else [("Register","register")])
     nav = "".join(f'<a class="btn{" main" if k == tab else ""}" href="#{k}">{n}</a>' for n, k in tabs)
     side = '      <div class="blk">\n' + (rd("account.html") if logged else rd("login.html")) + '      </div>\n      <div class="blk">\n' + soc + '      </div>\n'
     return (head.replace("<title>OpenHotel 2001</title>", f"<title>{title} · OpenHotel</title>") + '<body>\n<div class="page">\n'
@@ -101,63 +101,14 @@ forgot = '''      <div class="blk box">
         <p>Check your spam folder first. Still nothing after ten minutes? Ask on <a href="https://discord.gg/qBZfPdNWUj" target="_blank" rel="noopener">Discord</a> and a staff member will help.</p>
       </div>
 '''
-account = '''      <div class="blk box">
-        <h2>My account</h2>
-        <div class="two">
-          <div>
-            <dl class="kv">
-              <div><dt>Username</dt><dd>Nightowl</dd></div>
-              <div><dt>Email</dt><dd>n******@*****.com</dd></div>
-              <div><dt>Member since</dt><dd>Mar 2025</dd></div>
-              <div><dt>Role</dt><dd>Hotel owner</dd></div>
-            </dl>
-          </div>
-          <div class="avbox"><div class="av"><img src="assets/oh/av-wave-a.png" width="23" height="68" alt="Your avatar"></div><p class="hint">Your avatar as guests see it. You change it inside the hotel.</p></div>
-        </div>
-        <h3>Two-step login</h3>
-        <p><span class="badge">Off</span> Use an app like Aegis or Google Authenticator to add a code to your login.</p>
-        <a class="btn" href="#">Turn on two-step login</a>
-        <h3>Languages</h3>
-        <ul class="pills"><li>English <button type="button" aria-label="Remove English">x</button></li><li>Español <button type="button" aria-label="Remove Español">x</button></li></ul>
-        <div class="row" style="display:flex;gap:8px;max-width:340px"><select class="in"><option>Add a language</option><option>Deutsch</option><option>Français</option></select><button class="btn" type="button">Add</button></div>
-      </div>
-      <div class="blk box">
-        <h2>Connections and sessions</h2>
-        <div class="tbl"><table>
-          <tr><th>Where</th><th>Last used</th><th></th></tr>
-          <tr><td>OpenHotel, this browser</td><td>Now</td><td class="hint">This one</td></tr>
-          <tr><td>Pixel Plaza (hotel)</td><td>Yesterday</td><td><a href="#">Disconnect</a></td></tr>
-          <tr><td>OpenHotel, phone</td><td>3 days ago</td><td><a href="#">Log out</a></td></tr>
-        </table></div>
-        <p><a class="danger" href="#">Delete my account</a></p>
-      </div>
-'''
-def hotel(thumb, name, hid, vis, rows):
-    tr = "".join(f'          <tr><td>{a}</td><td>{b}</td><td><a href="#">{c}</a></td><td>{d}</td><td><a href="#">Licence</a> · <a class="danger" href="#">Remove</a></td></tr>\n' for a, b, c, d in rows)
-    return f'''      <div class="blk box">
-        <div class="hotel">
-          <div class="thumb"><img src="assets/oh/hotel-thumb-{thumb}.png" width="160" height="72" alt="{name}"></div>
-          <div><h3>{name} <span class="badge{' on' if vis == 'Public' else ''}">{vis}</span></h3><p class="id">{hid}</p><div class="acts"><a class="btn" href="#">Change picture</a><a class="btn" href="#">Add integration</a></div></div>
-        </div>
-        <div class="tbl"><table>
-          <tr><th>Integration</th><th>Type</th><th>URL</th><th>Accounts</th><th></th></tr>
-{tr}        </table></div>
-        <p><a class="danger" href="#">Delete hotel</a></p>
-      </div>
-'''
-hotels = '''      <div class="blk box">
-        <h2>My hotels</h2>
-        <p>Hotels you run on the OpenHotel network. Each one gets its own client and website, and guests log in with their OpenHotel account.</p>
-        <a class="btn main" href="#">Create a hotel</a>
-      </div>
-''' + hotel("plaza", "Sunset Plaza", "01M7XSPG3W92FQ0EEJ2EPHCY3C", "Public", [("Official client","Client","https://hotel1.example.com","2"),("Hotel website","Web","https://sunset.example.com","0")]) \
-    + hotel("cafe", "Pixel Inn", "01M7XSPG4KXBVQ8V0HYY57DZ69", "Private", [("Official client","Client","https://hotel2.example.com","2")])
+exec(open(T + "pages_acct.py").read())
 
 PAGES = {  # key: (title, tab, logged, body)
   "retro-news": ("News", "news", False, news_list), "retro-news-in": ("News", "news", True, news_list),
   "retro-post": ("Telephone booths are here", "news", False, post(False)), "retro-post-in": ("Telephone booths are here", "news", True, post(True)),
   "retro-register": ("Register", "register", False, register), "retro-forgot": ("Forgot password", "", False, forgot),
   "retro-account": ("My account", "account", True, account), "retro-my-hotels": ("My hotels", "hotels", True, hotels),
+  "retro-connections": ("Connected hotels", "connections", True, connections),
 }
 for key, (title, tab, logged, body) in PAGES.items():
     h = page(title, tab, logged, body)
@@ -169,10 +120,10 @@ def wire(path, theme, logged, community):
     s = open(path).read()
     sfx = "-in" if logged else ""
     m = {"#home": f"retro-lobby{sfx}", "#news": f"retro-news{sfx}", "#post": f"retro-post{sfx}", "#register": "retro-register",
-         "#account": "retro-account", "#hotels": "retro-my-hotels"}
+         "#account": "retro-account", "#hotels": "retro-my-hotels", "#connections": "retro-connections"}
     for k, v in m.items(): s = s.replace(f'href="{k}"', f'href="{v}-{theme}.html"')
     txt = {"Register for free": "retro-register", "Register on OpenHotel": "retro-register", "Forgot password?": "retro-forgot",
-           "Account settings": "retro-account", "OpenHotel account": "retro-account", "My hotels (2)": "retro-my-hotels",
+           "Account settings": "retro-account", "OpenHotel account": "retro-account", "My hotels (2)": "retro-my-hotels", "Connected hotels": "retro-connections",
            "All news": f"retro-news{sfx}", "Read more": f"retro-post{sfx}", "Log out": "retro-lobby", "Get the code": None}
     if community:  # community pages link news inside the hotel site; keep its own home
         txt.update({"All news": None, "Read more": None, "Log out": "retro-hotel"})
@@ -183,6 +134,6 @@ def wire(path, theme, logged, community):
 for f in glob.glob(f"{site}/retro-*-light.html") + glob.glob(f"{site}/retro-*-dark.html"):
     n = os.path.basename(f); theme = "light" if n.endswith("-light.html") else "dark"; key = n.rsplit("-", 1)[0]
     if key in ("retro-orange", "retro-portal"): continue
-    logged = key.endswith("-in") or key in ("retro-account", "retro-my-hotels")
+    logged = key.endswith("-in") or key in ("retro-account", "retro-my-hotels", "retro-connections")
     wire(f, theme, logged, key.startswith("retro-hotel"))
 print("ok")

@@ -124,6 +124,10 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .pwrow label{display:grid;gap:2px;color:var(--soft)}
 .pwrow .otp{letter-spacing:.08em;padding-left:4px;padding-right:2px}
 .foot .ver b{color:var(--foot-link)}
+.credits{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;padding:10px 12px;border-color:#000;background:linear-gradient(var(--accent),var(--accent));color:var(--accent-ink)}
+.credits h3{margin:0 0 2px;font-size:12px;color:var(--accent-ink)}
+.credits p{margin:0}
+.credits img{margin-top:2px}
 .top{margin:0}
 .hero.mini{height:110px}
 .hero.mini .room{top:-150px}
@@ -205,41 +209,128 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .cform .btn{justify-self:start}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media (max-width:900px){.split3{grid-template-columns:minmax(0,1fr)}}
+.tfa .st,.lic .st{display:none}
+.tfa[data-state="off"] .st-off,.tfa[data-state="enable"] .st-enable,.tfa[data-state="on"] .st-on,.tfa[data-state="disable"] .st-disable{display:block}
+.tfa[data-state="enable"] .st-enable,.tfa[data-state="disable"] .st-disable{display:grid}
+.lic[data-state="none"] .st-none,.lic[data-state="new"] .st-new,.lic[data-state="has"] .st-has{display:block}
+.demo{padding:6px 8px;border:1px dashed var(--line)}
+.demo .btn{padding:2px 8px}
+.qrrow{display:flex;gap:12px;align-items:center}
+.qr{width:96px;height:96px;display:grid;place-items:center;background:#fff;color:#777;border:1px solid #000;font-size:10px}
+.captcha{display:flex;justify-content:space-between;align-items:center;gap:8px;max-width:300px;padding:10px;border:1px solid var(--field-line);background:var(--field)}
+.otp.big{font-size:16px;max-width:140px}
+.danger-btn{background:#c0392b;color:#fff}
+.danger-btn:hover{color:#fff}
+.perms{margin:0 0 10px;padding-left:18px}
+.perms li{margin:2px 0}
+.fav{display:inline-block;vertical-align:middle;margin-right:4px}
+.conn .kv{margin-top:6px}
+.disc summary{list-style:none;display:inline-block}
+.disc summary::-webkit-details-marker{display:none}
+.disc[open] summary{margin-bottom:8px}
+.disc p{margin:0 0 8px}
+.mh-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 10px;align-items:center;margin-bottom:10px}
+.mh-head h3{margin:0;font-size:13px}
+.mh{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start}
+.media{display:grid;gap:10px}
+.media figure{margin:0;display:grid;gap:4px;justify-items:start}
+.media figcaption{color:var(--soft);font-size:10px}
+.iconbox{width:40px;height:40px;display:grid;place-items:center;border:1px solid #000;background:var(--hero)}
+.vis{border:1px solid var(--line);padding:6px 8px;margin:0;display:grid;gap:4px}
+.vis legend{color:var(--soft);padding:0 4px}
+.kv.wide{max-width:none;margin:12px 0 0;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));column-gap:16px}
+.key{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px;padding:8px;border:1px dashed var(--accent);background:var(--field)}
+.key code{font-size:12px;word-break:break-all;color:var(--strong)}
+.lic p{margin:0 0 8px}
+.newh .form{margin-top:4px}
+@media (max-width:560px){.mh{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
 <div class="page">
   <div class="grid2">
     <main class="mainc">
-      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-in-dark.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"><p>My hotels</p><a class="btn" href="retro-lobby-in-dark.html">Home</a><a class="btn" href="retro-news-in-dark.html">News</a><a class="btn" href="retro-account-dark.html">My account</a><a class="btn main" href="retro-my-hotels-dark.html">My hotels</a></nav></header>
+      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-in-dark.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"><p>My hotels</p><a class="btn" href="retro-lobby-in-dark.html">Home</a><a class="btn" href="retro-news-in-dark.html">News</a><a class="btn" href="retro-account-dark.html">My account</a><a class="btn" href="retro-connections-dark.html">Connections</a><a class="btn main" href="retro-my-hotels-dark.html">My hotels</a></nav></header>
       <div class="blk box">
         <h2>My hotels</h2>
-        <p>Hotels you run on the OpenHotel network. Each one gets its own client and website, and guests log in with their OpenHotel account.</p>
-        <a class="btn main" href="#">Create a hotel</a>
+        <p>Hotels you run on the OpenHotel network. Each hotel has one licence; its server uses it to talk to OpenHotel. Guests log in with their OpenHotel account.</p>
+        <details class="disc newh"><summary class="btn main">Create a hotel</summary>
+          <form class="form" onsubmit="event.preventDefault()">
+            <label>Name<input class="in" placeholder="My hotel"></label>
+            <label>Client URL<input class="in" type="url" placeholder="https://play.myhotel.example"></label>
+            <label>Website URL<input class="in" type="url" placeholder="https://myhotel.example"></label>
+            <fieldset class="vis"><legend>Who can find it</legend>
+              <label class="chk"><input type="radio" name="v-new" checked> Public</label>
+              <label class="chk"><input type="radio" name="v-new"> Private</label>
+            </fieldset>
+            <div class="row"><button class="btn main" type="submit">Create</button><span class="hint">You get the licence on the next step.</span></div>
+          </form>
+        </details>
       </div>
       <div class="blk box">
-        <div class="hotel">
-          <div class="thumb"><img src="assets/oh/hotel-thumb-plaza.png" width="160" height="72" alt="Sunset Plaza"></div>
-          <div><h3>Sunset Plaza <span class="badge on">Public</span></h3><p class="id">01M7XSPG3W92FQ0EEJ2EPHCY3C</p><div class="acts"><a class="btn" href="#">Change picture</a><a class="btn" href="#">Add integration</a></div></div>
+        <div class="mh-head"><h3><img class="fav" src="assets/oh/icon-console-off.png" width="15" height="23" alt=""> Sunset Plaza</h3><span class="id">01M7XSPG3W92FQ0EEJ2EPHCY3C</span></div>
+        <div class="mh">
+          <div class="media">
+            <figure><div class="thumb"><img src="assets/oh/hotel-thumb-plaza.png" width="160" height="72" alt="Hotel picture"></div><figcaption>Picture · 160 × 72 px</figcaption><a class="btn" href="#">Change picture</a></figure>
+            <figure><div class="iconbox"><img src="assets/oh/icon-console-off.png" width="15" height="23" alt="Hotel icon"></div><figcaption>Icon · 15 × 23 px<br><span class="hint">max 24 × 24</span></figcaption><a class="btn" href="#">Change icon</a></figure>
+          </div>
+          <form class="form" onsubmit="event.preventDefault()">
+            <label>Name<input class="in" value="Sunset Plaza"></label>
+            <label>Client URL<input class="in" type="url" value="https://play.sunset.example"></label>
+            <label>Website URL<input class="in" type="url" value="https://sunset.example"></label>
+            <fieldset class="vis"><legend>Who can find it</legend>
+              <label class="chk"><input type="radio" name="v-plaza" checked> Public: listed in "Hotels online now"</label>
+              <label class="chk"><input type="radio" name="v-plaza"> Private: only people with the link</label>
+            </fieldset>
+            <div class="row"><button class="btn main" type="submit">Save</button></div>
+          </form>
         </div>
-        <div class="tbl"><table>
-          <tr><th>Integration</th><th>Type</th><th>URL</th><th>Accounts</th><th></th></tr>
-          <tr><td>Official client</td><td>Client</td><td><a href="#">https://hotel1.example.com</a></td><td>2</td><td><a href="#">Licence</a> · <a class="danger" href="#">Remove</a></td></tr>
-          <tr><td>Hotel website</td><td>Web</td><td><a href="#">https://sunset.example.com</a></td><td>0</td><td><a href="#">Licence</a> · <a class="danger" href="#">Remove</a></td></tr>
-        </table></div>
+        <dl class="kv wide"><div><dt>Accounts connected</dt><dd>2</dd></div><div><dt>Online now</dt><dd>312</dd></div></dl>
+        <h3>Licence</h3>
+        <div class="lic" data-state="has">
+            <div class="st st-has"><p><span class="badge on">Active</span> Licence made on 12 Nov 2026. It was shown once and can't be shown again.</p>
+              <details class="disc"><summary class="btn">Remake licence</summary><p>The current licence stops working at once. The hotel server needs the new one to start.</p><button class="btn danger-btn" type="button" data-go="new">Remake licence</button></details></div>
+            <div class="st st-new"><p><b>Copy your new licence now.</b> You won't see it again.</p><div class="key"><code>ohl_9f3K2mQ7xV1pR8tZ4wL6yB0nC5sD</code><button class="btn" type="button">Copy</button></div><p class="hint">Put it in the hotel server's config as <code>LICENSE</code>.</p><button class="btn" type="button" data-go="has">Done</button></div>
+          </div>
         <p><a class="danger" href="#">Delete hotel</a></p>
       </div>
       <div class="blk box">
-        <div class="hotel">
-          <div class="thumb"><img src="assets/oh/hotel-thumb-cafe.png" width="160" height="72" alt="Pixel Inn"></div>
-          <div><h3>Pixel Inn <span class="badge">Private</span></h3><p class="id">01M7XSPG4KXBVQ8V0HYY57DZ69</p><div class="acts"><a class="btn" href="#">Change picture</a><a class="btn" href="#">Add integration</a></div></div>
+        <div class="mh-head"><h3><img class="fav" src="assets/oh/icon-club.png" width="23" height="21" alt=""> Pixel Inn</h3><span class="id">01M7XSPG4KXBVQ8V0HYY57DZ69</span></div>
+        <div class="mh">
+          <div class="media">
+            <figure><div class="thumb"><img src="assets/oh/hotel-thumb-cafe.png" width="160" height="72" alt="Hotel picture"></div><figcaption>Picture · 160 × 72 px</figcaption><a class="btn" href="#">Change picture</a></figure>
+            <figure><div class="iconbox"><img src="assets/oh/icon-club.png" width="23" height="21" alt="Hotel icon"></div><figcaption>Icon · 23 × 21 px<br><span class="hint">max 24 × 24</span></figcaption><a class="btn" href="#">Change icon</a></figure>
+          </div>
+          <form class="form" onsubmit="event.preventDefault()">
+            <label>Name<input class="in" value="Pixel Inn"></label>
+            <label>Client URL<input class="in" type="url" value="https://play.pixelinn.example"></label>
+            <label>Website URL<input class="in" type="url" value="https://pixelinn.example"></label>
+            <fieldset class="vis"><legend>Who can find it</legend>
+              <label class="chk"><input type="radio" name="v-cafe"> Public: listed in "Hotels online now"</label>
+              <label class="chk"><input type="radio" name="v-cafe" checked> Private: only people with the link</label>
+            </fieldset>
+            <div class="row"><button class="btn main" type="submit">Save</button></div>
+          </form>
         </div>
-        <div class="tbl"><table>
-          <tr><th>Integration</th><th>Type</th><th>URL</th><th>Accounts</th><th></th></tr>
-          <tr><td>Official client</td><td>Client</td><td><a href="#">https://hotel2.example.com</a></td><td>2</td><td><a href="#">Licence</a> · <a class="danger" href="#">Remove</a></td></tr>
-        </table></div>
+        <dl class="kv wide"><div><dt>Accounts connected</dt><dd>0</dd></div><div><dt>Online now</dt><dd>0</dd></div></dl>
+        <h3>Licence</h3>
+        <div class="lic" data-state="none">
+            <div class="st st-none"><p><span class="badge">None</span> This hotel has no licence yet. The server won't start without one.</p><button class="btn main" type="button" data-go="new">Generate licence</button></div>
+            <div class="st st-new"><p><b>Copy your licence now.</b> You won't see it again. Lost it? Remake it.</p><div class="key"><code>ohl_2Hq8Wc4Nt6Jm1Xe9Ru3Ky7Bv5Pa0Gs</code><button class="btn" type="button">Copy</button></div><p class="hint">Put it in the hotel server's config as <code>LICENSE</code>.</p><button class="btn" type="button" data-go="has">Done</button></div>
+            <div class="st st-has"><p><span class="badge on">Active</span> Licence made today. It was shown once and can't be shown again.</p></div>
+          </div>
         <p><a class="danger" href="#">Delete hotel</a></p>
       </div>
+<script>
+document.querySelectorAll(".lic").forEach((box) => box.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-go]");
+  if (b) { box.dataset.state = b.dataset.go; box.querySelectorAll("details").forEach((d) => (d.open = false)); }
+}));
+document.querySelectorAll(".key .btn").forEach((b) => b.addEventListener("click", () => {
+  const t = b.previousElementSibling.textContent;
+  try { navigator.clipboard.writeText(t).then(() => (b.textContent = "Copied"), () => (b.textContent = "Select it")); } catch (e) { b.textContent = "Select it"; }
+}));
+</script>
     </main>
     <aside class="side">
       <div class="blk">
@@ -252,6 +343,7 @@ img{display:block;image-rendering:pixelated;max-width:none}
         <a class="btn main" href="#">Enter hotel</a>
         <ul class="links">
           <li><a href="retro-account-dark.html">Account settings</a></li>
+          <li><a href="retro-connections-dark.html">Connected hotels</a></li>
           <li><a href="retro-my-hotels-dark.html">My hotels (2)</a></li>
           <li><a href="#">Friends online (4)</a></li>
           <li><a href="retro-lobby-dark.html">Log out</a></li>

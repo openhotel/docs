@@ -124,6 +124,10 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .pwrow label{display:grid;gap:2px;color:var(--soft)}
 .pwrow .otp{letter-spacing:.08em;padding-left:4px;padding-right:2px}
 .foot .ver b{color:var(--foot-link)}
+.credits{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;padding:10px 12px;border-color:#000;background:linear-gradient(var(--accent),var(--accent));color:var(--accent-ink)}
+.credits h3{margin:0 0 2px;font-size:12px;color:var(--accent-ink)}
+.credits p{margin:0}
+.credits img{margin-top:2px}
 .top{margin:0}
 .hero.mini{height:110px}
 .hero.mini .room{top:-150px}
@@ -205,13 +209,48 @@ img{display:block;image-rendering:pixelated;max-width:none}
 .cform .btn{justify-self:start}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media (max-width:900px){.split3{grid-template-columns:minmax(0,1fr)}}
+.tfa .st,.lic .st{display:none}
+.tfa[data-state="off"] .st-off,.tfa[data-state="enable"] .st-enable,.tfa[data-state="on"] .st-on,.tfa[data-state="disable"] .st-disable{display:block}
+.tfa[data-state="enable"] .st-enable,.tfa[data-state="disable"] .st-disable{display:grid}
+.lic[data-state="none"] .st-none,.lic[data-state="new"] .st-new,.lic[data-state="has"] .st-has{display:block}
+.demo{padding:6px 8px;border:1px dashed var(--line)}
+.demo .btn{padding:2px 8px}
+.qrrow{display:flex;gap:12px;align-items:center}
+.qr{width:96px;height:96px;display:grid;place-items:center;background:#fff;color:#777;border:1px solid #000;font-size:10px}
+.captcha{display:flex;justify-content:space-between;align-items:center;gap:8px;max-width:300px;padding:10px;border:1px solid var(--field-line);background:var(--field)}
+.otp.big{font-size:16px;max-width:140px}
+.danger-btn{background:#c0392b;color:#fff}
+.danger-btn:hover{color:#fff}
+.perms{margin:0 0 10px;padding-left:18px}
+.perms li{margin:2px 0}
+.fav{display:inline-block;vertical-align:middle;margin-right:4px}
+.conn .kv{margin-top:6px}
+.disc summary{list-style:none;display:inline-block}
+.disc summary::-webkit-details-marker{display:none}
+.disc[open] summary{margin-bottom:8px}
+.disc p{margin:0 0 8px}
+.mh-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 10px;align-items:center;margin-bottom:10px}
+.mh-head h3{margin:0;font-size:13px}
+.mh{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start}
+.media{display:grid;gap:10px}
+.media figure{margin:0;display:grid;gap:4px;justify-items:start}
+.media figcaption{color:var(--soft);font-size:10px}
+.iconbox{width:40px;height:40px;display:grid;place-items:center;border:1px solid #000;background:var(--hero)}
+.vis{border:1px solid var(--line);padding:6px 8px;margin:0;display:grid;gap:4px}
+.vis legend{color:var(--soft);padding:0 4px}
+.kv.wide{max-width:none;margin:12px 0 0;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));column-gap:16px}
+.key{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px;padding:8px;border:1px dashed var(--accent);background:var(--field)}
+.key code{font-size:12px;word-break:break-all;color:var(--strong)}
+.lic p{margin:0 0 8px}
+.newh .form{margin-top:4px}
+@media (max-width:560px){.mh{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
 <div class="page">
   <div class="grid2">
     <main class="mainc">
-      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-in-light.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"><p>Telephone booths are here</p><a class="btn" href="retro-lobby-in-light.html">Home</a><a class="btn main" href="retro-news-in-light.html">News</a><a class="btn" href="retro-account-light.html">My account</a><a class="btn" href="retro-my-hotels-light.html">My hotels</a></nav></header>
+      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-in-light.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"><p>Telephone booths are here</p><a class="btn" href="retro-lobby-in-light.html">Home</a><a class="btn main" href="retro-news-in-light.html">News</a><a class="btn" href="retro-account-light.html">My account</a><a class="btn" href="retro-connections-light.html">Connections</a><a class="btn" href="retro-my-hotels-light.html">My hotels</a></nav></header>
       <div class="split3">
         <div class="col">
       <div class="blk box article">
@@ -266,6 +305,7 @@ img{display:block;image-rendering:pixelated;max-width:none}
         <a class="btn main" href="#">Enter hotel</a>
         <ul class="links">
           <li><a href="retro-account-light.html">Account settings</a></li>
+          <li><a href="retro-connections-light.html">Connected hotels</a></li>
           <li><a href="retro-my-hotels-light.html">My hotels (2)</a></li>
           <li><a href="#">Friends online (4)</a></li>
           <li><a href="retro-lobby-light.html">Log out</a></li>
