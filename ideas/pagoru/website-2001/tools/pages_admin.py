@@ -59,7 +59,10 @@ def crow(t, n, by, sl, v, on, pr):
 PRICE = lambda v: f'<input class="in price" type="number" value="{v}" aria-label="Price">'
 admin_clothes = AN("admin-clothes") + box("Character personalisation", '''        <p class="hint">What guests can change on their avatar in this hotel.</p>
         <h3>Skin colours</h3>
-        <div class="skins">''' + "".join(f'<label class="skin"><span style="background:{c}"></span><input type="checkbox"{" checked" if i != 5 else ""} aria-label="Allow {c}"> {c}</label>' for i, c in enumerate(SKINS)) + '''</div>
+        <div class="skins">''' + "".join(f'<label class="skin"><span style="background:{c}"></span><input type="checkbox" checked disabled aria-label="{c} is always allowed"> {c}</label>' for c in SKINS) + '''</div>
+        <p class="hint">The six default skin colours are always allowed and can't be removed or turned off, so every guest can pick their own. You can add more colours.</p>
+        <h3>Extra colours</h3>
+        <div class="skins"><label class="skin"><span style="background:#8fd0a4"></span><input type="checkbox" checked aria-label="Allow #8fd0a4"> #8fd0a4</label> <button class="btn" type="button">Remove</button></div>
         <form class="mfind" onsubmit="event.preventDefault()"><input class="in" placeholder="#a1b2c3" aria-label="New colour" style="max-width:110px"><button class="btn" type="submit">Add colour</button><label class="chk">Default skin <select class="in sel-s"><option>#efcfb1</option><option>#c98e62</option></select></label></form>
         <h3>Guests can change</h3>
         <label class="chk"><input type="checkbox" checked> Skin colour</label> <label class="chk"><input type="checkbox" checked> Hair colour</label> <label class="chk"><input type="checkbox" checked> Clothes colours</label>
