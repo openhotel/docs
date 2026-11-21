@@ -15,7 +15,7 @@ NEWS = [("booths","21 Nov 2026","Telephone booths are here","Step into a booth a
 
 GO = '<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-sub-btn]");if(b)b.closest(".subnews").hidden=true});document.addEventListener("click",(e)=>{const r=e.target.closest("tr.go");if(r&&!e.target.closest("a,button,input,select,label,summary")){const a=r.querySelector("a");if(a)location.href=a.href}})</script>\n'
 import re as _re
-FSKIP = ("What each kind needs", "Overview", "Needs attention", "Numbers", "Updates", "Who sends", "Email templates", "Latest trades", "Order book")
+FSKIP = ("Test results", "Home sections", "Custom boxes", "What each kind needs", "Overview", "Needs attention", "Numbers", "Updates", "Who sends", "Email templates", "Latest trades", "Order book")
 def addfind(b):
     b = b.replace('<input class="in" type="search"', '<input data-filter class="in" type="search"')
     out, pos = "", 0
@@ -34,14 +34,17 @@ def page(title, tab, logged, body):
     if '<!--SIDE-->' in body:
         i, j = body.index('<!--SIDE-->'), body.index('<!--/SIDE-->')
         extra, body = body[i + 11:j], body[:i] + body[j + 12:]
+    bare = body.startswith('<!--BARE-->')
+    if bare: body = body[11:]
     if 'class="blk subnav"' in body or title in ("Friends",): body = addfind(body)
     tabs = [("Home","home"),("News","news")] + ([("Friends","friends"),("Exchange","exchange"),("Marketplace","market"),("My account","account"),("Connections","connections"),("My hotels","hotels")] if logged else [("Register","register")])
     nav = "".join(f'<a class="btn{" main" if k == tab else ""}" href="#{k}">{n}</a>' for n, k in tabs)
+    if bare: nav = ""
     side = '      <div class="blk">\n' + (rd("account.html") if logged else rd("login.html")) + '      </div>\n' + extra + (rd("sidebar-in.html") if logged else "") + '      <div class="blk">\n' + soc + '      </div>\n'
     return (head.replace("<title>OpenHotel 2001</title>", f"<title>{title} · OpenHotel</title>") + '<body>\n<div class="page">\n'
-      + '  <div class="grid2">\n    <main class="mainc">\n'
+      + '  <div class="grid2"' + (' style="grid-template-columns:1fr"' if bare else '') + '>\n    <main class="mainc">\n'
       + '      <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="#home"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div>'
-      + f'<nav class="actions" aria-label="Site">{nav}</nav></header>\n' + body + '    </main>\n    <aside class="side">\n' + side + '    </aside>\n  </div>\n' + foot.replace('</body>', GO + FIND + '</body>'))
+      + f'<nav class="actions" aria-label="Site">{nav}</nav></header>\n' + body + '    </main>\n' + ('' if bare else '    <aside class="side">\n' + side + '    </aside>\n') + '  </div>\n' + foot.replace('</body>', GO + FIND + '</body>'))
 
 SUBBOX = open(T + "sub-news.html").read()
 news_list = '      <div class="blk box">\n        <h2>Hotel news</h2>\n        <ul class="newslist">\n' + "".join(
@@ -151,7 +154,7 @@ PAGES = {  # key: (title, tab, logged, body)
   "retro-admin": ("Manage OpenHotel", "", True, admin), "retro-admin-registration": ("Registration", "", True, admin_registration), "retro-admin-accounts": ("Accounts", "", True, admin_accounts),
   "retro-admin-blocked": ("Blocked", "", True, admin_blocked), "retro-admin-rooms": ("Rooms", "", True, admin_rooms), "retro-admin-moderation": ("Moderation", "", True, admin_moderation),
   "retro-admin-credits": ("Credits", "", True, admin_credits), "retro-admin-publicrooms": ("Public rooms", "", True, admin_publicrooms), "retro-admin-clothes": ("Clothes", "", True, admin_clothes),
-  "retro-network": ("Network admin", "", True, network), "retro-network-hotels": ("Hotels", "", True, network_hotels), "retro-network-news": ("News", "", True, network_news), "retro-admin-news": ("News", "", True, admin_news), "retro-network-accounts": ("Accounts", "", True, network_accounts), "retro-network-blocked": ("Blocked", "", True, network_blocked), "retro-network-emails": ("Emails", "", True, network_emails), "retro-network-credits": ("Credit reports", "", True, network_credits), "retro-network-settings": ("Settings", "", True, network_settings),
+  "retro-setup": ("Setup", "", False, setup_welcome), "retro-setup-standalone": ("Setup: standalone", "", False, setup_stand), "retro-setup-join": ("Setup: managed hotel", "", False, setup_join), "retro-setup-new": ("Setup: network", "", False, setup_new), "retro-network": ("Network admin", "", True, network), "retro-network-hotels": ("Hotels", "", True, network_hotels), "retro-network-news": ("News", "", True, network_news), "retro-admin-news": ("News", "", True, admin_news), "retro-admin-website": ("Website", "", True, admin_website), "retro-admin-connection": ("Connection", "", True, admin_connection), "retro-network-accounts": ("Accounts", "", True, network_accounts), "retro-network-blocked": ("Blocked", "", True, network_blocked), "retro-network-emails": ("Emails", "", True, network_emails), "retro-network-credits": ("Credit reports", "", True, network_credits), "retro-network-settings": ("Settings", "", True, network_settings),
 }
 for key, (title, tab, logged, body) in PAGES.items():
     h = page(title, tab, logged, body)
