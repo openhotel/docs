@@ -10,7 +10,7 @@ PAGER = lambda t, k: f'<div class="pager"><span class="hint">{t}</span><span><a 
 def subnav(items, cur, title):
     return (f'      <nav class="blk subnav" aria-label="{title}">' + "".join(f'<a class="btn{" main" if k == cur else ""}" href="#{k}">{n}</a>' for k, n in items) + '</nav>\n')
 ADMIN_NAV = [("admin", "Manage hotel"), ("admin-registration", "Registration"), ("admin-accounts", "Accounts"), ("admin-blocked", "Blocked"), ("admin-rooms", "Rooms"),
-             ("admin-moderation", "Moderation"), ("admin-news", "News"), ("admin-credits", "Credits"), ("library", "Catalog"), ("admin-publicrooms", "Public rooms"), ("admin-clothes", "Clothes")]
+             ("admin-moderation", "Moderation"), ("admin-news", "News"), ("admin-credits", "Credits"), ("library", "Catalog"), ("admin-publicrooms", "Public rooms"), ("admin-clothes", "Clothes"), ("admin-website", "Website"), ("admin-connection", "Connection")]
 NET_NAV = [("network", "Network admin"), ("network-hotels", "Hotels"), ("network-accounts", "Accounts"), ("network-blocked", "Blocked"), ("network-emails", "Emails"), ("network-news", "News"), ("network-credits", "Credit reports"), ("network-settings", "Settings")]
 AN = lambda cur: subnav(ADMIN_NAV, cur, "Manage OpenHotel")
 NN = lambda cur: subnav(NET_NAV, cur, "Network admin")
@@ -97,6 +97,7 @@ CATS = [("Alpha", 5, "Visible", "-", "-", "10"), ("Flags", 14, "Visible", "-", "
 VB = {"Visible": '<span class="badge on">Visible</span>', "Scheduled": '<span class="badge">Scheduled</span>', "Hidden": '<span class="badge">Hidden</span>'}
 exec(open(T + "pages_net.py").read())
 exec(open(T + "pages_mine.py").read())
+exec(open(T + "pages_site.py").read())
 def catrow(i, n, c, st, a, b, pr):
     sel = ' class="go sel"' if n == "Teleports" else ' class="go"'
     return (f'<tr{sel}><td class="ord"><button class="btn" type="button" aria-label="Move up">↑</button><button class="btn" type="button" aria-label="Move down">↓</button></td>'
