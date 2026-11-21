@@ -374,6 +374,9 @@ td.dr label.chk{display:flex;gap:5px;margin:2px 0 0;color:var(--ink)}
 td.dr input.in{font:11px/1.2 Verdana,Tahoma,sans-serif;padding:3px 4px;min-width:0;width:100%}
 td.dr input.in[type=date]{width:8.6em}
 td.dr input.in[type=date]{width:7.8em;font-size:10px}
+.two>div>.blk{margin-bottom:10px}
+.two.wide{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
+@media (max-width:720px){.two.wide{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -382,15 +385,15 @@ td.dr input.in[type=date]{width:7.8em;font-size:10px}
     <main class="mainc">
       <header class="blk top"><div class="hero mini"><img class="room" src="assets/oh/room-lobby-door.png" width="396" height="300" alt=""><a class="logo" href="retro-lobby-in-light.html"><img src="assets/oh/logo.png" width="110" height="86" alt="OpenHotel home"></a></div><nav class="actions" aria-label="Site"><p>News</p><a class="btn" href="retro-lobby-in-light.html">Home</a><a class="btn" href="retro-news-in-light.html">News</a><a class="btn" href="retro-friends-light.html">Friends</a><a class="btn" href="retro-exchange-light.html">Exchange</a><a class="btn" href="retro-market-light.html">Marketplace</a><a class="btn" href="retro-account-light.html">My account</a><a class="btn" href="retro-connections-light.html">Connections</a><a class="btn" href="retro-my-hotels-light.html">My hotels</a></nav></header>
       <nav class="blk subnav" aria-label="Network admin"><b>Network admin</b><a class="btn" href="retro-network-light.html">Overview</a><a class="btn" href="retro-network-hotels-light.html">Hotels</a><a class="btn" href="retro-network-accounts-light.html">Accounts</a><a class="btn" href="retro-network-blocked-light.html">Blocked</a><a class="btn" href="retro-network-emails-light.html">Emails</a><a class="btn main" href="retro-network-news-light.html">News</a><a class="btn" href="retro-network-credits-light.html">Credit reports</a><a class="btn" href="retro-network-settings-light.html">Settings</a></nav>
-      <div class="blk box dense">
+<div class="two wide"><div>      <div class="blk box dense">
         <h2>Network news (3)</h2>
 <form class="mfind" onsubmit="event.preventDefault()"><input data-filter class="in" type="search" placeholder="Search network news" aria-label="Search network news"></form><div class="tbl"><table><tr><th>News</th><th>State</th><th>Email</th><th></th></tr><tr class="go"><td><a href="retro-post-in-light.html"><b>Network update 0.157</b></a><br><span class="hint">Draft</span></td><td><span class="badge">Draft</span></td><td>Not sent</td><td><button class="btn" type="button">Edit</button> <button class="btn" type="button">Delete</button></td></tr><tr class="go"><td><a href="retro-post-in-light.html"><b>New hotel: Neon Docks</b></a><br><span class="hint">Published 12 Nov</span></td><td><span class="badge on">Published</span></td><td><span class="badge on">Sent to 410,200</span></td><td><button class="btn" type="button">Edit</button> <button class="btn" type="button">Delete</button></td></tr><tr class="go"><td><a href="retro-post-in-light.html"><b>Credit exchange is open</b></a><br><span class="hint">Published 02 Nov</span></td><td><span class="badge on">Published</span></td><td><span class="badge on">Sent to 398,000</span></td><td><button class="btn" type="button">Edit</button> <button class="btn" type="button">Delete</button></td></tr></table></div><div class="pager"><span class="hint">3 of 8</span><span><a href="retro-network-news-light.html">Next</a> &gt;&gt;</span></div>
       </div>
       <div class="blk box dense">
         <h2>Email requests from hotels (2)</h2>
-<form class="mfind" onsubmit="event.preventDefault()"><input data-filter class="in" type="search" placeholder="Search email requests from hotels" aria-label="Search email requests from hotels"></form><div class="tbl"><table><tr><th>Hotel</th><th>News</th><th class="num">Its subscribed guests</th><th>This week</th><th></th></tr><tr><td>Pixel Plaza</td><td>Summer party</td><td class="num">9,400</td><td>1 of 2</td><td><button class="btn" type="button">Preview</button> <button class="btn main" type="button">Send</button> <button class="btn" type="button">Refuse</button></td></tr><tr><td>Neon Docks</td><td>New DJ room</td><td class="num">2,100</td><td>2 of 2</td><td><button class="btn" type="button">Preview</button> <button class="btn main" type="button">Send</button> <button class="btn" type="button">Refuse</button></td></tr></table></div><p class="hint">A hotel asks, the network sends, and only to guests who joined that hotel and subscribed. The hotel only gets the result (sent, refused, how many). Hotels never get addresses. Limits per hotel are in <a href="retro-network-settings-light.html">Settings</a>.</p>
+<form class="mfind" onsubmit="event.preventDefault()"><input data-filter class="in" type="search" placeholder="Search email requests from hotels" aria-label="Search email requests from hotels"></form><div class="tbl"><table><tr><th>Request</th><th></th></tr><tr><td><b>Pixel Plaza</b><br>Summer party<br>9,400 guests<br><span class="hint">1 of 2 this week</span></td><td><button class="btn" type="button">Preview</button> <button class="btn main" type="button">Send</button><br><button class="btn" type="button">Refuse</button></td></tr><tr><td><b>Neon Docks</b><br>New DJ room<br>2,100 guests<br><span class="hint">2 of 2 this week</span></td><td><button class="btn" type="button">Preview</button> <button class="btn main" type="button">Send</button><br><button class="btn" type="button">Refuse</button></td></tr></table></div><p class="hint">A hotel asks, the network sends, and only to guests who joined that hotel and subscribed. The hotel only gets the result (sent, refused, how many). Hotels never get addresses. Limits per hotel are in <a href="retro-network-settings-light.html">Settings</a>.</p>
       </div>
-      <div class="blk box dense">
+</div><div>      <div class="blk box dense">
         <h2>Write news</h2>
         <form class="form" onsubmit="event.preventDefault()">
           <label>Title<input class="in" value="Telephone booths are here"></label>
@@ -403,7 +406,7 @@ td.dr input.in[type=date]{width:7.8em;font-size:10px}
           <div class="row"><button class="btn" type="button">Save draft</button> <button class="btn main" type="submit">Publish</button> <button class="btn" type="button">Preview email</button></div>
         </form>
       </div>
-    </main>
+</div></div>    </main>
     <aside class="side">
       <div class="blk">
       <section class="me">
