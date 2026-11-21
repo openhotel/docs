@@ -104,12 +104,20 @@ exchange_body = """      <div class="split3">
       </div>
 """
 
-pts = [0.40 + 0.012 * math.sin(i / 3.1) + 0.008 * math.sin(i / 1.3) + i * 0.0004 for i in range(60)]
-lo, hi = min(pts) - 0.004, max(pts) + 0.004
-xy = [(i * 520 / 59, 150 - (v - lo) / (hi - lo) * 140) for i, v in enumerate(pts)]
-line = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in xy)
-area = line + " L520,160 L0,160 Z"
-chart = (f'<div class="chart"><svg viewBox="0 0 520 160" preserveAspectRatio="none" role="img" aria-label="PXP price, up 3.2%"><path class="ar" d="{area}"/><path class="ln" d="{line}"/></svg>'
+import random
+random.seed(7)
+N=40; W=520; H=160; cw=W/N
+cs=[]; p=0.40
+for i in range(N):
+    o=p; c=o+random.uniform(-0.012,0.013)+0.0004; hh=max(o,c)+random.uniform(0,0.006); ll=min(o,c)-random.uniform(0,0.006)
+    cs.append((o,c,hh,ll)); p=c
+lo=min(c[3] for c in cs)-0.004; hi=max(c[2] for c in cs)+0.004
+Y=lambda v: 150-(v-lo)/(hi-lo)*140
+bars=""
+for i,(o,c,hh,ll) in enumerate(cs):
+    x=i*cw+cw/2; k="g" if c>=o else "r"
+    bars+=f'<line class="w {k}" x1="{x:.1f}" x2="{x:.1f}" y1="{Y(hh):.1f}" y2="{Y(ll):.1f}"/><rect class="b {k}" x="{x-cw*0.32:.1f}" y="{Y(max(o,c)):.1f}" width="{cw*0.64:.1f}" height="{max(1.5,abs(Y(o)-Y(c))):.1f}"/>'
+chart = (f'<div class="chart"><svg viewBox="0 0 520 160" preserveAspectRatio="none" role="img" aria-label="PXP price candles, up 3.2%">{bars}</svg>'
          f'<div class="axis"><span>{hi:.3f}</span><span>{lo:.3f}</span></div></div>'
          '<div class="ktabs"><a class="btn" href="#coin">1D</a><a class="btn main" href="#coin">1W</a><a class="btn" href="#coin">1M</a><a class="btn" href="#coin">All</a></div>')
 coin_body = """      <div class="split3">

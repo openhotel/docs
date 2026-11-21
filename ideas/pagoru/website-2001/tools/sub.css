@@ -222,3 +222,6 @@ tr.sel td{font-weight:700}
 .sheet i{position:absolute;outline:1px dashed #d33}
 .fgrid.fr{grid-template-columns:minmax(0,2fr) repeat(6,minmax(0,1fr)) auto}
 @media (max-width:620px){.fgrid.fr{grid-template-columns:repeat(auto-fit,minmax(70px,1fr))}}
+.chart .w{stroke-width:1;vector-effect:non-scaling-stroke}
+.chart .w.g{stroke:#2e9b4a}.chart .b.g{fill:#2e9b4a}
+.chart .w.r{stroke:#d03a3a}.chart .b.r{fill:#d03a3a}
