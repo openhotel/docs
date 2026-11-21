@@ -1,0 +1,13 @@
+{
+  "name": "openhotel-link",
+  "displayName": "OpenHotel Link",
+  "description": "Sends sprites from Aseprite to the OpenHotel website",
+  "version": "1.0.0",
+  "author": { "name": "OpenHotel" },
+  "publisher": "openhotel",
+  "license": "MIT",
+  "categories": ["Scripts"],
+  "contributes": {
+    "scripts": [{ "path": "./oh-link.lua" }]
+  }
+}
