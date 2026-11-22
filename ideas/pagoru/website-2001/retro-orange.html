@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en" data-v="teal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OpenHotel Today 2005</title>
+<link rel="stylesheet" href="assets/oh/retro.css">
+<style>
+:root{--bgimg:url("assets/oh/bg-orange-teal.png");--bgc:#4fb3bd;--ink:#1d2433;--on-bg:#ffffff;--on-bg-soft:#e6f6f8;--win-ink:#2c3d66;--hero:#80c9e4}
+:root[data-v="sky"]{--bgimg:url("assets/oh/bg-orange-sky.png");--bgc:#6aaee6;--on-bg-soft:#e8f2fc;--win-ink:#5a4306}
+:root[data-v="lime"]{--bgimg:url("assets/oh/bg-orange-lime.png");--bgc:#93c74a;--on-bg-soft:#f0f8e4;--win-ink:#164a48}
+:root[data-v="bubblegum"]{--bgimg:url("assets/oh/bg-orange-bubblegum.png");--bgc:#ee9cc2;--on-bg-soft:#fdeef5;--win-ink:#3d2a6b}
+.side .oh-win{border-image-source:url("assets/oh/win-blue.png")}
+:root[data-v="sky"] .side .oh-win{border-image-source:url("assets/oh/win-gold.png")}
+:root[data-v="lime"] .side .oh-win{border-image-source:url("assets/oh/win-teal.png")}
+:root[data-v="bubblegum"] .side .oh-win{border-image-source:url("assets/oh/win-purple.png")}
+.oh-panel{border-image-source:url("assets/oh/panel-orange.png")}
+.oh-panel.tan{border-image-source:url("assets/oh/panel-tan.png")}
+.oh-win.grey{border-image-source:url("assets/oh/win-grey.png")!important;--win-ink:#30343c}
+body{background:var(--bgc) var(--bgimg) repeat;background-size:96px 192px;image-rendering:pixelated;color:var(--ink)}
+.wrap{max-width:940px;margin:0 auto;padding:16px max(16px,env(safe-area-inset-right,0px)) 26px max(16px,env(safe-area-inset-left,0px));image-rendering:auto}
+.vbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 12px;color:var(--on-bg)}
+.vbar .pf{text-shadow:2px 2px 0 rgba(0,0,0,.25)}
+.hero{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:18px;align-items:center;padding:14px;background:linear-gradient(#9ad6ee,#80c9e4);border:2px solid #10202a;border-radius:8px;box-shadow:inset 0 0 0 2px #c9ecf8}
+.hero .logo{display:block;width:220px;height:172px}
+.hero h1{margin:4px 0 10px;color:#0f2a3a}
+.hero p{margin:0 0 14px;max-width:34ch;font-size:13px;color:#14303f}
+.photo{background:#fff;padding:4px;border:2px solid #10202a;border-radius:6px;justify-self:end;max-width:100%}
+.photo img{display:block;width:520px;height:auto;border-radius:2px}
+.tabs{display:flex;flex-wrap:wrap;gap:2px 2px;align-items:flex-end;margin:18px 0 0;padding:0 12px}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:18px;align-items:start}
+.main .oh-panel{margin-top:-2px}
+.feature{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;background:#fff;border:2px solid #4a2a04;border-radius:6px;padding:10px 14px 12px 6px}
+.feature img{display:block;width:276px;height:240px}
+.feature time,.items time{color:#b45f00}
+.feature h3{margin:4px 0 8px;font-size:24px;line-height:30px}
+.feature p{margin:0 0 12px;font-size:13px}
+.section-h{margin:18px 2px 8px;color:#5b3404}
+.items{list-style:none;margin:0;padding:0;background:#fff7e3;border:2px solid #4a2a04;border-radius:6px}
+.items li{display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:12px;align-items:center;padding:9px 12px;border-bottom:2px dotted #e7b866}
+.items li:last-child{border-bottom:0}
+.items .ic{display:grid;place-items:center;width:46px;height:46px}
+.items .ic img{height:auto}
+.items h4{margin:0}
+.items p{margin:2px 0 0;color:#5a4a33}
+.week{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.week figure{margin:0;background:#fff;border:2px solid #4a2a04;border-radius:6px;padding:6px 6px 8px;text-align:center}
+.week img{display:block;margin:0 auto;width:156px;height:auto}
+.week figcaption{margin-top:4px}
+.week small{display:block;color:#6a5638;font-size:11px}
+.side{display:grid;gap:16px}
+.side label{display:block;margin:4px 0 4px;color:#3a4255}
+.side form{display:grid;gap:4px}
+.side .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-top:10px}
+.side .small{font-size:11px;margin:10px 0 0}
+.hits{list-style:none;margin:0;padding:0;counter-reset:h}
+.hits li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 0;border-bottom:2px dotted #c9d3ea;counter-increment:h}
+.hits li:last-child{border:0}
+.hits li::before{content:counter(h);font-family:"OH Pixel Bold",monospace;font-size:16px;color:#7a8bb3}
+.hits span{display:inline-flex;align-items:center;gap:6px;color:#4c566b}
+.hits img{width:14px;height:14px}
+.purse{display:flex;gap:12px;align-items:center}
+.purse .coins{display:flex;align-items:center;gap:8px;flex:none}
+.purse .coins img{width:24px;height:24px}
+.purse p{margin:0;font-size:12px}
+.safe{display:flex;gap:10px;align-items:flex-start}
+.safe img{width:36px;height:auto;flex:none}
+.safe p{margin:0}
+.foot{margin-top:22px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;color:var(--on-bg);text-shadow:2px 2px 0 rgba(0,0,0,.25)}
+.main,.side{min-width:0}
+@media (max-width:820px){.cols{grid-template-columns:minmax(0,1fr)}.hero{grid-template-columns:1fr}.photo{justify-self:stretch}.photo img{width:100%}.feature{grid-template-columns:1fr;padding:10px}.feature img{margin:0 auto;max-width:100%;height:auto}}
+@media (max-width:560px){.week{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:172px;overflow-x:auto;padding-bottom:4px}.tabs{padding:0;flex-wrap:nowrap;overflow-x:auto}.tabs .oh-tab{padding:10px 12px 6px}.hide-s{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="vbar">
+    <span class="pf">Try colours</span>
+    <div class="variants" role="group" aria-label="Colour variant">
+      <button type="button" data-v="teal" title="Teal"><span class="sw"><i style="background:#4fb3bd"></i></span><span class="sr">Teal</span></button>
+      <button type="button" data-v="sky" title="Sky"><span class="sw"><i style="background:#6aaee6"></i></span><span class="sr">Sky</span></button>
+      <button type="button" data-v="lime" title="Lime"><span class="sw"><i style="background:#93c74a"></i></span><span class="sr">Lime</span></button>
+      <button type="button" data-v="bubblegum" title="Bubblegum"><span class="sw"><i style="background:#ee9cc2"></i></span><span class="sr">Bubblegum</span></button>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div>
+      <img class="logo px" src="assets/oh/logo.png" width="220" height="172" alt="OpenHotel">
+      <h1 class="pfb x3">Your hotel is open</h1>
+      <p>Make friends, build rooms and run a hotel of your own. Free, open source, and yours to host.</p>
+      <a class="oh-btn orange big" href="#"><img src="assets/oh/icon-club.png" width="23" height="21" alt="">Check in</a>
+    </div>
+    <div class="photo"><img class="px" src="assets/oh/hotel-diorama-crop.png" width="520" height="250" alt="The OpenHotel building seen from above, with gardens, a pool and a river"></div>
+  </header>
+
+  <nav class="tabs" aria-label="Main">
+    <a class="oh-tab on" href="#" aria-current="page">Home</a>
+    <a class="oh-tab orange" href="#">Hotel</a>
+    <a class="oh-tab orange" href="#">Rooms</a>
+    <a class="oh-tab orange" href="#">Club</a>
+    <a class="oh-tab orange hide-s" href="#">Credits</a>
+    <a class="oh-tab orange" href="#">Help</a>
+  </nav>
+
+  <div class="cols">
+    <main class="main">
+      <section class="oh-panel">
+        <h2 class="t pfb">OpenHotel Today</h2>
+        <article class="feature">
+          <img class="px" src="assets/oh/room-cafe.png" width="276" height="240" alt="The Café: an orange tiled room with three guests">
+          <div>
+            <time class="pf">21 NOV 2026</time>
+            <h3 class="pfb">The Cafe is open</h3>
+            <p>Grab a seat by the window. The Café is the first public room with warm floors, and it is open around the clock.</p>
+            <a class="oh-btn orange" href="#">Go to the Cafe</a>
+          </div>
+        </article>
+
+        <h3 class="section-h pfb">More news</h3>
+        <ul class="items">
+          <li><span class="ic"><img class="px" src="assets/oh/icon-catalog.png" width="32" height="46" alt=""></span><div><h4 class="pfb">New in the catalog</h4><p>Twelve new furni for cafés and lounges.</p></div><time class="pf">20 NOV</time></li>
+          <li><span class="ic"><img class="px" src="assets/oh/icon-navigator.png" width="46" height="46" alt=""></span><div><h4 class="pfb">Find rooms faster</h4><p>The navigator now sorts rooms by guests inside.</p></div><time class="pf">14 NOV</time></li>
+          <li><span class="ic"><img class="px" src="assets/oh/icon-purse.png" width="36" height="40" alt=""></span><div><h4 class="pfb">Daily credits</h4><p>Check in each day and your purse fills up.</p></div><time class="pf">09 NOV</time></li>
+          <li><span class="ic"><img class="px" src="assets/oh/icon-console-on.png" width="30" height="46" alt=""></span><div><h4 class="pfb">Messages on the go</h4><p>Your console keeps messages while you are away.</p></div><time class="pf">02 NOV</time></li>
+        </ul>
+
+        <h3 class="section-h pfb">Rooms of the week</h3>
+        <div class="week">
+          <figure><img class="px" src="assets/oh/room-mini-a.png" width="156" height="180" alt="A small red room"><figcaption class="pfb">Red Lounge</figcaption><small>by lumi · 18 inside</small></figure>
+          <figure><img class="px" src="assets/oh/room-mini-b.png" width="156" height="180" alt="A small green room"><figcaption class="pfb">Garden Hut</figcaption><small>by orbit · 11 inside</small></figure>
+          <figure><img class="px" src="assets/oh/room-mini-c.png" width="156" height="180" alt="A small yellow room"><figcaption class="pfb">Sun Deck</figcaption><small>by sunny · 9 inside</small></figure>
+        </div>
+      </section>
+    </main>
+
+    <aside class="side">
+      <section class="oh-win">
+        <h2 class="t pfb">Sign in</h2>
+        <form onsubmit="event.preventDefault()">
+          <label class="pf" for="u">Name</label>
+          <input class="oh-input" id="u" autocomplete="off" value="sample_guest">
+          <label class="pf" for="p">Password</label>
+          <input class="oh-input" id="p" type="password" value="sample">
+          <div class="row">
+            <button class="oh-btn" type="submit">Sign in</button>
+            <a href="#" class="pf">Forgot?</a>
+          </div>
+        </form>
+        <p class="small">New here? <a href="#">Create your avatar</a>, it takes a minute.</p>
+      </section>
+
+      <section class="oh-win">
+        <h2 class="t pfb">Hotel hits</h2>
+        <ol class="hits">
+          <li><b class="pfb">The Cafe</b><span><img class="px" src="assets/oh/icon-heart.png" alt="">412</span></li>
+          <li><b class="pfb">Rooftop Pool</b><span><img class="px" src="assets/oh/icon-heart.png" alt="">388</span></li>
+          <li><b class="pfb">Disco Hall</b><span><img class="px" src="assets/oh/icon-heart.png" alt="">351</span></li>
+          <li><b class="pfb">Red Lounge</b><span><img class="px" src="assets/oh/icon-heart.png" alt="">207</span></li>
+          <li><b class="pfb">Garden Hut</b><span><img class="px" src="assets/oh/icon-heart.png" alt="">164</span></li>
+        </ol>
+      </section>
+
+      <section class="oh-panel tan">
+        <h2 class="t pfb">Your purse</h2>
+        <div class="purse">
+          <span class="coins"><img class="px" src="assets/oh/icon-coin.png" alt=""><b class="pfb x3">120</b></span>
+          <p>Credits for furni and Club. Check in daily for more.</p>
+        </div>
+      </section>
+
+      <section class="oh-win grey">
+        <h2 class="t pfb">Stay safe</h2>
+        <div class="safe">
+          <img class="px" src="assets/oh/icon-console-off.png" width="30" height="46" alt="">
+          <p>Staff never ask for your password. Never give it to anyone, in a room or in a message.</p>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="foot pf">
+    <span>OpenHotel · sample page</span>
+    <span>Art and fonts from the OpenHotel game</span>
+  </footer>
+</div>
+<script>
+(() => {
+  const KEY = "oh-retro-orange";
+  const buttons = document.querySelectorAll(".variants button");
+  const apply = (v) => {
+    document.documentElement.dataset.v = v;
+    buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === v)));
+    try { localStorage.setItem(KEY, v); } catch (e) {}
+  };
+  let start = "teal";
+  try { start = localStorage.getItem(KEY) || start; } catch (e) {}
+  buttons.forEach((b) => b.addEventListener("click", () => apply(b.dataset.v)));
+  apply(start);
+})();
+</script>
+</body>
+</html>
